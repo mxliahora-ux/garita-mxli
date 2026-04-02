@@ -6,62 +6,91 @@
 <title>MXLI AHORA</title>
 
 <style>
+*{box-sizing:border-box;}
+
 body{
   margin:0;
   font-family:Arial;
-  background:#0b1a3a;
+  background:#081a4a;
   color:white;
+  padding:20px;
+}
+
+.wrap{
+  max-width:800px;
+  margin:auto;
 }
 
 .header{
-  padding:15px;
-  font-size:22px;
+  font-size:26px;
   font-weight:bold;
+  margin-bottom:20px;
 }
 
 .card{
-  background:#0f2147;
-  margin:15px;
-  border-radius:20px;
-  padding:15px;
+  background:#16285c;
+  border-radius:25px;
+  padding:20px;
+}
+
+.title-main{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  margin-bottom:20px;
+  color:#ddd;
 }
 
 .flyer{
-  background:#13265c;
+  background:#1c2f70;
   border-radius:20px;
   padding:15px;
-  margin-top:10px;
 }
 
-.title{
-  background:#ff3b3b;
-  padding:10px;
-  border-radius:10px;
+.flyer-title{
+  background:#ef4b43;
+  border-radius:15px;
+  padding:12px;
   text-align:center;
+  font-size:22px;
   font-weight:bold;
+  margin-bottom:15px;
+}
+
+.center{
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.group{
+  background:rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:15px;
+}
+
+.group-title{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin:6px 0;
   font-size:18px;
 }
 
-.centro{
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-  margin-top:10px;
-}
+.red{color:#ff5a4f;}
+.green{color:#7CFF6B;}
 
-.section{
-  margin-top:10px;
-  padding:10px;
-  background:#1e2b50;
-  border-radius:10px;
-}
-
-.big{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.fechaHora{
+.footer{
   text-align:center;
   margin-top:15px;
   font-size:14px;
@@ -73,48 +102,70 @@ body{
 
 <body>
 
+<div class="wrap">
+
 <div class="header">🚨 MXLI AHORA</div>
 
 <div class="card">
 
-<h2>Garitas Mexicali en vivo</h2>
-<p>Información en tiempo real</p>
+<div class="title-main">Garitas Mexicali en vivo</div>
+<div class="subtitle">Información en tiempo real</div>
 
 <div class="flyer">
 
-<div class="title">🚨 GARITA MXLI</div>
+<div class="flyer-title">🚨 GARITA MXLI</div>
 
-<div class="centro">📍 Centro</div>
+<div class="center">📍 Centro</div>
 
-<div class="section">
-🚗 AUTOS<br>
-General — <span id="g" class="big">--</span><br>
-Sentri — <span id="s" class="big">--</span>
+<div class="group">
+<div class="group-title">🚗 AUTOS</div>
+
+<div class="row">
+<span>General</span>
+<span class="red">70 min</span>
 </div>
 
-<div class="section">
-🚶 PEATONES<br>
-General — <span id="p" class="big">--</span>
+<div class="row">
+<span>Sentri</span>
+<span class="green">5 min</span>
+</div>
 </div>
 
-<div id="fechaHora" class="fechaHora"></div>
+<div class="group">
+<div class="group-title">🚶 PEATONES</div>
+
+<div class="row">
+<span>General</span>
+<span class="red">30 min</span>
+</div>
+
+<div class="row">
+<span>Sentri</span>
+<span>N/D</span>
+</div>
+</div>
+
+<div id="fechaHora" class="footer"></div>
+
+</div>
 
 </div>
 
 </div>
 
 <script>
-
 function actualizarFechaHora(){
   const ahora = new Date();
 
   const fecha = new Intl.DateTimeFormat('es-MX',{
+    timeZone:'America/Tijuana',
     weekday:'long',
     day:'numeric',
     month:'long'
   }).format(ahora);
 
   const hora = new Intl.DateTimeFormat('es-MX',{
+    timeZone:'America/Tijuana',
     hour:'numeric',
     minute:'2-digit'
   }).format(ahora);
@@ -123,33 +174,8 @@ function actualizarFechaHora(){
     fecha + " • " + hora;
 }
 
-async function tiempos(){
-  try{
-    const r = await fetch("https://bwt.cbp.gov/api/bwt/rss/rssbyportnum/HTML/ALL/250302");
-    const t = await r.text();
-
-    const p1 = t.match(/Passenger Vehicles([\s\S]*?)Pedestrian/)[1];
-    const p2 = t.match(/Pedestrian([\s\S]*)/)[1];
-
-    const general = p1.match(/General Lanes.*?(\d+)/);
-    const sentri = p1.match(/Sentri Lanes.*?(\d+)/);
-    const peatones = p2.match(/General Lanes.*?(\d+)/);
-
-    document.getElementById("g").textContent = general ? general[1]+" min" : "--";
-    document.getElementById("s").textContent = sentri ? sentri[1]+" min" : "--";
-    document.getElementById("p").textContent = peatones ? peatones[1]+" min" : "--";
-
-  }catch(e){
-    console.log(e);
-  }
-}
-
 actualizarFechaHora();
-tiempos();
-
 setInterval(actualizarFechaHora,1000);
-setInterval(tiempos,300000);
-
 </script>
 
 </body>
