@@ -9,227 +9,133 @@
 
     body {
       margin: 0;
-      padding-bottom: 120px;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #081a4a 0%, #0a1c52 50%, #081a4a 100%);
+      background:
+        radial-gradient(circle at top, #112766 0%, #091744 45%, #071234 100%);
       color: white;
+      padding: 20px 16px 70px;
     }
 
-    .container {
-      max-width: 900px;
+    .wrap {
+      max-width: 860px;
       margin: 0 auto;
-      padding: 24px 20px 60px;
     }
 
     .topbar {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 26px;
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
-    .logo-wrap {
-      width: 78px;
-      height: 78px;
-      border-radius: 22px;
-      overflow: hidden;
-      background: #111827;
-      box-shadow:
-        0 0 16px rgba(255, 0, 0, 0.35),
-        0 8px 22px rgba(0, 0, 0, 0.35);
-      flex-shrink: 0;
-    }
-
-    .logo-wrap img {
-      width: 100%;
-      height: 100%;
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
       object-fit: cover;
-      display: block;
+      box-shadow: 0 0 18px rgba(255, 70, 70, 0.35);
+      background: #111;
     }
 
     .brand {
-      margin: 0;
       font-size: 34px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin: 0;
     }
 
     .menu {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 28px;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
     .menu a {
       text-decoration: none;
     }
 
-    .menu button {
+    .menu-btn {
       width: 100%;
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 70, 70, 0.28);
-      background: linear-gradient(180deg, rgba(255,40,40,0.10), rgba(255,255,255,0.03));
-      color: white;
-      font-weight: 700;
-      font-size: 17px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow:
-        0 0 12px rgba(255, 0, 0, 0.16),
-        0 10px 28px rgba(0,0,0,0.42),
-        inset 0 1px 0 rgba(255,255,255,0.07);
-    }
-
-    .menu a:first-child button {
-      background: linear-gradient(180deg, rgba(255,30,30,0.22), rgba(255,30,30,0.08));
-      border: 1px solid rgba(255, 80, 80, 0.45);
-      box-shadow:
-        0 0 16px rgba(255, 0, 0, 0.30),
-        0 0 34px rgba(255, 0, 0, 0.14),
-        0 12px 30px rgba(0,0,0,0.50);
-    }
-
-    .card {
-      background: rgba(22, 40, 92, 0.96);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow:
-        0 0 30px rgba(255,0,0,0.08),
-        0 18px 40px rgba(0,0,0,0.22);
-      margin-bottom: 22px;
-    }
-
-    .small-badge {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 11px 18px;
-      border: 1px solid #7b3237;
-      color: #f1a3a7;
-      border-radius: 999px;
-      font-size: 16px;
-      background: rgba(123, 50, 55, 0.12);
-    }
-
-    .card h2 {
-      font-size: 24px;
-      line-height: 1.15;
-      margin: 0 0 14px;
-    }
-
-    .card p {
-      font-size: 16px;
-      line-height: 1.55;
-      color: #d8dbe3;
-      margin: 0;
-    }
-
-    .live-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      margin-bottom: 18px;
-      font-size: 16px;
-    }
-
-    .live-dot {
-      width: 10px;
-      height: 10px;
-      background: red;
-      border-radius: 50%;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.35; }
-      100% { opacity: 1; }
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-      margin-bottom: 18px;
-    }
-
-    .mini-card {
+      border: 1px solid rgba(255, 80, 80, 0.25);
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 14px 10px;
-      border-radius: 18px;
-      text-align: center;
-      font-size: 15px;
-      line-height: 1.35;
-      min-height: 88px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: white;
-    }
-
-    /* CUADRO BONITO */
-    .flyer {
-      background: #1c2f70;
-      border-radius: 22px;
-      padding: 18px 14px 22px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-      margin-top: 14px;
-    }
-
-    .flyer-title {
-      background: #ef5a4d;
       border-radius: 18px;
-      padding: 16px 12px;
+      padding: 14px 10px;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.10);
+    }
+
+    .hero {
+      background: rgba(28, 45, 98, 0.92);
+      border-radius: 30px;
+      padding: 22px;
+      box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.08),
+        0 18px 40px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.12;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 17px;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .flyer {
+      margin-top: 20px;
+      background: #22367f;
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .flyer-top {
+      background: linear-gradient(90deg, #ef4e43, #f05d48);
+      border-radius: 18px;
+      padding: 18px 14px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      margin-bottom: 18px;
+    }
+
+    .flyer-center {
       text-align: center;
       font-size: 30px;
       font-weight: 900;
-      letter-spacing: 0.5px;
-      margin-bottom: 22px;
-    }
-
-    .center-title {
-      text-align: center;
-      font-size: 34px;
-      font-weight: 900;
-      margin: 0 0 22px;
+      margin: 0 0 18px;
     }
 
     .group {
       background: rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 18px 16px;
-      margin-bottom: 20px;
+      border-radius: 22px;
+      padding: 16px;
+      margin-bottom: 18px;
     }
 
     .group-title {
-      text-align: left;
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 14px;
     }
 
     .row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      font-size: 24px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .row:first-of-type {
-      border-top: none;
-      padding-top: 0;
+      gap: 12px;
+      padding: 7px 0;
+      font-size: 23px;
     }
 
     .label {
@@ -240,162 +146,112 @@
       font-weight: 900;
     }
 
-    .red { color: #ff5a4f; }
-    .green { color: #7CFF6B; }
+    .red { color: #ff6959; }
+    .green { color: #85ff72; }
 
-    .footer-time {
-      margin-top: 10px;
+    .date-line {
       text-align: center;
+      margin-top: 8px;
       font-size: 20px;
-      color: rgba(255,255,255,0.95);
       font-weight: 700;
+      color: rgba(255,255,255,0.96);
     }
 
-    .report-section {
-      margin-top: 22px;
-      background: rgba(20,30,50,0.58);
-      border: 1px solid rgba(255,255,255,0.04);
-      padding: 22px;
-      border-radius: 24px;
+    .live-btn {
+      display: block;
+      text-decoration: none;
       text-align: center;
-      box-shadow: 0 0 24px rgba(255,0,0,0.08);
-      margin-bottom: 22px;
-    }
-
-    .report-section h3 {
-      margin: 0 0 10px;
+      margin: 18px auto 0;
+      background: linear-gradient(90deg, #ff3d3d, #ff6a3d);
       color: white;
-      font-size: 22px;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      max-width: 360px;
+      box-shadow: 0 0 22px rgba(255, 80, 80, 0.45);
     }
 
-    .report-section p {
+    .contact-card,
+    .sofia-card {
+      background: rgba(20,30,60,0.92);
+      border-radius: 26px;
+      padding: 20px;
+      margin-top: 18px;
+      box-shadow: 0 0 24px rgba(255,0,0,0.08);
+    }
+
+    .contact-card h3,
+    .sofia-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .contact-card p,
+    .sofia-card p {
       margin: 0 0 16px;
-      color: #94a3b8;
+      text-align: center;
+      color: #c9d2e8;
       line-height: 1.5;
     }
 
-    .btn-blue,
-    .btn-green,
-    .btn-red,
-    .btn-dark {
+    .btn {
       display: block;
       text-decoration: none;
+      text-align: center;
       color: white;
+      font-weight: 800;
       padding: 14px;
       border-radius: 14px;
-      font-weight: bold;
-      margin-bottom: 12px;
-      transition: 0.2s ease;
-      text-align: center;
+      margin-top: 12px;
     }
 
-    .btn-blue {
-      background: #1877f2;
-      box-shadow: 0 0 18px rgba(24,119,242,0.35);
-    }
-
-    .btn-green {
-      background: #22c55e;
-      box-shadow: 0 0 18px rgba(34,197,94,0.28);
-    }
-
-    .btn-red {
-      background: linear-gradient(135deg, #ff3b3b, #ff0000);
-      box-shadow: 0 0 20px rgba(255,0,0,0.35);
-    }
-
-    .btn-dark {
-      background: #1e293b;
-      box-shadow: 0 0 18px rgba(0,0,0,0.25);
-    }
-
-    .sofia-card {
-      background: rgba(20,30,50,0.58);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 0 24px rgba(255,0,0,0.08);
-    }
+    .btn-blue { background: #2f76ff; }
+    .btn-green { background: #59c96b; }
+    .btn-dark { background: #21314f; }
+    .btn-red { background: #ff3d3d; }
 
     .sofia-img {
       width: 100%;
+      border-radius: 18px;
       display: block;
-    }
-
-    .sofia-content {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .sofia-content h3 {
-      margin: 0 0 10px;
-      font-size: 24px;
-      color: white;
-    }
-
-    .sofia-content p {
-      margin: 0 0 18px;
-      color: #94a3b8;
-      line-height: 1.5;
+      margin-bottom: 16px;
     }
 
     @media (max-width: 560px) {
-      .container { padding: 20px 16px 50px; }
-      .logo-wrap { width: 72px; height: 72px; }
-      .brand { font-size: 24px; }
-      .menu button { font-size: 15px; padding: 14px 8px; }
-      .card h2 { font-size: 22px; }
-      .info-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .mini-card { font-size: 14px; min-height: 82px; }
-      .flyer-title { font-size: 24px; }
-      .center-title { font-size: 28px; }
+      .brand { font-size: 28px; }
+      .hero h1 { font-size: 30px; }
+      .flyer-top { font-size: 24px; }
+      .flyer-center { font-size: 26px; }
       .group-title { font-size: 22px; }
-      .row { font-size: 20px; }
-      .footer-time { font-size: 18px; }
+      .row { font-size: 19px; }
+      .date-line { font-size: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
+
     <div class="topbar">
-      <div class="logo-wrap">
-        <img src="logo.png" alt="Logo Garita MXLI">
-      </div>
+      <img src="logo.png" alt="Logo MXLI" class="logo">
       <h1 class="brand">MXLI AHORA</h1>
     </div>
 
     <div class="menu">
-      <a href="#">
-        <button>🚗 Garitas</button>
-      </a>
-      <a href="camaras.html">
-        <button>📷 Cámaras</button>
-      </a>
-      <a href="paginas.html">
-        <button>🌐 Páginas</button>
-      </a>
+      <a href="https://bit.ly/mxliahora" target="_blank"><div class="menu-btn">🚗 Garitas</div></a>
+      <a href="camaras.html"><div class="menu-btn">📷 Cámaras</div></a>
+      <a href="paginas.html"><div class="menu-btn">🌐 Páginas</div></a>
     </div>
 
-    <div class="card">
-      <div class="small-badge">Centro oficial • Garitas Mexicali</div>
-      <h2>Garitas Mexicali en vivo</h2>
-      <p>Consulta cámaras, hora actual, clima y accesos rápidos en un solo lugar.</p>
-
-      <div class="live-bar">
-        <div class="live-dot"></div>
-        <span>EN VIVO AHORA</span>
-      </div>
-
-      <div class="info-row">
-        <div class="mini-card" id="fechaCard">📅 Cargando...</div>
-        <div class="mini-card" id="horaCard">⏰ Cargando...</div>
-        <div class="mini-card" id="climaCard">🌡️ 29°C</div>
-      </div>
+    <div class="hero">
+      <h1>Garitas Mexicali en vivo</h1>
+      <p>Información en tiempo real</p>
 
       <div class="flyer">
-        <div class="flyer-title">🚨 GARITA MXLI</div>
+        <div class="flyer-top">🚨 GARITA MXLI</div>
 
-        <div class="center-title">📍 Centro</div>
+        <div class="flyer-center">📍 Centro</div>
 
         <div class="group">
           <div class="group-title">🚗 AUTOS</div>
@@ -421,38 +277,33 @@
           </div>
         </div>
 
-        <div class="footer-time" id="fechaHora"></div>
+        <div id="fechaHora" class="date-line"></div>
+
+        <a class="live-btn" href="https://bit.ly/mxliahora" target="_blank">
+          🚨 VER GARITA EN VIVO
+        </a>
       </div>
     </div>
 
-    <div class="report-section">
+    <div class="contact-card">
       <h3>🚨 ¿Cruzas la garita?</h3>
       <p>Mándanos fotos o videos en tiempo real para ayudar a más personas.</p>
-
-      <a href="https://m.me/garitamxli?text=Hola%20te%20envio%20reporte%20de%20garita" target="_blank" class="btn-blue">
+      <a class="btn btn-blue" href="https://m.me/garitamxli?text=Hola%20te%20envio%20reporte%20de%20garita" target="_blank">
         Enviar foto por Messenger
       </a>
-
-      <a href="mailto:mxliahora@gmail.com?subject=Reporte%20de%20garita&body=Hola,%20te%20envio%20mi%20reporte." class="btn-green">
+      <a class="btn btn-green" href="mailto:mxliahora@gmail.com?subject=Reporte%20de%20garita&body=Hola,%20te%20envio%20mi%20reporte.">
         Enviar por Email
       </a>
     </div>
 
     <div class="sofia-card">
-      <img src="sofia.jpg" alt="Reporte de Garita con Sofía" class="sofia-img">
-      <div class="sofia-content">
-        <h3>🎤 Reporte de Garita</h3>
-        <p>Con Sofía · Información rápida para cruzar mejor.</p>
-
-        <a href="#" class="btn-red">
-          Ver tiempos oficiales
-        </a>
-
-        <a href="camaras.html" class="btn-dark">
-          Ver cámaras en vivo
-        </a>
-      </div>
+      <img src="sofia.jpg" alt="Reporte con Sofía" class="sofia-img">
+      <h3>🎤 Reporte de Garita</h3>
+      <p>Con Sofía · Información rápida para cruzar mejor.</p>
+      <a class="btn btn-red" href="https://bit.ly/mxliahora" target="_blank">Ver tiempos oficiales</a>
+      <a class="btn btn-dark" href="camaras.html">Ver cámaras en vivo</a>
     </div>
+
   </div>
 
   <script>
@@ -473,8 +324,6 @@
         hour12: true
       }).format(ahora);
 
-      document.getElementById('fechaCard').textContent = '📅 ' + fecha;
-      document.getElementById('horaCard').textContent = '⏰ ' + hora;
       document.getElementById('fechaHora').textContent = fecha + ' • ' + hora;
     }
 
