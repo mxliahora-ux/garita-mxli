@@ -1,182 +1,485 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MXLI AHORA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MXLI AHORA</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<style>
-*{box-sizing:border-box;}
+    body {
+      margin: 0;
+      padding-bottom: 120px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #081a4a 0%, #0a1c52 50%, #081a4a 100%);
+      color: white;
+    }
 
-body{
-  margin:0;
-  font-family:Arial;
-  background:#081a4a;
-  color:white;
-  padding:20px;
-}
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
 
-.wrap{
-  max-width:800px;
-  margin:auto;
-}
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
 
-.header{
-  font-size:26px;
-  font-weight:bold;
-  margin-bottom:20px;
-}
+    .logo-wrap {
+      width: 78px;
+      height: 78px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #111827;
+      box-shadow:
+        0 0 16px rgba(255, 0, 0, 0.35),
+        0 8px 22px rgba(0, 0, 0, 0.35);
+      flex-shrink: 0;
+    }
 
-.card{
-  background:#16285c;
-  border-radius:25px;
-  padding:20px;
-}
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-.title-main{
-  font-size:28px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
+    .brand {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
 
-.subtitle{
-  margin-bottom:20px;
-  color:#ddd;
-}
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
 
-.flyer{
-  background:#1c2f70;
-  border-radius:20px;
-  padding:15px;
-}
+    .menu a {
+      text-decoration: none;
+    }
 
-.flyer-title{
-  background:#ef4b43;
-  border-radius:15px;
-  padding:12px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
+    .menu button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 70, 70, 0.28);
+      background: linear-gradient(180deg, rgba(255,40,40,0.10), rgba(255,255,255,0.03));
+      color: white;
+      font-weight: 700;
+      font-size: 17px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow:
+        0 0 12px rgba(255, 0, 0, 0.16),
+        0 10px 28px rgba(0,0,0,0.42),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+    }
 
-.center{
-  text-align:center;
-  font-size:26px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
+    .menu a:first-child button {
+      background: linear-gradient(180deg, rgba(255,30,30,0.22), rgba(255,30,30,0.08));
+      border: 1px solid rgba(255, 80, 80, 0.45);
+      box-shadow:
+        0 0 16px rgba(255, 0, 0, 0.30),
+        0 0 34px rgba(255, 0, 0, 0.14),
+        0 12px 30px rgba(0,0,0,0.50);
+    }
 
-.group{
-  background:rgba(255,255,255,0.08);
-  border-radius:15px;
-  padding:15px;
-  margin-bottom:15px;
-}
+    .card {
+      background: rgba(22, 40, 92, 0.96);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow:
+        0 0 30px rgba(255,0,0,0.08),
+        0 18px 40px rgba(0,0,0,0.22);
+      margin-bottom: 22px;
+    }
 
-.group-title{
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
+    .small-badge {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 11px 18px;
+      border: 1px solid #7b3237;
+      color: #f1a3a7;
+      border-radius: 999px;
+      font-size: 16px;
+      background: rgba(123, 50, 55, 0.12);
+    }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  margin:6px 0;
-  font-size:18px;
-}
+    .card h2 {
+      font-size: 24px;
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
 
-.red{color:#ff5a4f;}
-.green{color:#7CFF6B;}
+    .card p {
+      font-size: 16px;
+      line-height: 1.55;
+      color: #d8dbe3;
+      margin: 0;
+    }
 
-.footer{
-  text-align:center;
-  margin-top:15px;
-  font-size:14px;
-  opacity:0.9;
-}
-</style>
+    .live-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
 
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 50%;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.35; }
+      100% { opacity: 1; }
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px 10px;
+      border-radius: 18px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.35;
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* CUADRO BONITO */
+    .flyer {
+      background: #1c2f70;
+      border-radius: 22px;
+      padding: 18px 14px 22px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      margin-top: 14px;
+    }
+
+    .flyer-title {
+      background: #ef5a4d;
+      border-radius: 18px;
+      padding: 16px 12px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+    }
+
+    .center-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 900;
+      margin: 0 0 22px;
+    }
+
+    .group {
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px 16px;
+      margin-bottom: 20px;
+    }
+
+    .group-title {
+      text-align: left;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 24px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .row:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .label {
+      font-weight: 700;
+    }
+
+    .value {
+      font-weight: 900;
+    }
+
+    .red { color: #ff5a4f; }
+    .green { color: #7CFF6B; }
+
+    .footer-time {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 20px;
+      color: rgba(255,255,255,0.95);
+      font-weight: 700;
+    }
+
+    .report-section {
+      margin-top: 22px;
+      background: rgba(20,30,50,0.58);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 22px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 0 24px rgba(255,0,0,0.08);
+      margin-bottom: 22px;
+    }
+
+    .report-section h3 {
+      margin: 0 0 10px;
+      color: white;
+      font-size: 22px;
+    }
+
+    .report-section p {
+      margin: 0 0 16px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .btn-blue,
+    .btn-green,
+    .btn-red,
+    .btn-dark {
+      display: block;
+      text-decoration: none;
+      color: white;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      transition: 0.2s ease;
+      text-align: center;
+    }
+
+    .btn-blue {
+      background: #1877f2;
+      box-shadow: 0 0 18px rgba(24,119,242,0.35);
+    }
+
+    .btn-green {
+      background: #22c55e;
+      box-shadow: 0 0 18px rgba(34,197,94,0.28);
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #ff3b3b, #ff0000);
+      box-shadow: 0 0 20px rgba(255,0,0,0.35);
+    }
+
+    .btn-dark {
+      background: #1e293b;
+      box-shadow: 0 0 18px rgba(0,0,0,0.25);
+    }
+
+    .sofia-card {
+      background: rgba(20,30,50,0.58);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 24px rgba(255,0,0,0.08);
+    }
+
+    .sofia-img {
+      width: 100%;
+      display: block;
+    }
+
+    .sofia-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .sofia-content h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: white;
+    }
+
+    .sofia-content p {
+      margin: 0 0 18px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .container { padding: 20px 16px 50px; }
+      .logo-wrap { width: 72px; height: 72px; }
+      .brand { font-size: 24px; }
+      .menu button { font-size: 15px; padding: 14px 8px; }
+      .card h2 { font-size: 22px; }
+      .info-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .mini-card { font-size: 14px; min-height: 82px; }
+      .flyer-title { font-size: 24px; }
+      .center-title { font-size: 28px; }
+      .group-title { font-size: 22px; }
+      .row { font-size: 20px; }
+      .footer-time { font-size: 18px; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <img src="logo.png" alt="Logo Garita MXLI">
+      </div>
+      <h1 class="brand">MXLI AHORA</h1>
+    </div>
 
-<div class="wrap">
+    <div class="menu">
+      <a href="#">
+        <button>🚗 Garitas</button>
+      </a>
+      <a href="camaras.html">
+        <button>📷 Cámaras</button>
+      </a>
+      <a href="paginas.html">
+        <button>🌐 Páginas</button>
+      </a>
+    </div>
 
-<div class="header">🚨 MXLI AHORA</div>
+    <div class="card">
+      <div class="small-badge">Centro oficial • Garitas Mexicali</div>
+      <h2>Garitas Mexicali en vivo</h2>
+      <p>Consulta cámaras, hora actual, clima y accesos rápidos en un solo lugar.</p>
 
-<div class="card">
+      <div class="live-bar">
+        <div class="live-dot"></div>
+        <span>EN VIVO AHORA</span>
+      </div>
 
-<div class="title-main">Garitas Mexicali en vivo</div>
-<div class="subtitle">Información en tiempo real</div>
+      <div class="info-row">
+        <div class="mini-card" id="fechaCard">📅 Cargando...</div>
+        <div class="mini-card" id="horaCard">⏰ Cargando...</div>
+        <div class="mini-card" id="climaCard">🌡️ 29°C</div>
+      </div>
 
-<div class="flyer">
+      <div class="flyer">
+        <div class="flyer-title">🚨 GARITA MXLI</div>
 
-<div class="flyer-title">🚨 GARITA MXLI</div>
+        <div class="center-title">📍 Centro</div>
 
-<div class="center">📍 Centro</div>
+        <div class="group">
+          <div class="group-title">🚗 AUTOS</div>
+          <div class="row">
+            <div class="label">General</div>
+            <div class="value red">70 min</div>
+          </div>
+          <div class="row">
+            <div class="label">Sentri</div>
+            <div class="value green">5 min</div>
+          </div>
+        </div>
 
-<div class="group">
-<div class="group-title">🚗 AUTOS</div>
+        <div class="group">
+          <div class="group-title">🚶 PEATONES</div>
+          <div class="row">
+            <div class="label">General</div>
+            <div class="value red">30 min</div>
+          </div>
+          <div class="row">
+            <div class="label">Sentri</div>
+            <div class="value">N/D</div>
+          </div>
+        </div>
 
-<div class="row">
-<span>General</span>
-<span class="red">70 min</span>
-</div>
+        <div class="footer-time" id="fechaHora"></div>
+      </div>
+    </div>
 
-<div class="row">
-<span>Sentri</span>
-<span class="green">5 min</span>
-</div>
-</div>
+    <div class="report-section">
+      <h3>🚨 ¿Cruzas la garita?</h3>
+      <p>Mándanos fotos o videos en tiempo real para ayudar a más personas.</p>
 
-<div class="group">
-<div class="group-title">🚶 PEATONES</div>
+      <a href="https://m.me/garitamxli?text=Hola%20te%20envio%20reporte%20de%20garita" target="_blank" class="btn-blue">
+        Enviar foto por Messenger
+      </a>
 
-<div class="row">
-<span>General</span>
-<span class="red">30 min</span>
-</div>
+      <a href="mailto:mxliahora@gmail.com?subject=Reporte%20de%20garita&body=Hola,%20te%20envio%20mi%20reporte." class="btn-green">
+        Enviar por Email
+      </a>
+    </div>
 
-<div class="row">
-<span>Sentri</span>
-<span>N/D</span>
-</div>
-</div>
+    <div class="sofia-card">
+      <img src="sofia.jpg" alt="Reporte de Garita con Sofía" class="sofia-img">
+      <div class="sofia-content">
+        <h3>🎤 Reporte de Garita</h3>
+        <p>Con Sofía · Información rápida para cruzar mejor.</p>
 
-<div id="fechaHora" class="footer"></div>
+        <a href="#" class="btn-red">
+          Ver tiempos oficiales
+        </a>
 
-</div>
+        <a href="camaras.html" class="btn-dark">
+          Ver cámaras en vivo
+        </a>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <script>
+    function actualizarFechaHora() {
+      const ahora = new Date();
 
-</div>
+      const fecha = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+      }).format(ahora);
 
-<script>
-function actualizarFechaHora(){
-  const ahora = new Date();
+      const hora = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(ahora);
 
-  const fecha = new Intl.DateTimeFormat('es-MX',{
-    timeZone:'America/Tijuana',
-    weekday:'long',
-    day:'numeric',
-    month:'long'
-  }).format(ahora);
+      document.getElementById('fechaCard').textContent = '📅 ' + fecha;
+      document.getElementById('horaCard').textContent = '⏰ ' + hora;
+      document.getElementById('fechaHora').textContent = fecha + ' • ' + hora;
+    }
 
-  const hora = new Intl.DateTimeFormat('es-MX',{
-    timeZone:'America/Tijuana',
-    hour:'numeric',
-    minute:'2-digit'
-  }).format(ahora);
-
-  document.getElementById("fechaHora").textContent =
-    fecha + " • " + hora;
-}
-
-actualizarFechaHora();
-setInterval(actualizarFechaHora,1000);
-</script>
-
+    actualizarFechaHora();
+    setInterval(actualizarFechaHora, 1000);
+  </script>
 </body>
 </html>
