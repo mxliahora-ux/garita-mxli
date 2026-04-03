@@ -146,19 +146,23 @@
       <div class="section-title">🚨 GARITA MXLI - Centro</div>
 
       <div class="row">
-        🚗 General: <span id="general" class="red">90 min</span>
+        🚗 General: <span id="general" class="red"> 45 min</span>
       </div>
 
       <div class="row">
-        ⚡ Sentri: <span id="sentri" class="green">10 min</span>
+        ⚡ Sentri: <span id="sentri" class="green"> 45 min</span>
+      </div>
+
+    <div class="row">
+        ⚡️Ready Lane: <span id="sentri" class="green"> 45 min</span>
       </div>
 
       <div class="row">
-        🚶 Peatones: <span id="peatones" class="red">30 min</span>
+        🚶 Peatones: <span id="peatones" class="red"> 5 min</span>
       </div>
 
       <div class="row">
-        ⚡ Sentri peatones: N/D
+        ⚡ Sentri peatones: 5 min
       </div>
 
       <div class="subinfo" id="actualizado">
@@ -234,7 +238,7 @@
 
     async function actualizarTipoCambio() {
       const salida = document.getElementById('tipoCambioTexto');
-      salida.textContent = 'Compra: $16.85   Venta: $17.10';
+      salida.textContent = 'Compra: $17.43   Venta: $18.14';
 
       try {
         const res = await fetch('https://open.er-api.com/v6/latest/USD', {
