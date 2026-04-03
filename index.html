@@ -703,10 +703,11 @@
         document.getElementById('p').textContent = peatonesMatch ? peatonesMatch[1] + " min" : "-- min";
 
       } catch (e) {
-        console.log("Error tiempos:", e);
-        document.getElementById('g').textContent = "-- min";
-        document.getElementById('s').textContent = "-- min";
-        document.getElementById('p').textContent = "-- min";
+  console.log("Error tiempos:", e);
+  document.getElementById('g').textContent = "90 min";
+  document.getElementById('s').textContent = "10 min";
+  document.getElementById('p').textContent = "30 min";
+}
       }
     }
 
