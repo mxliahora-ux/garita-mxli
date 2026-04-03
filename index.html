@@ -705,12 +705,12 @@
       document.getElementById('g').textContent = generalMatch ? generalMatch[1] + " min" : "90 min";
       document.getElementById('s').textContent = sentriMatch ? sentriMatch[1] + " min" : "10 min";
       document.getElementById('p').textContent = peatonesMatch ? peatonesMatch[1] + " min" : "30 min";
-
     } catch (e) {
-      console.log("Error tiempos:", e);
-      document.getElementById('g').textContent = "90 min";
-      document.getElementById('s').textContent = "10 min";
-      document.getElementById('p').textContent = "30 min";
+  console.log("Error tiempos:", e);
+  document.getElementById('g').textContent = "90 min";
+  document.getElementById('s').textContent = "10 min";
+  document.getElementById('p').textContent = "30 min";
+}
     }
   }
 
