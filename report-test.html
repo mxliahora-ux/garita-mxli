@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporte Test - MXLI AHORA</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071234;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .card {
+      background: #1c2650;
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+    }
+
+    .report-image {
+      width: 100%;
+      border-radius: 16px;
+      display: none;
+      margin-bottom: 14px;
+    }
+
+    .report-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .report-text {
+      font-size: 18px;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .report-updated {
+      margin-top: 14px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .empty {
+      opacity: 0.75;
+      font-size: 18px;
+    }
+
+    a.link {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 16px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Reporte en vivo</h1>
+
+      <img id="reportImage" class="report-image" alt="Reporte">
+
+      <div id="reportBlock">
+        <div id="reportTitle" class="report-title">🚨 Reporte MXLI</div>
+        <div id="reportText" class="report-text empty">Todavía no has subido ningún reporte.</div>
+        <div id="reportUpdated" class="report-updated"></div>
+      </div>
+
+      <a class="link" href="admin-test.html">← Volver a Admin Test</a>
+    </div>
+  </div>
+
+  <script>
+    function cargarReporte() {
+      const text = localStorage.getItem('mxli_report_text') || '';
+      const image = localStorage.getItem('mxli_report_image') || '';
+      const updated = localStorage.getItem('mxli_report_updated') || '';
+
+      const reportImage = document.getElementById('reportImage');
+      const reportText = document.getElementById('reportText');
+      const reportUpdated = document.getElementById('reportUpdated');
+
+      if (image) {
+        reportImage.src = image;
+        reportImage.style.display = 'block';
+      } else {
+        reportImage.style.display = 'none';
+      }
+
+      if (text) {
+        reportText.textContent = text;
+        reportText.classList.remove('empty');
+      } else {
+        reportText.textContent = 'Todavía no has subido ningún reporte.';
+        reportText.classList.add('empty');
+      }
+
+      reportUpdated.textContent = updated ? 'Última actualización: ' + updated : '';
+    }
+
+    cargarReporte();
+    setInterval(cargarReporte, 2000);
+  </script>
+</body>
+</html>
