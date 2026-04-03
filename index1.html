@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MXLI AHORA</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071234;
+      color: white;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: #1c2650;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 10px;
+      text-decoration: none;
+      box-sizing: border-box;
+      font-size: 18px;
+    }
+
+    .red {
+      background: #f04f45;
+      color: white;
+    }
+
+    .dark {
+      background: #1e293b;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 🔥 SOLO IMAGEN -->
+    <div style="margin-bottom:15px;">
+      <img src="reporte.jpg" style="
+        width:100%;
+        border-radius:20px;
+        display:block;
+      ">
+    </div>
+
+    <!-- FECHA -->
+    <div class="box" id="fechaBox">📅 Cargando...</div>
+
+    <!-- HORA -->
+    <div class="box" id="horaBox">⏰ Cargando...</div>
+
+    <!-- CLIMA -->
+    <div class="box">🌡️ 29°C</div>
+
+    <!-- BOTONES -->
+    <a href="https://bwt.cbp.gov/ViewAllPorts.html?com=1&pas=1&ped=1&plist=2503" target="_blank" class="btn red">
+      Ver tiempos oficiales
+    </a>
+
+    <a href="camaras.html" class="btn dark">
+      Ver cámaras en vivo
+    </a>
+
+  </div>
+
+  <script>
+    function capitalizar(texto) {
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
+    }
+
+    function actualizarFechaHora() {
+      const ahora = new Date();
+
+      const fecha = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+      }).format(ahora);
+
+      const hora = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(ahora);
+
+      document.getElementById('fechaBox').textContent = '📅 ' + capitalizar(fecha);
+      document.getElementById('horaBox').textContent = '⏰ ' + hora;
+    }
+
+    actualizarFechaHora();
+    setInterval(actualizarFechaHora, 1000);
+  </script>
+
+</body>
+</html>
