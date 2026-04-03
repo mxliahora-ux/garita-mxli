@@ -630,12 +630,18 @@
 
     const fechaBonita = capitalizarTexto(fecha);
 
-    document.getElementById('fechaCard').textContent = '📅 ' + fechaBonita;
-    document.getElementById('horaCard').textContent = '⏰ ' + hora;
+    <script>
+  document.getElementById('fechaCard').textContent = '📅 Jueves, 2 de abril';
+  document.getElementById('horaCard').textContent = '⏰ 7:25 p.m.';
+  document.getElementById('climaCard').textContent = '🌡️ 29°C';
 
-    document.getElementById('flyerDateTop').textContent = fechaBonita;
-    document.getElementById('flyerDateBottom').textContent = fechaBonita;
-    document.getElementById('flyerTimeBottom').textContent = hora;
+  document.getElementById('g').textContent = '90 min';
+  document.getElementById('s').textContent = '10 min';
+  document.getElementById('p').textContent = '30 min';
+
+  document.getElementById('flyerDateBottom').textContent = 'Jueves, 2 de abril';
+  document.getElementById('flyerTimeBottom').textContent = '7:25 p.m.';
+</script>
   }
 
   async function obtenerClima() {
