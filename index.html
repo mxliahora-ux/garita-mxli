@@ -606,120 +606,121 @@
     </div>
   </div>
 
-  <script>
-    function capitalizarTexto(texto) {
-      return texto.charAt(0).toUpperCase() + texto.slice(1);
+ <script>
+  function capitalizarTexto(texto) {
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
+
+  function actualizarFechaHoraMexicali() {
+    const ahora = new Date();
+
+    const fecha = new Intl.DateTimeFormat('es-MX', {
+      timeZone: 'America/Tijuana',
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long'
+    }).format(ahora);
+
+    const hora = new Intl.DateTimeFormat('es-MX', {
+      timeZone: 'America/Tijuana',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    }).format(ahora);
+
+    const fechaBonita = capitalizarTexto(fecha);
+
+    document.getElementById('fechaCard').textContent = '📅 ' + fechaBonita;
+    document.getElementById('horaCard').textContent = '⏰ ' + hora;
+
+    document.getElementById('flyerDateTop').textContent = fechaBonita;
+    document.getElementById('flyerDateBottom').textContent = fechaBonita;
+    document.getElementById('flyerTimeBottom').textContent = hora;
+  }
+
+  async function obtenerClima() {
+    try {
+      const res = await fetch('https://wttr.in/Mexicali?format=%t');
+      let data = await res.text();
+      data = data.replace('+', '').trim();
+      document.getElementById('climaCard').textContent = '🌡️ ' + data;
+    } catch (e) {
+      document.getElementById('climaCard').textContent = '🌡️ 29°C';
     }
+  }
 
-    function actualizarFechaHoraMexicali() {
-      const ahora = new Date();
+  async function tiempos() {
+    const feedUrl = "https://bwt.cbp.gov/api/bwtrss/rssbyportnum/HTML/ALL/250302";
+    const proxyUrls = [
+      "https://api.allorigins.win/raw?url=" + encodeURIComponent(feedUrl),
+      "https://api.allorigins.win/get?url=" + encodeURIComponent(feedUrl),
+      "https://r.jina.ai/http://bwt.cbp.gov/api/bwtrss/rssbyportnum/HTML/ALL/250302"
+    ];
 
-      const fecha = new Intl.DateTimeFormat('es-MX', {
-        timeZone: 'America/Tijuana',
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long'
-      }).format(ahora);
+    document.getElementById('g').textContent = "90 min";
+    document.getElementById('s').textContent = "10 min";
+    document.getElementById('p').textContent = "30 min";
 
-      const hora = new Intl.DateTimeFormat('es-MX', {
-        timeZone: 'America/Tijuana',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      }).format(ahora);
+    try {
+      let rawText = "";
 
-      const fechaBonita = capitalizarTexto(fecha);
+      for (const url of proxyUrls) {
+        try {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) continue;
 
-      document.getElementById('fechaCard').textContent = '📅 ' + fechaBonita;
-      document.getElementById('horaCard').textContent = '⏰ ' + hora;
+          const text = await res.text();
 
-      document.getElementById('flyerDateTop').textContent = fechaBonita;
-      document.getElementById('flyerDateBottom').textContent = fechaBonita;
-      document.getElementById('flyerTimeBottom').textContent = hora;
-    }
+          if (url.includes("/get?url=")) {
+            const json = JSON.parse(text);
+            rawText = json.contents || "";
+          } else {
+            rawText = text;
+          }
 
-    async function obtenerClima() {
-      try {
-        const res = await fetch('https://wttr.in/Mexicali?format=%t');
-        let data = await res.text();
-        data = data.replace('+', '').trim();
-        document.getElementById('climaCard').textContent = '🌡️ ' + data;
-      } catch (e) {
-        document.getElementById('climaCard').textContent = '🌡️ Mexicali';
+          if (rawText && rawText.includes("Passenger Vehicles")) {
+            break;
+          }
+        } catch (err) {}
       }
-    }
 
-    async function tiempos() {
-      const feedUrl = "https://bwt.cbp.gov/api/bwtrss/rssbyportnum/HTML/ALL/250302";
-      const proxyUrls = [
-        "https://api.allorigins.win/raw?url=" + encodeURIComponent(feedUrl),
-        "https://api.allorigins.win/get?url=" + encodeURIComponent(feedUrl),
-        "https://r.jina.ai/http://bwt.cbp.gov/api/bwtrss/rssbyportnum/HTML/ALL/250302"
-      ];
-
-      try {
-        let rawText = "";
-
-        for (const url of proxyUrls) {
-          try {
-            const res = await fetch(url, { cache: "no-store" });
-            if (!res.ok) continue;
-
-            const text = await res.text();
-
-            if (url.includes("/get?url=")) {
-              const json = JSON.parse(text);
-              rawText = json.contents || "";
-            } else {
-              rawText = text;
-            }
-
-            if (rawText && rawText.includes("Passenger Vehicles")) {
-              break;
-            }
-          } catch (err) {}
-        }
-
-        if (!rawText || !rawText.includes("Passenger Vehicles")) {
-          throw new Error("No se pudo leer el feed");
-        }
-
-        const passengerMatch = rawText.match(/Passenger Vehicles([\s\S]*?)Pedestrian/i);
-        const pedestrianMatch = rawText.match(/Pedestrian([\s\S]*?)(<\/description>|<\/item>|$)/i);
-
-        if (!passengerMatch || !pedestrianMatch) {
-          throw new Error("No encontré bloques");
-        }
-
-        const passenger = passengerMatch[1];
-        const pedestrian = pedestrianMatch[1];
-
-        const generalMatch = passenger.match(/General Lanes:\s*At.*?(\d+)\s*min/i);
-        const sentriMatch = passenger.match(/Sentri Lanes:\s*At.*?(\d+)\s*min/i);
-        const peatonesMatch = pedestrian.match(/General Lanes:\s*At.*?(\d+)\s*min/i);
-
-        document.getElementById('g').textContent = generalMatch ? generalMatch[1] + " min" : "-- min";
-        document.getElementById('s').textContent = sentriMatch ? sentriMatch[1] + " min" : "-- min";
-        document.getElementById('p').textContent = peatonesMatch ? peatonesMatch[1] + " min" : "-- min";
-
-      } catch (e) {
-  console.log("Error tiempos:", e);
-  document.getElementById('g').textContent = "90 min";
-  document.getElementById('s').textContent = "10 min";
-  document.getElementById('p').textContent = "30 min";
-}
-}
+      if (!rawText || !rawText.includes("Passenger Vehicles")) {
+        throw new Error("No se pudo leer el feed");
       }
+
+      const passengerMatch = rawText.match(/Passenger Vehicles([\s\S]*?)Pedestrian/i);
+      const pedestrianMatch = rawText.match(/Pedestrian([\s\S]*?)(<\/description>|<\/item>|$)/i);
+
+      if (!passengerMatch || !pedestrianMatch) {
+        throw new Error("No encontré bloques");
+      }
+
+      const passenger = passengerMatch[1];
+      const pedestrian = pedestrianMatch[1];
+
+      const generalMatch = passenger.match(/General Lanes:\s*At.*?(\d+)\s*min/i);
+      const sentriMatch = passenger.match(/Sentri Lanes:\s*At.*?(\d+)\s*min/i);
+      const peatonesMatch = pedestrian.match(/General Lanes:\s*At.*?(\d+)\s*min/i);
+
+      document.getElementById('g').textContent = generalMatch ? generalMatch[1] + " min" : "90 min";
+      document.getElementById('s').textContent = sentriMatch ? sentriMatch[1] + " min" : "10 min";
+      document.getElementById('p').textContent = peatonesMatch ? peatonesMatch[1] + " min" : "30 min";
+
+    } catch (e) {
+      console.log("Error tiempos:", e);
+      document.getElementById('g').textContent = "90 min";
+      document.getElementById('s').textContent = "10 min";
+      document.getElementById('p').textContent = "30 min";
     }
+  }
 
-    actualizarFechaHoraMexicali();
-    setInterval(actualizarFechaHoraMexicali, 1000);
+  actualizarFechaHoraMexicali();
+  obtenerClima();
+  tiempos();
 
-    obtenerClima();
-    setInterval(obtenerClima, 600000);
-
-    tiempos();
-    setInterval(tiempos, 300000);
-  </script>
+  setInterval(actualizarFechaHoraMexicali, 1000);
+  setInterval(obtenerClima, 600000);
+  setInterval(tiempos, 300000);
+</script>
 </body>
 </html>
