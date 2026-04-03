@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Test - MXLI AHORA</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071234;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .card {
+      background: #1c2650;
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 28px;
+    }
+
+    .sub {
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      border-radius: 14px;
+      margin-top: 12px;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      background: #f04f45;
+      color: white;
+    }
+
+    .btn-clear {
+      background: #1e293b;
+      color: white;
+    }
+
+    .preview {
+      width: 100%;
+      border-radius: 16px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    a.link {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 14px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Admin Test</h1>
+      <div class="sub">Aquí tú subes la foto y el texto para probar cómo se vería en tu página.</div>
+
+      <label>Texto del reporte</label>
+      <textarea id="reportText" placeholder="Ejemplo: Fila larga para entrar a Calexico en este momento."></textarea>
+
+      <label>Subir foto</label>
+      <input id="reportImage" type="file" accept="image/*" />
+
+      <img id="previewImage" class="preview" alt="Vista previa">
+
+      <button class="btn btn-save" onclick="guardarReporte()">Guardar reporte</button>
+      <button class="btn btn-clear" onclick="borrarReporte()">Borrar reporte</button>
+
+      <div id="status" class="status">Esperando cambios...</div>
+
+      <a class="link" href="report-test.html">Ver página de prueba →</a>
+    </div>
+  </div>
+
+  <script>
+    const imageInput = document.getElementById('reportImage');
+    const previewImage = document.getElementById('previewImage');
+    const reportText = document.getElementById('reportText');
+    const statusBox = document.getElementById('status');
+
+    let currentImageData = '';
+
+    imageInput.addEventListener('change', function () {
+      const file = imageInput.files && imageInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        currentImageData = e.target.result;
+        previewImage.src = currentImageData;
+        previewImage.style.display = 'block';
+        statusBox.textContent = 'Imagen cargada. Ya puedes guardar.';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function guardarReporte() {
+      const text = reportText.value.trim();
+
+      if (!text && !currentImageData) {
+        statusBox.textContent = 'Pon un texto o una foto primero.';
+        return;
+      }
+
+      if (text) {
+        localStorage.setItem('mxli_report_text', text);
+      }
+
+      if (currentImageData) {
+        localStorage.setItem('mxli_report_image', currentImageData);
+      }
+
+      localStorage.setItem('mxli_report_updated', new Date().toLocaleString('es-MX'));
+      statusBox.textContent = 'Reporte guardado. Abre la página de prueba.';
+    }
+
+    function borrarReporte() {
+      localStorage.removeItem('mxli_report_text');
+      localStorage.removeItem('mxli_report_image');
+      localStorage.removeItem('mxli_report_updated');
+
+      reportText.value = '';
+      imageInput.value = '';
+      currentImageData = '';
+      previewImage.style.display = 'none';
+      previewImage.src = '';
+      statusBox.textContent = 'Reporte borrado.';
+    }
+  </script>
+</body>
+</html>
