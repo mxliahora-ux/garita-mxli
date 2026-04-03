@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MXLI AHORA</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071234;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .menu a {
+      text-decoration: none;
+    }
+
+    .menu button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background: #1e293b;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .box {
+      background: #2a356b;
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .big-box {
+      background: #1c2650;
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .row {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+
+    .red { color: #ff8a8a; }
+    .green { color: #9fff9f; }
+
+    .subinfo {
+      margin-top: 14px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      padding: 16px;
+      border-radius: 16px;
+      margin-top: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .btn-red {
+      background: #f04f45;
+      color: white;
+    }
+
+    .btn-dark {
+      background: #1e293b;
+      color: white;
+    }
+
+    .tipo-cambio-grid {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      flex-wrap: wrap;
+    }
+
+    .tipo-item {
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .tipo-label {
+      font-size: 13px;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+
+    .tipo-value {
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .tipo-footer {
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.5;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <img src="logo.png" class="logo" alt="Logo MXLI AHORA">
+      <h1>MXLI AHORA</h1>
+    </div>
+
+    <div class="menu">
+      <a href="https://bwt.cbp.gov/ViewAllPorts.html?com=1&pas=1&ped=1&plist=2503" target="_blank">
+        <button>🚗 Garitas</button>
+      </a>
+      <a href="camaras.html">
+        <button>📷 Cámaras</button>
+      </a>
+      <a href="paginas.html">
+        <button>🌐 Páginas</button>
+      </a>
+    </div>
+
+    <div class="box" id="fechaBox">📅 Cargando...</div>
+    <div class="box" id="horaBox">⏰ Cargando...</div>
+    <div class="box">🌡️ 29°C</div>
+
+    <div class="big-box">
+      <div class="section-title">🚨 GARITA MXLI - Centro</div>
+
+      <div class="row">
+        🚗 General: <span class="red">45 min</span>
+      </div>
+
+      <div class="row">
+        ⚡ Sentri: <span class="green">45 min</span>
+      </div>
+
+      <div class="row">
+        ⚡ Ready Lane: <span class="green">45 min</span>
+      </div>
+
+      <div class="row">
+        🚶 Peatones: <span class="red">5 min</span>
+      </div>
+
+      <div class="row">
+        ⚡ Sentri peatones: 5 min
+      </div>
+
+      <div class="subinfo" id="actualizado">
+        Actualizado hace unos segundos
+      </div>
+    </div>
+
+    <div class="box" style="text-align:center; margin-top:15px;">
+      <div style="font-size:22px; font-weight:bold;">
+        💵 Tipo de cambio
+      </div>
+
+      <div style="margin-top:6px; font-size:15px; opacity:0.7;">
+        Hoy en Mexicali
+      </div>
+
+      <div class="tipo-cambio-grid">
+        <div class="tipo-item">
+          <div class="tipo-label">Compra</div>
+          <div class="tipo-value">$16.85</div>
+        </div>
+
+        <div class="tipo-item">
+          <div class="tipo-label">Venta</div>
+          <div class="tipo-value">$17.10</div>
+        </div>
+      </div>
+
+      <div class="tipo-footer">
+        Actualízalo manualmente cuando cambie
+      </div>
+    </div>
+
+    <a href="https://bwt.cbp.gov/ViewAllPorts.html?com=1&pas=1&ped=1&plist=2503" target="_blank" class="btn btn-red">
+      Ver tiempos oficiales
+    </a>
+
+    <a href="camaras.html" class="btn btn-dark">
+      Ver cámaras en vivo
+    </a>
+
+  </div>
+
+  <script>
+    let ultimaActualizacion = new Date();
+
+    function capitalizar(texto) {
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
+    }
+
+    function actualizarFechaHora() {
+      const ahora = new Date();
+
+      const fecha = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+      }).format(ahora);
+
+      const hora = new Intl.DateTimeFormat('es-MX', {
+        timeZone: 'America/Tijuana',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(ahora);
+
+      document.getElementById('fechaBox').textContent = '📅 ' + capitalizar(fecha);
+      document.getElementById('horaBox').textContent = '⏰ ' + hora;
+    }
+
+    function actualizarTextoTiempo() {
+      const ahora = new Date();
+      const segundos = Math.floor((ahora - ultimaActualizacion) / 1000);
+
+      let texto = '';
+      if (segundos < 60) {
+        texto = 'Actualizado hace unos segundos';
+      } else {
+        texto = 'Actualizado hace ' + Math.floor(segundos / 60) + ' min';
+      }
+
+      document.getElementById('actualizado').textContent = texto;
+    }
+
+    actualizarFechaHora();
+    actualizarTextoTiempo();
+
+    setInterval(actualizarFechaHora, 1000);
+    setInterval(actualizarTextoTiempo, 1000);
+  </script>
+
+</body>
+</html>
