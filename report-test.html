@@ -188,7 +188,7 @@
 
     <!-- FOTO PRINCIPAL -->
     <div class="card">
-      <img src="reporte.jpg?v=1" class="hero-img" alt="Reporte principal">
+      <img src="reporte.jpg" id="reporteImg" class="hero-img" alt="Reporte principal">
     </div>
 
     <!-- FECHA -->
@@ -303,6 +303,11 @@
 
 
 </div>
-
+<script>
+setInterval(function() {
+  var img = document.getElementById("reporteImg");
+  img.src = "reporte.jpg?t=" + new Date().getTime();
+}, 10000); // cada 10 segundos
+</script>
 </body>
 </html>
