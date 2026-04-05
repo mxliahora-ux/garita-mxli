@@ -304,10 +304,15 @@
 
 </div>
 <script>
-setInterval(function() {
+function actualizarImagen() {
   var img = document.getElementById("reporteImg");
-  img.src = "reporte.jpg?t=" + new Date().getTime();
-}, 10000); // cada 10 segundos
+  if (img) {
+    img.src = "reporte.jpg?t=" + Date.now();
+  }
+}
+
+actualizarImagen(); // al abrir
+setInterval(actualizarImagen, 10000); // cada 10 segundos
 </script>
 </body>
 </html>
