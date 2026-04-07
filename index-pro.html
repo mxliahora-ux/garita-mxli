@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MXLI AHORA</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #071234;
+  color: white;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 18px;
+}
+
+.card {
+  background: #1c2650;
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.hero-img, .sofia-img {
+  width: 100%;
+  border-radius: 18px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+}
+
+.brand-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-item {
+  background: #253152;
+  border-radius: 16px;
+  padding: 14px 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-night {
+  font-size: 13px;
+}
+
+.info-box {
+  background: #2a356b;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.mini-note {
+  text-align: center;
+  opacity: 0.9;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+.btn-red { background: #ef5a4d; }
+
+.exchange-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+}
+
+.exchange-value {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffd84d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="topbar">
+  <img src="logo.png" class="logo">
+  <div class="brand-title">MXLI AHORA</div>
+</div>
+
+<!-- MENU -->
+<div class="menu">
+  <a href="#"><div class="menu-item">📷 Cámaras</div></a>
+  <a href="#"><div class="menu-item">📘 Garita</div></a>
+  <a href="#"><div class="menu-item menu-night">🌙 Mexicali de noche</div></a>
+</div>
+
+<!-- FOTO -->
+<div class="card">
+  <img src="reporte.jpg" class="hero-img">
+</div>
+
+<!-- FECHA + HORA -->
+<div class="info-box" id="fechaHoraBox"></div>
+
+<!-- ACTUALIZADO -->
+<div class="mini-note" id="updateBox"></div>
+
+<!-- CLIMA -->
+<div class="info-box" id="climaBox"></div>
+
+<!-- 🔥 TIEMPOS AUTOMÁTICOS -->
+<div class="card" id="garitasData">
+  Cargando tiempos...
+</div>
+
+<!-- TIPO DE CAMBIO -->
+<div class="card">
+  <div style="font-size:22px;font-weight:bold;">💵 Tipo de cambio</div>
+  <div style="text-align:center;opacity:0.7;">Hoy en Mexicali</div>
+
+  <div class="exchange-wrap">
+    <div>
+      <div>Compra</div>
+      <div class="exchange-value">$16.85</div>
+    </div>
+    <div>
+      <div>Venta</div>
+      <div class="exchange-value">$17.10</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function capitalizar(texto) {
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function actualizarFechaHora() {
+  const ahora = new Date();
+
+  const fecha = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Tijuana',
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  }).format(ahora);
+
+  const hora = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Tijuana',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  }).format(ahora);
+
+  document.getElementById('fechaHoraBox').textContent =
+    '📅 ' + capitalizar(fecha) + ' • ⏰ ' + hora;
+}
+
+async function obtenerClima() {
+  try {
+    const res = await fetch('https://wttr.in/Mexicali?format=%t');
+    const clima = await res.text();
+    document.getElementById('climaBox').textContent = '🌡️ ' + clima;
+  } catch {
+    document.getElementById('climaBox').textContent = '🌡️ 30°C';
+  }
+}
+
+let tiempoInicial = new Date();
+
+function actualizarTiempoRelativo() {
+  const ahora = new Date();
+  const diff = Math.floor((ahora - tiempoInicial) / 60000);
+
+  document.getElementById("updateBox").textContent =
+    diff <= 0 ? "Actualizado hace unos segundos"
+    : diff === 1 ? "Actualizado hace 1 min"
+    : "Actualizado hace " + diff + " min";
+}
+
+/* 🔥 DATOS SIMULADOS */
+const data = {
+  centro: { general: 70, ready: 50, sentri: 5, peatones: 15 },
+  nuevo: { general: 60, ready: 30, sentri: 5, peatones: 5 }
+};
+
+function mostrarDatos() {
+  document.getElementById("garitasData").innerHTML = `
+    <h3>🚗 Centro</h3>
+    General: ${data.centro.general} min<br>
+    Ready: ${data.centro.ready} min<br>
+    Sentri: ${data.centro.sentri} min<br>
+    Peatones: ${data.centro.peatones} min<br><br>
+
+    <h3>🚗 Nuevo Mexicali</h3>
+    General: ${data.nuevo.general} min<br>
+    Ready: ${data.nuevo.ready} min<br>
+    Sentri: ${data.nuevo.sentri} min<br>
+    Peatones: ${data.nuevo.peatones} min
+  `;
+}
+
+actualizarFechaHora();
+obtenerClima();
+actualizarTiempoRelativo();
+mostrarDatos();
+
+setInterval(actualizarFechaHora, 1000);
+setInterval(actualizarTiempoRelativo, 30000);
+</script>
+
+</body>
+</html>
