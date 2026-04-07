@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba API Garitas</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #071234;
+  color: white;
+  padding: 20px;
+}
+
+.card {
+  background: #1c2650;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Prueba automática de garitas 🔥</h2>
+
+<div class="card" id="resultado">
+Cargando datos...
+</div>
+
+<script>
+async function pruebaDatos() {
+  try {
+    const res = await fetch("https://tiempogaritas.com/garitas/mexicali");
+    const text = await res.text();
+
+    const matchEast = text.match(/Calexico East.*?Normal: (.*?)\..*?Ready Lane: (.*?)\..*?Sentri: (.*?)\..*?Peatones Normal: (.*?)\./s);
+
+    const matchWest = text.match(/Calexico West.*?Normal: (.*?)\..*?Ready Lane: (.*?)\..*?Sentri: (.*?)\..*?Peatones Normal: (.*?)\./s);
+
+    let html = "";
+
+    if (matchEast) {
+      html += `
+        <h3>🚗 Nuevo Mexicali</h3>
+        General: ${matchEast[1]}<br>
+        Ready: ${matchEast[2]}<br>
+        Sentri: ${matchEast[3]}<br>
+        Peatones: ${matchEast[4]}<br><br>
+      `;
+    }
+
+    if (matchWest) {
+      html += `
+        <h3>🚗 Centro</h3>
+        General: ${matchWest[1]}<br>
+        Ready: ${matchWest[2]}<br>
+        Sentri: ${matchWest[3]}<br>
+        Peatones: ${matchWest[4]}<br>
+      `;
+    }
+
+    document.getElementById("resultado").innerHTML = html || "No se encontraron datos";
+  } catch (e) {
+    document.getElementById("resultado").innerHTML = "❌ Error cargando datos (probablemente bloqueo)";
+  }
+}
+
+pruebaDatos();
+</script>
+
+</body>
+</html>
