@@ -289,22 +289,22 @@ function actualizarFechaHora() {
   const ahora = new Date();
 
   const fecha = new Intl.DateTimeFormat('es-MX', {
-  timeZone: 'America/Tijuana',
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long'
-}).format(ahora);
+    timeZone: 'America/Tijuana',
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  }).format(ahora);
 
-  const hora = ahora.toLocaleTimeString('es-MX', {
+  const hora = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Tijuana',
     hour: 'numeric',
     minute: '2-digit',
     hour12: true
-  });
+  }).format(ahora);
 
   document.getElementById('fechaHoraBox').textContent =
-    "📅 " + capitalizar(fecha) + " • ⏰ " + hora;
+    '📅 ' + capitalizar(fecha) + ' • ⏰ ' + hora;
 }
-
 function actualizarTiempoRelativo() {
   const ahora = new Date();
   const diff = Math.floor((ahora - tiempoInicial) / 60000);
