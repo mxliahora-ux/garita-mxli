@@ -308,9 +308,9 @@ async function obtenerClima() {
   try {
     const res = await fetch('https://wttr.in/Mexicali?format=%t');
     const clima = await res.text();
-    document.getElementById('climaBox').textContent = '🌡️ ' + clima.trim();
+    document.getElementById('climaBox').innerHTML = '🌡️ ${clima.trim()} <span style="opacity:0.6;">Mexicali</span>':
   } catch {
-    document.getElementById('climaBox').textContent = '🌡️ 29°C';
+    document.getElementById('climaBox').innerHTML = '🌡️ 29°C'<span style=opacity:0.6;">Mexicali</span>';
   }
 }
 
