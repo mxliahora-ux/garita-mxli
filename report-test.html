@@ -279,6 +279,8 @@ body {
 </div>
 
 <script>
+const tiempoInicial = new Date();
+
 function capitalizar(texto) {
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
@@ -286,38 +288,21 @@ function capitalizar(texto) {
 function actualizarFechaHora() {
   const ahora = new Date();
 
-  const fecha = new Intl.DateTimeFormat('es-MX', {
-    timeZone: 'America/Tijuana',
+  const fecha = ahora.toLocaleDateString('es-MX', {
     weekday: 'long',
     day: 'numeric',
     month: 'long'
-  }).format(ahora);
+  });
 
-  const hora = new Intl.DateTimeFormat('es-MX', {
-    timeZone: 'America/Tijuana',
+  const hora = ahora.toLocaleTimeString('es-MX', {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true
-  }).format(ahora);
+  });
 
   document.getElementById('fechaHoraBox').textContent =
-    '📅 ' + capitalizar(fecha) + ' • ⏰ ' + hora;
+    "📅 " + capitalizar(fecha) + " • ⏰ " + hora;
 }
-
-async function obtenerClima() {
-  try {
-    const res = await fetch('https://wttr.in/Mexicali?format=%t');
-    const clima = await res.text();
-    document.getElementById('climaBox').innerHTML =
-"🌡️ " + clima.trim() + " <span style='opacity:0.6;'>Mexicali</span>";
-
-
-document.getElementById('climaBox').innerHTML =
-"🌡️ 29°C <span style='opacity:0.6;'>Mexicali</span>";
-  }
-}
-
-let tiempoInicial = new Date();
 
 function actualizarTiempoRelativo() {
   const ahora = new Date();
@@ -332,12 +317,28 @@ function actualizarTiempoRelativo() {
   document.getElementById("updateBox").textContent = texto;
 }
 
+async function obtenerClima() {
+  try {
+    const res = await fetch('https://wttr.in/Mexicali?format=%t');
+    const clima = await res.text();
+
+    document.getElementById('climaBox').innerHTML =
+      "🌡️ " + clima.trim() + " <span style='opacity:0.6;'>Mexicali</span>";
+
+  } catch {
+    document.getElementById('climaBox').innerHTML =
+      "🌡️ 34°C <span style='opacity:0.6;'>Mexicali</span>";
+  }
+}
+
+// INICIO
 actualizarFechaHora();
 obtenerClima();
 actualizarTiempoRelativo();
 
+// ACTUALIZACIONES
 setInterval(actualizarFechaHora, 1000);
-setInterval(obtenerClima, 600000);
+setInterval(obtenerClima, 300000); // 5 min
 setInterval(actualizarTiempoRelativo, 30000);
 </script>
 
