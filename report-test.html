@@ -288,11 +288,12 @@ function capitalizar(texto) {
 function actualizarFechaHora() {
   const ahora = new Date();
 
-  const fecha = ahora.toLocaleDateString('es-MX', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-  });
+  const fecha = new Intl.DateTimeFormat('es-MX', {
+  timeZone: 'America/Tijuana',
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long'
+}).format(ahora);
 
   const hora = ahora.toLocaleTimeString('es-MX', {
     hour: 'numeric',
