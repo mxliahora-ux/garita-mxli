@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MXLI AHORA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-main: #030816;
+      --bg-card: rgba(20, 28, 52, 0.72);
+      --bg-card-inner: rgba(10, 15, 30, 0.55);
+      --text-main: #f5f7fb;
+      --text-soft: #aeb8d4;
+      --line: rgba(255,255,255,0.10);
+      --green: #63e38b;
+      --yellow: #ffd84d;
+      --red: #ff6767;
+      --blue: #5d8cff;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 70, 70, 0.14), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(40, 110, 255, 0.16), transparent 30%),
+        linear-gradient(180deg, #08152f 0%, #020816 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 430px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .header {
+      text-align: center;
+      padding: 18px 10px 10px;
+      margin-bottom: 18px;
+    }
+
+    .header-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.15));
+    }
+
+    .header-title {
+      margin: 0;
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 12px rgba(255,255,255,0.12);
+    }
+
+    .header-subtitle {
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.35;
+    }
+
+    .glass-card {
+      position: relative;
+      width: 100%;
+      margin: 0 0 18px 0;
+      padding: 18px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(22, 31, 58, 0.76), rgba(14, 22, 42, 0.80));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow:
+        0 18px 45px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1px;
+      background: linear-gradient(
+        120deg,
+        rgba(81, 140, 255, 0.85),
+        rgba(194, 94, 255, 0.45),
+        rgba(255, 163, 59, 0.75)
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 46%;
+      border-radius: 28px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.12) 0%,
+        rgba(255,255,255,0.04) 38%,
+        rgba(255,255,255,0.00) 100%
+      );
+      pointer-events: none;
+    }
+
+    .card-title {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .card-title .pin {
+      font-size: 25px;
+    }
+
+    .table-wrap {
+      position: relative;
+      z-index: 2;
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      padding: 16px 16px 10px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-top: 1px solid var(--line);
+      font-size: 16px;
+    }
+
+    th {
+      color: var(--text-soft);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .line-name {
+      font-weight: 700;
+    }
+
+    .time-green,
+    .time-yellow,
+    .time-red,
+    .time-blue {
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .time-green { color: var(--green); }
+    .time-yellow { color: var(--yellow); }
+    .time-red { color: var(--red); }
+    .time-blue { color: var(--blue); }
+
+    .muted {
+      color: var(--text-soft);
+    }
+
+    .update-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--green);
+    }
+
+    .currency-card {
+      text-align: center;
+    }
+
+    .currency-title {
+      position: relative;
+      z-index: 2;
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .currency-subtitle {
+      position: relative;
+      z-index: 2;
+      color: var(--text-soft);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .currency-boxes {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .currency-box {
+      background: rgba(10, 15, 30, 0.55);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 16px 10px;
+    }
+
+    .currency-label {
+      color: var(--text-soft);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .currency-value {
+      color: var(--yellow);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .footer-tags {
+      text-align: center;
+      color: #6d89c9;
+      font-size: 13px;
+      margin: 12px 0 6px;
+      line-height: 1.5;
+    }
+
+    .button-preview {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      text-align: center;
+      background: linear-gradient(180deg, #e86d5c 0%, #d55d50 100%);
+      color: white;
+      text-decoration: none;
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 10px 28px rgba(213, 93, 80, 0.28);
+    }
+
+    @media (max-width: 390px) {
+      .header-title {
+        font-size: 26px;
+      }
+
+      .card-title {
+        font-size: 22px;
+      }
+
+      th, td {
+        padding: 12px 12px;
+        font-size: 15px;
+      }
+
+      .time-green,
+      .time-yellow,
+      .time-red,
+      .time-blue {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+
+    <div class="header">
+      <span class="header-icon">📍</span>
+      <h1 class="header-title">MXLI AHORA</h1>
+      <div class="header-subtitle">Garitas Mexicali en tiempo real</div>
+    </div>
+
+    <div class="glass-card">
+      <div class="card-title">
+        <span class="pin">📍</span>
+        <span>Centro</span>
+      </div>
+
+      <div class="table-wrap">
+        <div class="section-label">AUTOS</div>
+        <table>
+          <tr>
+            <th>Línea</th>
+            <th>Espera</th>
+          </tr>
+          <tr>
+            <td class="line-name">🚗 General</td>
+            <td class="time-yellow">45 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">🟦 Ready</td>
+            <td class="time-red">60 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">⚡ Sentri</td>
+            <td class="time-green">5 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">🚶 Peatonal</td>
+            <td class="time-green">12 min</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="update-row">
+        <span>🟢</span>
+        <span>Actualizado hace unos minutos</span>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="card-title">
+        <span class="pin">📍</span>
+        <span>Nuevo Mexicali</span>
+      </div>
+
+      <div class="table-wrap">
+        <div class="section-label">AUTOS</div>
+        <table>
+          <tr>
+            <th>Línea</th>
+            <th>Espera</th>
+          </tr>
+          <tr>
+            <td class="line-name">🚗 General</td>
+            <td class="time-red">90 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">🟦 Ready</td>
+            <td class="time-yellow">15 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">⚡ Sentri</td>
+            <td class="time-green">10 min</td>
+          </tr>
+          <tr>
+            <td class="line-name">🚶 Peatonal</td>
+            <td class="time-yellow">14 min</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="update-row">
+        <span>🟢</span>
+        <span>Actualizado hace unos minutos</span>
+      </div>
+    </div>
+
+    <div class="glass-card currency-card">
+      <div class="currency-title">💵 Tipo de cambio</div>
+      <div class="currency-subtitle">Hoy en Mexicali</div>
+
+      <div class="currency-boxes">
+        <div class="currency-box">
+          <div class="currency-label">Compra</div>
+          <div class="currency-value">$16.85</div>
+        </div>
+        <div class="currency-box">
+          <div class="currency-label">Venta</div>
+          <div class="currency-value">$17.10</div>
+        </div>
+      </div>
+
+      <a class="button-preview" href="#">Ver cámaras en vivo</a>
+    </div>
+
+    <div class="footer-tags">
+      #GaritaMexicali #MXLI #TiempoDeEspera
+    </div>
+
+  </div>
+</body>
+</html>
