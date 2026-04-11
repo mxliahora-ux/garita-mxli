@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MXLI AHORA</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #0b1a3a, #020617);
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 10px 0 5px;
+  font-size: 28px;
+}
+
+.header p {
+  color: #a1a1aa;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+/* TARJETA */
+.card {
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* TITULO DE TARJETA */
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.card-title h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* LINK CAMARA */
+.camera-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #38bdf8;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.camera-link:hover {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+/* TABLA */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: 12px;
+  color: #9ca3af;
+  padding-bottom: 6px;
+}
+
+.table td {
+  padding: 8px 0;
+  font-size: 15px;
+}
+
+.row {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* COLORES */
+.yellow {
+  color: #facc15;
+  font-weight: bold;
+}
+
+.red {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.green {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+/* STATUS */
+.status {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #22c55e;
+}
+
+/* DOLAR */
+.dollar {
+  text-align: center;
+}
+
+.dollar-box {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  gap: 10px;
+}
+
+/* SOFIA */
+.sofia {
+  text-align: center;
+}
+
+.sofia img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  object-fit: cover;
+}
+
+.sofia p {
+  margin: 6px 0;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>MXLI AHORA</h1>
+    <p>Garitas Mexicali en tiempo real</p>
+    <p>📅 Domingo 30 de marzo · ⏰ 2:50 a.m.</p>
+  </div>
+
+  <!-- CLIMA -->
+  <div class="card">
+    <div class="card-title">
+      <h2>🌡️ Clima</h2>
+    </div>
+    <p>☀️ Mexicali: 28°C · Despejado</p>
+  </div>
+
+  <!-- CENTRO -->
+  <div class="card">
+    <div class="card-title">
+      <h2>📍 Centro</h2>
+      <a href="#" class="camera-link">📷 Mirar cámara</a>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Línea</th>
+        <th>Espera</th>
+      </tr>
+      <tr class="row">
+        <td>🚗 General</td>
+        <td class="yellow">45 min</td>
+      </tr>
+      <tr class="row">
+        <td>🟦 Ready</td>
+        <td class="red">60 min</td>
+      </tr>
+      <tr class="row">
+        <td>⚡ Sentri</td>
+        <td class="green">5 min</td>
+      </tr>
+      <tr class="row">
+        <td>🚶 Peatonal</td>
+        <td class="green">12 min</td>
+      </tr>
+    </table>
+
+    <div class="status">🟢 Actualizado hace unos minutos</div>
+  </div>
+
+  <!-- NUEVO MEXICALI -->
+  <div class="card">
+    <div class="card-title">
+      <h2>📍 Nuevo Mexicali</h2>
+      <a href="#" class="camera-link">📷 Mirar cámara</a>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Línea</th>
+        <th>Espera</th>
+      </tr>
+      <tr class="row">
+        <td>🚗 General</td>
+        <td class="red">90 min</td>
+      </tr>
+      <tr class="row">
+        <td>🟦 Ready</td>
+        <td class="yellow">15 min</td>
+      </tr>
+      <tr class="row">
+        <td>⚡ Sentri</td>
+        <td class="green">10 min</td>
+      </tr>
+      <tr class="row">
+        <td>🚶 Peatonal</td>
+        <td class="yellow">14 min</td>
+      </tr>
+    </table>
+
+    <div class="status">🟢 Actualizado hace unos minutos</div>
+  </div>
+
+  <!-- DOLAR -->
+  <div class="card dollar">
+    <div class="card-title" style="justify-content:center;">
+      <h2>💵 Tipo de cambio</h2>
+    </div>
+    <div class="dollar-box">
+      <span>Compra $16.85</span>
+      <span>Venta $17.10</span>
+    </div>
+  </div>
+
+  <!-- SOFIA -->
+  <div class="card sofia">
+    <img src="sofia.jpg" alt="Sofía">
+    <p>👩‍💼 Reporte con Sofía</p>
+    <p>📸 Manda tu foto y la publicamos</p>
+    <p>📧 mxliahora@gmail.com</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    #GaritaMexicali #TiempoDeEspera
+  </div>
+
+</div>
+
+</body>
+</html>
