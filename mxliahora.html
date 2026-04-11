@@ -1,315 +1,394 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MXLI AHORA</title>
 
-<title>MXLI AHORA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #0b1a3a, #020617);
-  color: white;
-  display: flex;
-  justify-content: center;
-}
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(25, 52, 110, 0.35), transparent 35%),
+        linear-gradient(180deg, #04153d 0%, #020b27 100%);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+    }
 
-.container {
-  width: 100%;
-  max-width: 420px;
-  padding: 20px;
-}
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px 16px 40px;
+    }
 
-/* HEADER */
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
 
-.header h1 {
-  margin: 10px 0 5px;
-  font-size: 28px;
-}
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
 
-.header p {
-  color: #a1a1aa;
-  font-size: 14px;
-  margin: 4px 0;
-}
+    .header p {
+      margin: 4px 0;
+      color: #b8bfd6;
+      font-size: 14px;
+    }
 
-/* TARJETA */
-.card {
-  border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 16px;
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-}
+    .card {
+      background: linear-gradient(180deg, rgba(18, 33, 73, 0.92), rgba(7, 20, 53, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 10px 30px rgba(0,0,0,0.18);
+    }
 
-/* TITULO DE TARJETA */
-.card-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 12px;
-}
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
 
-.card-title h2 {
-  margin: 0;
-  font-size: 18px;
-}
+    .card-title h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+    }
 
-/* LINK CAMARA */
-.camera-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: #38bdf8;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(56, 189, 248, 0.10);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-}
+    .camera-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #67c8ff;
+      text-decoration: none;
+      background: rgba(38, 129, 255, 0.12);
+      border: 1px solid rgba(69, 160, 255, 0.25);
+      white-space: nowrap;
+    }
 
-.camera-link:hover {
-  background: rgba(56, 189, 248, 0.18);
-}
+    .camera-link:hover {
+      background: rgba(38, 129, 255, 0.18);
+    }
 
-/* TABLA */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-.table th {
-  text-align: left;
-  font-size: 12px;
-  color: #9ca3af;
-  padding-bottom: 6px;
-}
+    .table th {
+      text-align: left;
+      font-size: 13px;
+      color: #9ea8c7;
+      padding-bottom: 8px;
+      font-weight: 700;
+    }
 
-.table td {
-  padding: 8px 0;
-  font-size: 15px;
-}
+    .table td {
+      font-size: 15px;
+      padding: 12px 0;
+    }
 
-.row {
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
+    .row {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
 
-/* COLORES */
-.yellow {
-  color: #facc15;
-  font-weight: bold;
-}
+    .yellow {
+      color: #ffd64d;
+      font-weight: 800;
+    }
 
-.red {
-  color: #ef4444;
-  font-weight: bold;
-}
+    .red {
+      color: #ff6262;
+      font-weight: 800;
+    }
 
-.green {
-  color: #22c55e;
-  font-weight: bold;
-}
+    .green {
+      color: #34d76a;
+      font-weight: 800;
+    }
 
-/* STATUS */
-.status {
-  margin-top: 10px;
-  font-size: 11px;
-  color: #22c55e;
-}
+    .status {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #38d96a;
+    }
 
-/* DOLAR */
-.dollar {
-  text-align: center;
-}
+    .clima-text {
+      margin: 0;
+      font-size: 16px;
+      color: #ffffff;
+    }
 
-.dollar-box {
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: bold;
-  gap: 10px;
-}
+    .exchange-title {
+      text-align: center;
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 800;
+    }
 
-/* SOFIA */
-.sofia {
-  text-align: center;
-}
+    .exchange-sub {
+      text-align: center;
+      margin: 0 0 16px;
+      color: #aeb7d1;
+      font-size: 13px;
+    }
 
-.sofia img {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  margin-bottom: 6px;
-  object-fit: cover;
-}
+    .exchange-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
-.sofia p {
-  margin: 6px 0;
-}
+    .exchange-box {
+      background: rgba(4, 12, 37, 0.55);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 18px 10px;
+      text-align: center;
+    }
 
-/* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 10px;
-}
-</style>
+    .exchange-label {
+      display: block;
+      color: #b2bad1;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .exchange-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffd64d;
+    }
+
+    .sofia {
+      text-align: center;
+    }
+
+    .sofia img {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      margin-bottom: 12px;
+      border: 2px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .sofia-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .sofia-text {
+      margin: 0 0 8px;
+      color: #d3d9ec;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .sofia-email {
+      margin: 0;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ads {
+      text-align: center;
+    }
+
+    .ads-label {
+      margin: 0 0 10px;
+      color: #9ea8c7;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .ads-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .ads-text {
+      margin: 0 0 18px;
+      color: #d3d9ec;
+      font-size: 14px;
+    }
+
+    .ads-button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #2ec5ff, #1698f0);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(22, 152, 240, 0.28);
+    }
+
+    .footer {
+      text-align: center;
+      color: #929cb9;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
 
-<div class="container">
-
-  <!-- HEADER -->
-  <div class="header">
-    <h1>MXLI AHORA</h1>
-    <p>Garitas Mexicali en tiempo real</p>
-    <p>📅 Domingo 30 de marzo · ⏰ 2:50 a.m.</p>
-  </div>
-
-  <!-- CLIMA -->
-  <div class="card">
-    <div class="card-title">
-      <h2>🌡️ Clima</h2>
-    </div>
-    <p>☀️ Mexicali: 28°C · Despejado</p>
-  </div>
-
-  <!-- CENTRO -->
-  <div class="card">
-    <div class="card-title">
-      <h2>📍 Centro</h2>
-      <a href="#" class="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mirar cámara</a>
+    <!-- HEADER -->
+    <div class="header">
+      <h1>MXLI AHORA</h1>
+      <p>Garitas Mexicali en tiempo real</p>
+      <p>📅 Domingo 30 de marzo · ⏰ 2:50 a.m.</p>
     </div>
 
-    <table class="table">
-      <tr>
-        <th>Línea</th>
-        <th>Espera</th>
-      </tr>
-      <tr class="row">
-        <td>🚗 General</td>
-        <td class="yellow">45 min</td>
-      </tr>
-      <tr class="row">
-        <td>🟦 Ready</td>
-        <td class="red">60 min</td>
-      </tr>
-      <tr class="row">
-        <td>⚡ Sentri</td>
-        <td class="green">5 min</td>
-      </tr>
-      <tr class="row">
-        <td>🚶 Peatonal</td>
-        <td class="green">12 min</td>
-      </tr>
-    </table>
-
-    <div class="status">🟢 Actualizado hace unos minutos</div>
-  </div>
-
-  <!-- NUEVO MEXICALI -->
-  <div class="card">
-    <div class="card-title">
-      <h2>📍 Nuevo Mexicali</h2>
-      <a href="#" class="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mirar cámara</a>
+    <!-- CLIMA -->
+    <div class="card">
+      <div class="card-title">
+        <h2>🌡️ Clima</h2>
+      </div>
+      <p class="clima-text">☀️ Mexicali: 28°C · Despejado</p>
     </div>
 
-    <table class="table">
-      <tr>
-        <th>Línea</th>
-        <th>Espera</th>
-      </tr>
-      <tr class="row">
-        <td>🚗 General</td>
-        <td class="red">90 min</td>
-      </tr>
-      <tr class="row">
-        <td>🟦 Ready</td>
-        <td class="yellow">15 min</td>
-      </tr>
-      <tr class="row">
-        <td>⚡ Sentri</td>
-        <td class="green">10 min</td>
-      </tr>
-      <tr class="row">
-        <td>🚶 Peatonal</td>
-        <td class="yellow">14 min</td>
-      </tr>
-    </table>
+    <!-- CENTRO -->
+    <div class="card">
+      <div class="card-title">
+        <h2>📍 Centro</h2>
+        <a href="CAMARA_CENTRO_URL" target="_blank" class="camera-link">📷 Mirar cámara</a>
+      </div>
 
-    <div class="status">🟢 Actualizado hace unos minutos</div>
-  </div>
+      <table class="table">
+        <tr>
+          <th>Línea</th>
+          <th>Espera</th>
+        </tr>
 
-  <!-- DOLAR -->
-  <div class="card dollar">
-    <div class="card-title" style="justify-content:center;">
-      <h2>💵 Tipo de cambio</h2>
+        <tr class="row">
+          <td>🚗 General</td>
+          <td class="yellow">45 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>🟦 Ready</td>
+          <td class="red">60 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>⚡ Sentri</td>
+          <td class="green">5 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>🚶 Peatonal</td>
+          <td class="green">12 min</td>
+        </tr>
+      </table>
+
+      <div class="status">🟢 Actualizado hace unos minutos</div>
     </div>
-    <div class="dollar-box">
-      <span>Compra $16.85</span>
-      <span>Venta $17.10</span>
+
+    <!-- NUEVO MEXICALI -->
+    <div class="card">
+      <div class="card-title">
+        <h2>📍 Nuevo Mexicali</h2>
+        <a href="CAMARA_NUEVO_URL" target="_blank" class="camera-link">📷 Mirar cámara</a>
+      </div>
+
+      <table class="table">
+        <tr>
+          <th>Línea</th>
+          <th>Espera</th>
+        </tr>
+
+        <tr class="row">
+          <td>🚗 General</td>
+          <td class="red">90 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>🟦 Ready</td>
+          <td class="yellow">15 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>⚡ Sentri</td>
+          <td class="green">10 min</td>
+        </tr>
+
+        <tr class="row">
+          <td>🚶 Peatonal</td>
+          <td class="yellow">14 min</td>
+        </tr>
+      </table>
+
+      <div class="status">🟢 Actualizado hace unos minutos</div>
     </div>
+
+    <!-- TIPO DE CAMBIO -->
+    <div class="card">
+      <h2 class="exchange-title">💵 Tipo de cambio</h2>
+      <p class="exchange-sub">Hoy en Mexicali</p>
+
+      <div class="exchange-grid">
+        <div class="exchange-box">
+          <span class="exchange-label">Compra</span>
+          <span class="exchange-value">$16.85</span>
+        </div>
+
+        <div class="exchange-box">
+          <span class="exchange-label">Venta</span>
+          <span class="exchange-value">$17.10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOFIA -->
+    <div class="card sofia">
+      <img src="sofia.jpg" alt="Sofía" />
+      <p class="sofia-title">👩‍💼 Reporte en vivo con Sofía</p>
+      <p class="sofia-text">📸 ¿Estás en la fila? Manda tu foto y aparece aquí</p>
+      <p class="sofia-email">📧 mxliahora@gmail.com</p>
+    </div>
+
+    <!-- PUBLICIDAD -->
+    <div class="card ads">
+      <p class="ads-label">PUBLICIDAD</p>
+      <p class="ads-title">🚀 Tu negocio aquí</p>
+      <p class="ads-text">Miles de personas verán tu anuncio hoy</p>
+      <a href="mailto:mxliahora@gmail.com" class="ads-button">📩 Anúnciate ahora</a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      #GaritaMexicali #TiempoDeEspera
+    </div>
+
   </div>
-
-<!-- SOFÍA -->
-<div class="card sofia">
-  <img src="sofia.jpg" alt="Sofía">
-
-  <p style="font-size:16px; font-weight:bold;">
-    👩‍💼 Reporte en vivo con Sofía
-  </p>
-
-  <p style="font-size:13px; color:#cbd5f5;">
-    📸 ¿Estás en la fila?  
-    Manda tu foto y aparece aquí
-  </p>
-
-  <p style="font-size:13px;">
-    📧 mxliahora@gmail.com
-  </p>
-</div>
-
-<!-- PUBLICIDAD -->
-<div class="card" style="text-align:center;">
-
-  <p style="font-size:12px; color:#9ca3af; margin-bottom:5px;">
-    PUBLICIDAD
-  </p>
-
-  <p style="font-size:18px; font-weight:bold;">
-    🚀 Tu negocio aquí
-  </p>
-
-  <p style="font-size:13px; color:#cbd5f5;">
-    Miles de personas verán tu anuncio hoy
-  </p>
-
-  <a href="mailto:mxliahora@gmail.com" style="
-    display:inline-block;
-    margin-top:10px;
-    padding:10px 14px;
-    border-radius:12px;
-    background:#0ea5e9;
-    color:white;
-    text-decoration:none;
-    font-size:13px;
-  ">
-    📩 Anúnciate ahora
-  </a>
-
-</div>
-
 </body>
 </html>
