@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MXLI AHORA</title>
+
+<style>
+
+/* 🔥 FONDO GENERAL */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at 20% 30%, #ff3c3c22, transparent 40%),
+              radial-gradient(circle at 80% 70%, #3c7cff22, transparent 40%),
+              #0b0f1a;
+  color: white;
+}
+
+/* 📱 CONTENEDOR TIPO CELULAR */
+.app {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 14px;
+}
+
+/* 🔝 HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 30px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-top: 5px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #aab4d6;
+  margin-top: 4px;
+}
+
+/* 🔲 TARJETAS */
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* 🏷️ TITULO TARJETA */
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* 📊 FILAS */
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 18px;
+}
+
+/* 🎨 COLORES */
+.green { color: #00e676; font-weight: bold; }
+.yellow { color: #ffcc00; font-weight: bold; }
+.red { color: #ff5252; font-weight: bold; }
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">📍</div>
+    <div class="title">MXLI AHORA</div>
+    <div class="subtitle">Garitas Mexicali en tiempo real</div>
+  </div>
+
+  <!-- TARJETA PRUEBA -->
+  <div class="card">
+    <div class="card-title">Centro</div>
+
+    <div class="row">
+      <span>🚗 General</span>
+      <span class="yellow">45 min</span>
+    </div>
+
+    <div class="row">
+      <span>🟦 Ready</span>
+      <span class="red">60 min</span>
+    </div>
+
+    <div class="row">
+      <span>⚡ Sentri</span>
+      <span class="green">5 min</span>
+    </div>
+
+    <div class="row">
+      <span>🚶 Peatonal</span>
+      <span class="green">12 min</span>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
