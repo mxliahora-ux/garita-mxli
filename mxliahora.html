@@ -9,268 +9,208 @@
 <style>
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  color:white;
-
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,100,100,0.15), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(80,150,255,0.15), transparent 40%),
-    #0b1220;
-
-  min-height:100vh;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg,#e9eef5,#d6dee9);
+  color:#1b1f23;
 }
 
 .container{
-  max-width:420px;
+  max-width:500px;
   margin:auto;
-  padding:20px;
+  padding:16px;
 }
 
-.title{
+.header{
   text-align:center;
-  margin:20px 0;
+  margin-bottom:20px;
 }
 
-.title h1{
+.header h1{
   margin:0;
-  font-size:30px;
-}
-
-.title p{
-  opacity:.6;
-}
-
-.infobar{
-  margin:15px 0;
-  padding:12px;
-  border-radius:16px;
-  text-align:center;
-
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(20px);
 }
 
 .card{
-  margin-top:20px;
-  border-radius:22px;
+  background:#ffffff;
+  border-radius:18px;
   padding:16px;
-
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(25px);
-
-  border:1px solid rgba(255,255,255,0.1);
+  margin-bottom:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-.card-header{
+.title{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:10px;
 }
 
-.btn-cam{
-  font-size:13px;
-  padding:6px 12px;
-  border-radius:14px;
+.btn{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:10px;
+  border:1px solid #ccc;
   text-decoration:none;
-  color:#8ecbff;
-
-  border:1px solid rgba(255,255,255,0.2);
 }
 
 .row{
   display:flex;
   justify-content:space-between;
-  padding:14px 0;
-  border-top:1px solid rgba(255,255,255,0.05);
+  padding:10px 0;
+  border-bottom:1px solid #eee;
 }
 
-.label{
+.row:last-child{
+  border-bottom:none;
+}
+
+.green{color:#2ecc71;}
+.yellow{color:#f1c40f;}
+.red{color:#e74c3c;}
+
+.exchange{
   display:flex;
   gap:10px;
 }
 
-.yellow{color:#ffd54f;}
-.red{color:#ff6b6b;}
-.green{color:#6bff9e;}
-
-.simple-card{
-  margin-top:20px;
-  padding:16px;
-  border-radius:20px;
-
-  background:rgba(255,255,255,0.06);
-}
-
-.rate{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-}
-
-.rate div{
+.exchange-box{
   flex:1;
-  background:rgba(0,0,0,0.4);
-  padding:12px;
+  background:#f4f6fa;
   border-radius:14px;
+  padding:10px;
   text-align:center;
+}
+
+.exchange-value{
+  font-size:20px;
+  font-weight:bold;
+  color:#d4a017;
 }
 
 .sofia-img{
   width:100%;
-  border-radius:16px;
+  border-radius:12px;
   margin-bottom:10px;
-}
-
-.ads{
-  text-align:center;
-}
-
-.ads a{
-  display:inline-block;
-  margin-top:10px;
-  padding:12px 20px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#4facfe,#00f2fe);
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
 }
 
 .footer{
   text-align:center;
   margin-top:20px;
-  opacity:.6;
+  font-size:12px;
+  color:#555;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="title">
-  <h1>📍 MXLI AHORA</h1>
-  <p>Garitas Mexicali en tiempo real</p>
-</div>
-
-<div id="hora" class="infobar">Cargando...</div>
-
-<!-- CENTRO -->
-<div class="card">
-  <div class="card-header">
-    <h3>📍 Centro</h3>
-    <a href="camaras.html" class="btn-cam">📷 Mira en vivo</a>
+  <div class="header">
+    <h1>📍 MXLI AHORA</h1>
+    <p id="hora"></p>
   </div>
 
-  <div class="row">
-    <div class="label">🚗 General</div>
-    <div id="centro-general" class="yellow">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">🟦 Ready</div>
-    <div id="centro-ready" class="red">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">⚡ Sentri</div>
-    <div id="centro-sentri" class="green">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">🚶 Peatonal</div>
-    <div id="centro-peaton" class="green">--</div>
-  </div>
-</div>
-
-<!-- NUEVO -->
-<div class="card">
-  <div class="card-header">
-    <h3>📍 Nuevo Mexicali</h3>
-    <a href="camaras.html" class="btn-cam">📷 Mira en vivo</a>
-  </div>
-
-  <div class="row">
-    <div class="label">🚗 General</div>
-    <div id="nuevo-general" class="red">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">🟦 Ready</div>
-    <div id="nuevo-ready" class="yellow">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">⚡ Sentri</div>
-    <div id="nuevo-sentri" class="green">--</div>
-  </div>
-
-  <div class="row">
-    <div class="label">🚶 Peatonal</div>
-    <div id="nuevo-peaton" class="yellow">--</div>
-  </div>
-</div>
-
-<!-- TIPO CAMBIO -->
-<div class="simple-card">
-  <h3>💵 Tipo de cambio</h3>
-  <p>Hoy en Mexicali</p>
-
-  <div class="rate">
-    <div>
-      Compra<br><b>$16.85</b>
+  <!-- CENTRO -->
+  <div class="card">
+    <div class="title">
+      <h3>📍 Centro</h3>
+      <a class="btn" href="#">📷 Mira en vivo</a>
     </div>
-    <div>
-      Venta<br><b>$17.10</b>
+
+    <div class="row">
+      <span>🚗 General</span>
+      <span id="centro-general">--</span>
+    </div>
+    <div class="row">
+      <span>🟦 Ready</span>
+      <span id="centro-ready">--</span>
+    </div>
+    <div class="row">
+      <span>⚡ Sentri</span>
+      <span id="centro-sentri">--</span>
+    </div>
+    <div class="row">
+      <span>🚶 Peatonal</span>
+      <span id="centro-peaton">--</span>
     </div>
   </div>
-</div>
 
-<!-- SOFIA -->
-<div class="simple-card">
-  <img src="https://mxliahora-ux.github.io/garita-mxli/sofia.jpg" class="sofia-img">
-  <p><b>👩 Reporte en vivo con Sofía</b></p>
-  <p>📸 ¿Estás en la fila? Manda tu foto y aparece aquí</p>
-  <p>📧 mxliahora@gmail.com</p>
-</div>
+  <!-- NUEVO -->
+  <div class="card">
+    <div class="title">
+      <h3>📍 Nuevo Mexicali</h3>
+      <a class="btn" href="#">📷 Mira en vivo</a>
+    </div>
 
-<!-- PUBLICIDAD -->
-<div class="simple-card ads">
-  <p>PUBLICIDAD</p>
-  <h3>🚀 Tu negocio aquí</h3>
-  <p>Miles de personas verán tu anuncio</p>
-  <a href="mailto:mxliahora@gmail.com">📩 Anúnciate ahora</a>
-</div>
+    <div class="row">
+      <span>🚗 General</span>
+      <span id="nuevo-general">--</span>
+    </div>
+    <div class="row">
+      <span>🟦 Ready</span>
+      <span id="nuevo-ready">--</span>
+    </div>
+    <div class="row">
+      <span>⚡ Sentri</span>
+      <span id="nuevo-sentri">--</span>
+    </div>
+    <div class="row">
+      <span>🚶 Peatonal</span>
+      <span id="nuevo-peaton">--</span>
+    </div>
+  </div>
 
-<div class="footer">
-  #GaritaMexicali #TiempoDeEspera
-</div>
+  <!-- TIPO DE CAMBIO -->
+  <div class="card">
+    <h3>💵 Tipo de cambio</h3>
+    <div class="exchange">
+      <div class="exchange-box">
+        <p>Compra</p>
+        <p class="exchange-value">$16.85</p>
+      </div>
+      <div class="exchange-box">
+        <p>Venta</p>
+        <p class="exchange-value">$17.10</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOFIA -->
+  <div class="card">
+    <img src="https://mxliahora-ux.github.io/garita-mxli/sofia.jpg" class="sofia-img">
+    <p><b>👩 Reporte en vivo con Sofía</b></p>
+    <p>📸 ¿Estás en la fila? Manda tu foto</p>
+    <p>📩 mxliahora@gmail.com</p>
+  </div>
+
+  <!-- PUBLICIDAD -->
+  <div class="card">
+    <p><b>🚀 Tu negocio aquí</b></p>
+    <p>Miles de personas verán tu anuncio</p>
+    <a href="mailto:mxliahora@gmail.com">📩 Anúnciate</a>
+  </div>
+
+  <div class="footer">
+    #GaritaMexicali #TiempoDeEspera
+  </div>
 
 </div>
 
 <script>
+// 🔥 HORA AUTOMÁTICA
 function actualizarHora(){
   const ahora = new Date();
-  const fecha = new Intl.DateTimeFormat("es-MX", {
-    timeZone:"America/Tijuana",
-    weekday:"long",
-    hour:"numeric",
-    minute:"2-digit",
-    hour12:true
-  }).format(ahora);
-
-  document.getElementById("hora").innerHTML =
-    fecha + " • 🌡️ 26°C Mexicali";
+  document.getElementById("hora").innerText =
+    ahora.toLocaleString("es-MX", { timeZone: "America/Tijuana" });
 }
-
 actualizarHora();
 setInterval(actualizarHora,60000);
 
-<s
+// 🔥 DATOS EN VIVO
 async function cargarDatos(){
   try{
-    const res = await fetch("fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
+    const res = await fetch("https://raspy-sky-1be8.workers.dev");
     const data = await res.json();
 
     document.getElementById("centro-general").innerText = data.centro.general + " min";
@@ -284,19 +224,13 @@ async function cargarDatos(){
     document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
 
   }catch(e){
-    // 🔥 VALORES DE RESPALDO (IMPORTANTE)
-    document.getElementById("centro-general").innerText = "45 min";
-    document.getElementById("centro-ready").innerText = "60 min";
-    document.getElementById("centro-sentri").innerText = "5 min";
-    document.getElementById("centro-peaton").innerText = "12 min";
-
-    document.getElementById("nuevo-general").innerText = "90 min";
-    document.getElementById("nuevo-ready").innerText = "15 min";
-    document.getElementById("nuevo-sentri").innerText = "10 min";
-    document.getElementById("nuevo-peaton").innerText = "14 min";
+    console.log("error", e);
   }
 }
 
 cargarDatos();
 setInterval(cargarDatos,300000);
 </script>
+
+</body>
+</html>
