@@ -247,7 +247,9 @@ actualizarHora();
 setInterval(actualizarHora,60000);
 
 
-// DATOS EN VIVO (cuando esté listo)
+<!-- TODO TU HTML ARRIBA -->
+
+<script>
 async function cargarDatos(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
@@ -264,13 +266,21 @@ async function cargarDatos(){
     document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
 
   }catch(e){
-    console.log("error datos", e);
+    // respaldo si falla
+    document.getElementById("centro-general").innerText = "45 min";
+    document.getElementById("centro-ready").innerText = "60 min";
+    document.getElementById("centro-sentri").innerText = "5 min";
+    document.getElementById("centro-peaton").innerText = "12 min";
+
+    document.getElementById("nuevo-general").innerText = "90 min";
+    document.getElementById("nuevo-ready").innerText = "15 min";
+    document.getElementById("nuevo-sentri").innerText = "10 min";
+    document.getElementById("nuevo-peaton").innerText = "14 min";
   }
 }
 
 cargarDatos();
 setInterval(cargarDatos,300000);
-
 </script>
 
 </body>
