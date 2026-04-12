@@ -226,17 +226,15 @@ body{
 
 </div>
 
-<!-- SCRIPT -->
 <script>
-
-// HORA
 function actualizarHora(){
   const ahora = new Date();
   const fecha = new Intl.DateTimeFormat("es-MX", {
     timeZone:"America/Tijuana",
     weekday:"long",
     hour:"numeric",
-    minute:"2-digit"
+    minute:"2-digit",
+    hour12:true
   }).format(ahora);
 
   document.getElementById("hora").innerHTML =
@@ -246,10 +244,6 @@ function actualizarHora(){
 actualizarHora();
 setInterval(actualizarHora,60000);
 
-
-<!-- TODO TU HTML ARRIBA -->
-
-<script>
 async function cargarDatos(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
@@ -264,9 +258,7 @@ async function cargarDatos(){
     document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
     document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
     document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
-
   }catch(e){
-    // respaldo si falla
     document.getElementById("centro-general").innerText = "45 min";
     document.getElementById("centro-ready").innerText = "60 min";
     document.getElementById("centro-sentri").innerText = "5 min";
@@ -282,6 +274,3 @@ async function cargarDatos(){
 cargarDatos();
 setInterval(cargarDatos,300000);
 </script>
-
-</body>
-</html>
