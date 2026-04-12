@@ -1,236 +1,258 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MXLI AHORA</title>
 
-<title>MXLI AHORA</title>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg,#e9eef5,#d6dee9);
-  color:#1b1f23;
-}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      background: linear-gradient(180deg,#e9eef5,#d6dee9);
+      color:#1b1f23;
+    }
 
-.container{
-  max-width:500px;
-  margin:auto;
-  padding:16px;
-}
+    .container{
+      max-width:500px;
+      margin:0 auto;
+      padding:16px;
+    }
 
-.header{
-  text-align:center;
-  margin-bottom:20px;
-}
+    .header{
+      text-align:center;
+      margin-bottom:20px;
+    }
 
-.header h1{
-  margin:0;
-}
+    .header h1{
+      margin:0;
+      font-size:32px;
+      font-weight:800;
+    }
 
-.card{
-  background:#ffffff;
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+    .header p{
+      margin:10px 0 0;
+      font-size:16px;
+      color:#444;
+    }
 
-.title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
+    .card{
+      background:#fff;
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:16px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
 
-.btn{
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:10px;
-  border:1px solid #ccc;
-  text-decoration:none;
-}
+    .title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-}
+    .title h3{
+      margin:0;
+      font-size:22px;
+    }
 
-.row:last-child{
-  border-bottom:none;
-}
+    .btn{
+      font-size:13px;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid #ccc;
+      text-decoration:none;
+      color:#1b1f23;
+      background:#fff;
+      white-space:nowrap;
+    }
 
-.green{color:#2ecc71;}
-.yellow{color:#f1c40f;}
-.red{color:#e74c3c;}
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      border-bottom:1px solid #eee;
+      font-size:18px;
+    }
 
-.exchange{
-  display:flex;
-  gap:10px;
-}
+    .row:last-child{
+      border-bottom:none;
+    }
 
-.exchange-box{
-  flex:1;
-  background:#f4f6fa;
-  border-radius:14px;
-  padding:10px;
-  text-align:center;
-}
+    .yellow{ color:#d4a017; font-weight:700; }
+    .red{ color:#d94a4a; font-weight:700; }
+    .green{ color:#2e9b57; font-weight:700; }
 
-.exchange-value{
-  font-size:20px;
-  font-weight:bold;
-  color:#d4a017;
-}
+    .exchange{
+      display:flex;
+      gap:10px;
+    }
 
-.sofia-img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:10px;
-}
+    .exchange-box{
+      flex:1;
+      background:#f4f6fa;
+      border-radius:14px;
+      padding:14px;
+      text-align:center;
+    }
 
-.footer{
-  text-align:center;
-  margin-top:20px;
-  font-size:12px;
-  color:#555;
-}
-</style>
+    .exchange-label{
+      display:block;
+      color:#666;
+      margin-bottom:6px;
+    }
 
+    .exchange-value{
+      font-size:22px;
+      font-weight:800;
+      color:#d4a017;
+    }
+
+    .sofia-img{
+      width:100%;
+      border-radius:12px;
+      margin-bottom:10px;
+      display:block;
+    }
+
+    .ads a{
+      display:inline-block;
+      margin-top:10px;
+      padding:12px 18px;
+      border-radius:14px;
+      background:#4fa3ff;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:20px;
+      font-size:12px;
+      color:#555;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="header">
-    <h1>📍 MXLI AHORA</h1>
-    <p id="hora"></p>
-  </div>
-
-  <!-- CENTRO -->
-  <div class="card">
-    <div class="title">
-      <h3>📍 Centro</h3>
-      <a class="btn" href="#">📷 Mira en vivo</a>
+    <div class="header">
+      <h1>📍 MXLI AHORA</h1>
+      <p id="hora"></p>
     </div>
 
-    <div class="row">
-      <span>🚗 General</span>
-      <span id="centro-general">--</span>
-    </div>
-    <div class="row">
-      <span>🟦 Ready</span>
-      <span id="centro-ready">--</span>
-    </div>
-    <div class="row">
-      <span>⚡ Sentri</span>
-      <span id="centro-sentri">--</span>
-    </div>
-    <div class="row">
-      <span>🚶 Peatonal</span>
-      <span id="centro-peaton">--</span>
-    </div>
-  </div>
-
-  <!-- NUEVO -->
-  <div class="card">
-    <div class="title">
-      <h3>📍 Nuevo Mexicali</h3>
-      <a class="btn" href="#">📷 Mira en vivo</a>
-    </div>
-
-    <div class="row">
-      <span>🚗 General</span>
-      <span id="nuevo-general">--</span>
-    </div>
-    <div class="row">
-      <span>🟦 Ready</span>
-      <span id="nuevo-ready">--</span>
-    </div>
-    <div class="row">
-      <span>⚡ Sentri</span>
-      <span id="nuevo-sentri">--</span>
-    </div>
-    <div class="row">
-      <span>🚶 Peatonal</span>
-      <span id="nuevo-peaton">--</span>
-    </div>
-  </div>
-
-  <!-- TIPO DE CAMBIO -->
-  <div class="card">
-    <h3>💵 Tipo de cambio</h3>
-    <div class="exchange">
-      <div class="exchange-box">
-        <p>Compra</p>
-        <p class="exchange-value">$16.85</p>
+    <!-- CENTRO -->
+    <div class="card">
+      <div class="title">
+        <h3>📍 Centro</h3>
+        <a class="btn" href="camaras.html">📷 Mira en vivo</a>
       </div>
-      <div class="exchange-box">
-        <p>Venta</p>
-        <p class="exchange-value">$17.10</p>
+
+      <div class="row">
+        <span>🚗 General</span>
+        <span class="yellow">45 min</span>
+      </div>
+
+      <div class="row">
+        <span>🟦 Ready</span>
+        <span class="red">60 min</span>
+      </div>
+
+      <div class="row">
+        <span>⚡ Sentri</span>
+        <span class="green">5 min</span>
+      </div>
+
+      <div class="row">
+        <span>🚶 Peatonal</span>
+        <span class="green">12 min</span>
       </div>
     </div>
+
+    <!-- NUEVO MEXICALI -->
+    <div class="card">
+      <div class="title">
+        <h3>📍 Nuevo Mexicali</h3>
+        <a class="btn" href="camaras.html">📷 Mira en vivo</a>
+      </div>
+
+      <div class="row">
+        <span>🚗 General</span>
+        <span class="red">90 min</span>
+      </div>
+
+      <div class="row">
+        <span>🟦 Ready</span>
+        <span class="yellow">15 min</span>
+      </div>
+
+      <div class="row">
+        <span>⚡ Sentri</span>
+        <span class="green">10 min</span>
+      </div>
+
+      <div class="row">
+        <span>🚶 Peatonal</span>
+        <span class="yellow">14 min</span>
+      </div>
+    </div>
+
+    <!-- TIPO DE CAMBIO -->
+    <div class="card">
+      <h3>💵 Tipo de cambio</h3>
+
+      <div class="exchange">
+        <div class="exchange-box">
+          <span class="exchange-label">Compra</span>
+          <span class="exchange-value">$16.85</span>
+        </div>
+
+        <div class="exchange-box">
+          <span class="exchange-label">Venta</span>
+          <span class="exchange-value">$17.10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOFIA -->
+    <div class="card">
+      <img src="https://mxliahora-ux.github.io/garita-mxli/sofia.jpg" class="sofia-img" alt="Reporte con Sofía">
+      <p><b>👩 Reporte en vivo con Sofía</b></p>
+      <p>📸 ¿Estás en la fila? Manda tu foto</p>
+      <p>📩 mxliahora@gmail.com</p>
+    </div>
+
+    <!-- PUBLICIDAD -->
+    <div class="card ads">
+      <p><b>🚀 Tu negocio aquí</b></p>
+      <p>Miles de personas verán tu anuncio</p>
+      <a href="mailto:mxliahora@gmail.com">📩 Anúnciate</a>
+    </div>
+
+    <div class="footer">
+      #GaritaMexicali #TiempoDeEspera
+    </div>
+
   </div>
 
-  <!-- SOFIA -->
-  <div class="card">
-    <img src="https://mxliahora-ux.github.io/garita-mxli/sofia.jpg" class="sofia-img">
-    <p><b>👩 Reporte en vivo con Sofía</b></p>
-    <p>📸 ¿Estás en la fila? Manda tu foto</p>
-    <p>📩 mxliahora@gmail.com</p>
-  </div>
+  <script>
+    function actualizarHora(){
+      const ahora = new Date();
+      document.getElementById("hora").innerText =
+        ahora.toLocaleString("es-MX", { timeZone: "America/Tijuana" });
+    }
 
-  <!-- PUBLICIDAD -->
-  <div class="card">
-    <p><b>🚀 Tu negocio aquí</b></p>
-    <p>Miles de personas verán tu anuncio</p>
-    <a href="mailto:mxliahora@gmail.com">📩 Anúnciate</a>
-  </div>
-
-  <div class="footer">
-    #GaritaMexicali #TiempoDeEspera
-  </div>
-
-</div>
-
-<script>
-// 🔥 HORA AUTOMÁTICA
-function actualizarHora(){
-  const ahora = new Date();
-  document.getElementById("hora").innerText =
-    ahora.toLocaleString("es-MX", { timeZone: "America/Tijuana" });
-}
-actualizarHora();
-setInterval(actualizarHora,60000);
-
-// 🔥 DATOS EN VIVO
-async function cargarDatos(){
-  try{
-    const res = await fetch("https://raspy-sky-1be8.workers.dev");
-    const data = await res.json();
-
-    document.getElementById("centro-general").innerText = data.centro.general + " min";
-    document.getElementById("centro-ready").innerText = data.centro.ready + " min";
-    document.getElementById("centro-sentri").innerText = data.centro.sentri + " min";
-    document.getElementById("centro-peaton").innerText = data.centro.peaton + " min";
-
-    document.getElementById("nuevo-general").innerText = data.nuevo.general + " min";
-    document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
-    document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
-    document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
-
-  }catch(e){
-    console.log("error", e);
-  }
-}
-
-cargarDatos();
-setInterval(cargarDatos,300000);
-</script>
+    actualizarHora();
+    setInterval(actualizarHora, 60000);
+  </script>
 
 </body>
 </html>
