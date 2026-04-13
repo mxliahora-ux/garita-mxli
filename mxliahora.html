@@ -8,53 +8,55 @@
 <style>
 body{
   margin:0;
-  font-family: -apple-system, BlinkMacSystemFont;
-  background: linear-gradient(180deg,#0f1c2e,#1f2f47);
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  background:#0f172a;
   color:white;
 }
 
 .container{
+  max-width:420px;
+  margin:auto;
   padding:20px;
-  text-align:center;
 }
 
 h1{
+  text-align:center;
   font-size:32px;
   margin-bottom:5px;
 }
 
 .sub{
-  opacity:.7;
+  text-align:center;
+  color:#94a3b8;
   margin-bottom:20px;
 }
 
 .card{
-  background:#2c3a52;
-  border-radius:20px;
-  padding:20px;
-  margin:15px 0;
-  text-align:left;
-}
-
-.title{
-  font-size:22px;
+  background:#1e293b;
+  border-radius:18px;
+  padding:16px;
   margin-bottom:15px;
 }
 
-.line{
+.title{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.row{
   display:flex;
   justify-content:space-between;
   padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-.line:last-child{
+.row:last-child{
   border:none;
 }
 
-.green{color:#4cd964;}
-.yellow{color:#ffd60a;}
-.red{color:#ff453a;}
+.green{color:#22c55e;}
+.yellow{color:#facc15;}
+.red{color:#ef4444;}
 </style>
 </head>
 
@@ -67,106 +69,109 @@ h1{
 
 <!-- CENTRO -->
 <div class="card">
-<div class="title">📍 Centro</div>
+  <div class="title">📍 Centro</div>
 
-<div class="line">
-<span>🚗 General</span>
-<span id="centro-general">--</span>
-</div>
+  <div class="row">
+    <span>🚗 General</span>
+    <span id="centro-general">--</span>
+  </div>
 
-<div class="line">
-<span>🟦 Ready</span>
-<span id="centro-ready">--</span>
-</div>
+  <div class="row">
+    <span>🟦 Ready</span>
+    <span id="centro-ready">--</span>
+  </div>
 
-<div class="line">
-<span>⚡ Sentri</span>
-<span id="centro-sentri">--</span>
-</div>
+  <div class="row">
+    <span>⚡ Sentri</span>
+    <span id="centro-sentri">--</span>
+  </div>
 
-<div class="line">
-<span>🚶 Peatonal</span>
-<span id="centro-peaton">--</span>
-</div>
+  <div class="row">
+    <span>🚶 Peatonal</span>
+    <span id="centro-peaton">--</span>
+  </div>
 </div>
 
 <!-- NUEVO -->
 <div class="card">
-<div class="title">📍 Nuevo Mexicali</div>
+  <div class="title">📍 Nuevo Mexicali</div>
 
-<div class="line">
-<span>🚗 General</span>
-<span id="nuevo-general">--</span>
-</div>
+  <div class="row">
+    <span>🚗 General</span>
+    <span id="nuevo-general">--</span>
+  </div>
 
-<div class="line">
-<span>🟦 Ready</span>
-<span id="nuevo-ready">--</span>
-</div>
+  <div class="row">
+    <span>🟦 Ready</span>
+    <span id="nuevo-ready">--</span>
+  </div>
 
-<div class="line">
-<span>⚡ Sentri</span>
-<span id="nuevo-sentri">--</span>
-</div>
+  <div class="row">
+    <span>⚡ Sentri</span>
+    <span id="nuevo-sentri">--</span>
+  </div>
 
-<div class="line">
-<span>🚶 Peatonal</span>
-<span id="nuevo-peaton">--</span>
-</div>
+  <div class="row">
+    <span>🚶 Peatonal</span>
+    <span id="nuevo-peaton">--</span>
+  </div>
 </div>
 
 </div>
 
 <script>
-// 🔥 HORA
+// ⏰ HORA
 function actualizarHora(){
   const ahora = new Date();
   document.getElementById("hora").innerText =
-    ahora.toLocaleString("es-MX",{hour:"numeric",minute:"numeric"}) + " • Mexicali";
+    ahora.toLocaleString("es-MX", {
+      timeZone:"America/Tijuana",
+      weekday:"long",
+      hour:"numeric",
+      minute:"numeric"
+    });
 }
 setInterval(actualizarHora,1000);
 actualizarHora();
 
 
-// 🔥 COLORES AUTOMÁTICOS
-function colorTiempo(valor){
-  if(valor <= 15) return "green";
-  if(valor <= 60) return "yellow";
+// 🎨 COLORES
+function color(v){
+  if(v <= 15) return "green";
+  if(v <= 60) return "yellow";
   return "red";
 }
 
 
-// 🔥 API
-async function cargarDatos(){
+// 🚀 API
+async function cargar(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
     const data = await res.json();
 
-    function poner(id, valor){
+    function set(id, val){
       const el = document.getElementById(id);
-      el.innerText = valor + " min";
-      el.className = colorTiempo(valor);
+      el.innerText = val + " min";
+      el.className = color(val);
     }
 
-    // CENTRO
-    poner("centro-general", data.centro.general);
-    poner("centro-ready", data.centro.ready);
-    poner("centro-sentri", data.centro.sentri);
-    poner("centro-peaton", data.centro.peaton);
+    set("centro-general", data.centro.general);
+    set("centro-ready", data.centro.ready);
+    set("centro-sentri", data.centro.sentri);
+    set("centro-peaton", data.centro.peaton);
 
-    // NUEVO
-    poner("nuevo-general", data.nuevo.general);
-    poner("nuevo-ready", data.nuevo.ready);
-    poner("nuevo-sentri", data.nuevo.sentri);
-    poner("nuevo-peaton", data.nuevo.peaton);
+    set("nuevo-general", data.nuevo.general);
+    set("nuevo-ready", data.nuevo.ready);
+    set("nuevo-sentri", data.nuevo.sentri);
+    set("nuevo-peaton", data.nuevo.peaton);
 
   }catch(e){
-    console.log("Error:",e);
+    console.log(e);
   }
 }
 
-cargarDatos();
-setInterval(cargarDatos,30000);
+cargar();
+setInterval(cargar,30000);
 </script>
 
 </body>
