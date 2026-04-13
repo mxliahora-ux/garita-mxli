@@ -3,38 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MXLI AHORA</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background: linear-gradient(180deg,#0b1c3d,#1f2f4a);
+  font-family: -apple-system, BlinkMacSystemFont;
+  background: linear-gradient(180deg,#0f1c2e,#1f2f47);
   color:white;
+}
+
+.container{
+  padding:20px;
   text-align:center;
 }
 
 h1{
-  margin-top:40px;
-  font-size:40px;
+  font-size:32px;
+  margin-bottom:5px;
 }
 
 .sub{
-  opacity:0.8;
+  opacity:.7;
   margin-bottom:20px;
 }
 
 .card{
-  background:#2a3b55;
-  margin:20px;
-  padding:20px;
+  background:#2c3a52;
   border-radius:20px;
+  padding:20px;
+  margin:15px 0;
   text-align:left;
 }
 
 .title{
-  font-size:24px;
+  font-size:22px;
   margin-bottom:15px;
 }
 
@@ -42,101 +45,127 @@ h1{
   display:flex;
   justify-content:space-between;
   padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 
 .line:last-child{
   border:none;
 }
 
-.green{color:#6ee7a2;}
-.yellow{color:#ffd166;}
-.red{color:#ff6b6b;}
+.green{color:#4cd964;}
+.yellow{color:#ffd60a;}
+.red{color:#ff453a;}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>📍 MXLI AHORA</h1>
-<div class="sub">Garitas Mexicali en tiempo real</div>
+<div class="sub" id="hora">Cargando...</div>
 
 <!-- CENTRO -->
 <div class="card">
-  <div class="title">📍 Centro</div>
+<div class="title">📍 Centro</div>
 
-  <div class="line">
-    <span>🚗 General</span>
-    <span id="centro-general">--</span>
-  </div>
-
-  <div class="line">
-    <span>🟦 Ready</span>
-    <span id="centro-ready">--</span>
-  </div>
-
-  <div class="line">
-    <span>⚡ Sentri</span>
-    <span id="centro-sentri">--</span>
-  </div>
-
-  <div class="line">
-    <span>🚶 Peatonal</span>
-    <span id="centro-peaton">--</span>
-  </div>
+<div class="line">
+<span>🚗 General</span>
+<span id="centro-general">--</span>
 </div>
 
-<!-- NUEVO MEXICALI -->
+<div class="line">
+<span>🟦 Ready</span>
+<span id="centro-ready">--</span>
+</div>
+
+<div class="line">
+<span>⚡ Sentri</span>
+<span id="centro-sentri">--</span>
+</div>
+
+<div class="line">
+<span>🚶 Peatonal</span>
+<span id="centro-peaton">--</span>
+</div>
+</div>
+
+<!-- NUEVO -->
 <div class="card">
-  <div class="title">📍 Nuevo Mexicali</div>
+<div class="title">📍 Nuevo Mexicali</div>
 
-  <div class="line">
-    <span>🚗 General</span>
-    <span id="nuevo-general">--</span>
-  </div>
+<div class="line">
+<span>🚗 General</span>
+<span id="nuevo-general">--</span>
+</div>
 
-  <div class="line">
-    <span>🟦 Ready</span>
-    <span id="nuevo-ready">--</span>
-  </div>
+<div class="line">
+<span>🟦 Ready</span>
+<span id="nuevo-ready">--</span>
+</div>
 
-  <div class="line">
-    <span>⚡ Sentri</span>
-    <span id="nuevo-sentri">--</span>
-  </div>
+<div class="line">
+<span>⚡ Sentri</span>
+<span id="nuevo-sentri">--</span>
+</div>
 
-  <div class="line">
-    <span>🚶 Peatonal</span>
-    <span id="nuevo-peaton">--</span>
-  </div>
+<div class="line">
+<span>🚶 Peatonal</span>
+<span id="nuevo-peaton">--</span>
+</div>
+</div>
+
 </div>
 
 <script>
+// 🔥 HORA
+function actualizarHora(){
+  const ahora = new Date();
+  document.getElementById("hora").innerText =
+    ahora.toLocaleString("es-MX",{hour:"numeric",minute:"numeric"}) + " • Mexicali";
+}
+setInterval(actualizarHora,1000);
+actualizarHora();
+
+
+// 🔥 COLORES AUTOMÁTICOS
+function colorTiempo(valor){
+  if(valor <= 15) return "green";
+  if(valor <= 60) return "yellow";
+  return "red";
+}
+
+
+// 🔥 API
 async function cargarDatos(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
     const data = await res.json();
 
+    function poner(id, valor){
+      const el = document.getElementById(id);
+      el.innerText = valor + " min";
+      el.className = colorTiempo(valor);
+    }
+
     // CENTRO
-    document.getElementById("centro-general").innerText = data.centro.general + " min";
-    document.getElementById("centro-ready").innerText = data.centro.ready + " min";
-    document.getElementById("centro-sentri").innerText = data.centro.sentri + " min";
-    document.getElementById("centro-peaton").innerText = data.centro.peaton + " min";
+    poner("centro-general", data.centro.general);
+    poner("centro-ready", data.centro.ready);
+    poner("centro-sentri", data.centro.sentri);
+    poner("centro-peaton", data.centro.peaton);
 
     // NUEVO
-    document.getElementById("nuevo-general").innerText = data.nuevo.general + " min";
-    document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
-    document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
-    document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
+    poner("nuevo-general", data.nuevo.general);
+    poner("nuevo-ready", data.nuevo.ready);
+    poner("nuevo-sentri", data.nuevo.sentri);
+    poner("nuevo-peaton", data.nuevo.peaton);
 
   }catch(e){
-    console.log("Error cargando datos", e);
+    console.log("Error:",e);
   }
 }
 
-// cargar al inicio
 cargarDatos();
-
-// actualizar cada 30 segundos
 setInterval(cargarDatos,30000);
 </script>
 
