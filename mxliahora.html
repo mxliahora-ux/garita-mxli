@@ -3,53 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MXLI AHORA</title>
 
 <style>
 body{
   margin:0;
-  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg,#0f172a,#1e293b);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg,#1e2a3d,#2c3e55);
   color:white;
-}
-
-.container{
-  max-width:500px;
-  margin:auto;
-  padding:16px;
-}
-
-.header{
   text-align:center;
 }
 
-.header h1{
-  margin:0;
-  font-size:32px;
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:15px;
 }
 
-/* 🔥 barra info */
+h1{
+  margin:10px 0 0;
+}
+
+.subtitle{
+  color:#cbd5e1;
+  margin-bottom:10px;
+}
+
 .top-info{
-  margin-top:10px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  border-radius:16px;
-  padding:12px;
-  font-size:14px;
-  color:#d1d5db;
+  margin:10px 0 20px;
+  color:#e2e8f0;
 }
 
-/* 🔥 tarjetas */
 .card{
-  margin-top:16px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   border-radius:20px;
-  padding:16px;
-  border:1px solid rgba(255,255,255,0.1);
+  padding:15px;
+  margin-bottom:15px;
+  text-align:left;
 }
 
-.title{
+.card-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -57,55 +52,51 @@ body{
 }
 
 .btn{
-  font-size:12px;
-  padding:6px 12px;
+  border:1px solid rgba(255,255,255,0.3);
+  padding:6px 10px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,0.2);
-  color:white;
+  font-size:13px;
+  color:#cbd5e1;
   text-decoration:none;
 }
 
-/* filas */
 .row{
   display:flex;
   justify-content:space-between;
   padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  border-top:1px solid rgba(255,255,255,0.1);
 }
 
-.row:last-child{
-  border:none;
+.value{
+  font-weight:bold;
 }
 
-/* colores */
-.green{color:#4ade80;}
-.yellow{color:#facc15;}
-.red{color:#f87171;}
+.green{ color:#4ade80; }
+.yellow{ color:#facc15; }
+.red{ color:#f87171; }
 
 .exchange{
   display:flex;
   gap:10px;
 }
 
-.box{
+.exchange div{
   flex:1;
   background: rgba(0,0,0,0.3);
-  border-radius:14px;
-  padding:12px;
+  border-radius:15px;
+  padding:15px;
   text-align:center;
 }
 
-.price{
-  font-size:20px;
-  font-weight:800;
-  color:#facc15;
+.sofia img{
+  width:100%;
+  border-radius:15px;
 }
 
 .footer{
-  text-align:center;
-  margin-top:20px;
-  font-size:12px;
-  color:#9ca3af;
+  margin-top:15px;
+  color:#94a3b8;
+  font-size:13px;
 }
 </style>
 </head>
@@ -114,117 +105,113 @@ body{
 
 <div class="container">
 
-  <div class="header">
-    <h1>📍 MXLI AHORA</h1>
-    <p>Garitas Mexicali en tiempo real</p>
+📍
+<h1>MXLI AHORA</h1>
+<div class="subtitle">Garitas Mexicali en tiempo real</div>
 
-    <!-- 🔥 INFO ARRIBA -->
-    <div class="top-info" id="top-info">
-      📅 -- • ⏰ -- • 🌡️ 26°C Mexicali
-    </div>
+<div class="top-info" id="fechaHora">Cargando...</div>
+
+<!-- CENTRO -->
+<div class="card">
+  <div class="card-header">
+    <h3>📍 Centro</h3>
+    <a class="btn" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
   </div>
 
-  <!-- CENTRO -->
-  <div class="card">
-    <div class="title">
-      <h3>📍 Centro</h3>
-      <a class="btn" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
-    </div>
+  <div class="row">🚗 General <span id="centro-general" class="value yellow">--</span></div>
+  <div class="row">🟦 Ready <span id="centro-ready" class="value red">--</span></div>
+  <div class="row">⚡ Sentri <span id="centro-sentri" class="value green">--</span></div>
+  <div class="row">🚶 Peatonal <span id="centro-peaton" class="value green">--</span></div>
+</div>
 
-    <div class="row">
-      <span>🚗 General</span>
-      <span class="yellow">45 min</span>
-    </div>
-
-    <div class="row">
-      <span>🟦 Ready</span>
-      <span class="red">60 min</span>
-    </div>
-
-    <div class="row">
-      <span>⚡ Sentri</span>
-      <span class="green">5 min</span>
-    </div>
-
-    <div class="row">
-      <span>🚶 Peatonal</span>
-      <span class="green">12 min</span>
-    </div>
+<!-- NUEVO -->
+<div class="card">
+  <div class="card-header">
+    <h3>📍 Nuevo Mexicali</h3>
+    <a class="btn" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
   </div>
 
-  <!-- NUEVO -->
-  <div class="card">
-    <div class="title">
-      <h3>📍 Nuevo Mexicali</h3>
-      <a class="btn" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
-    </div>
+  <div class="row">🚗 General <span id="nuevo-general" class="value red">--</span></div>
+  <div class="row">🟦 Ready <span id="nuevo-ready" class="value yellow">--</span></div>
+  <div class="row">⚡ Sentri <span id="nuevo-sentri" class="value green">--</span></div>
+  <div class="row">🚶 Peatonal <span id="nuevo-peaton" class="value yellow">--</span></div>
+</div>
 
-    <div class="row">
-      <span>🚗 General</span>
-      <span class="red">90 min</span>
+<!-- TIPO DE CAMBIO -->
+<div class="card">
+  <h3>💵 Tipo de cambio</h3>
+  <div class="exchange">
+    <div>
+      Compra<br>
+      <b>$16.85</b>
     </div>
-
-    <div class="row">
-      <span>🟦 Ready</span>
-      <span class="yellow">15 min</span>
-    </div>
-
-    <div class="row">
-      <span>⚡ Sentri</span>
-      <span class="green">10 min</span>
-    </div>
-
-    <div class="row">
-      <span>🚶 Peatonal</span>
-      <span class="yellow">14 min</span>
+    <div>
+      Venta<br>
+      <b>$17.10</b>
     </div>
   </div>
+</div>
 
-  <!-- TIPO DE CAMBIO -->
-  <div class="card">
-    <h3>💵 Tipo de cambio</h3>
+<!-- SOFIA -->
+<div class="card sofia">
+  <img src="https://i.imgur.com/6VBx3io.jpg">
+  <p>👩‍💼 Reporte en vivo con Sofía</p>
+</div>
 
-    <div class="exchange">
-      <div class="box">
-        <p>Compra</p>
-        <p class="price">$16.85</p>
-      </div>
-
-      <div class="box">
-        <p>Venta</p>
-        <p class="price">$17.10</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    #GaritaMexicali #TiempoDeEspera
-  </div>
+<div class="footer">
+#GaritaMexicali #TiempoDeEspera
+</div>
 
 </div>
 
 <script>
-// 🔥 FECHA + HORA AUTOMÁTICA
-function actualizarInfo(){
+// ⏰ FECHA Y HORA
+function actualizarHora(){
   const ahora = new Date();
-
   const opciones = {
     timeZone: "America/Tijuana",
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    hour: "numeric",
-    minute: "numeric"
+    weekday:"long",
+    hour:"numeric",
+    minute:"numeric"
   };
+  document.getElementById("fechaHora").innerText =
+    ahora.toLocaleString("es-MX", opciones) + " • 🌡️ 26°C Mexicali";
+}
+setInterval(actualizarHora,1000);
+actualizarHora();
 
-  const texto = ahora.toLocaleString("es-MX", opciones);
+// 🚀 DATOS EN VIVO
+async function cargarDatos(){
+  try{
+    const res = await fetch("https://raspy-sky-1be8.workers.dev");
+    const data = await res.json();
 
-  document.getElementById("top-info").innerText =
-    "📅 " + texto + " • 🌡️ 26°C Mexicali";
+    document.getElementById("centro-general").innerText = data.centro.general+" min";
+    document.getElementById("centro-ready").innerText = data.centro.ready+" min";
+    document.getElementById("centro-sentri").innerText = data.centro.sentri+" min";
+    document.getElementById("centro-peaton").innerText = data.centro.peaton+" min";
+
+    document.getElementById("nuevo-general").innerText = data.nuevo.general+" min";
+    document.getElementById("nuevo-ready").innerText = data.nuevo.ready+" min";
+    document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri+" min";
+    document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton+" min";
+
+  }catch(e){
+    // respaldo
+    document.getElementById("centro-general").innerText="45 min";
+    document.getElementById("centro-ready").innerText="60 min";
+    document.getElementById("centro-sentri").innerText="5 min";
+    document.getElementById("centro-peaton").innerText="12 min";
+
+    document.getElementById("nuevo-general").innerText="90 min";
+    document.getElementById("nuevo-ready").innerText="15 min";
+    document.getElementById("nuevo-sentri").innerText="10 min";
+    document.getElementById("nuevo-peaton").innerText="14 min";
+  }
 }
 
-actualizarInfo();
-setInterval(actualizarInfo,60000);
+cargarDatos();
+setInterval(cargarDatos,30000);
 </script>
 
 </body>
