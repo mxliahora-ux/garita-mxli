@@ -286,6 +286,29 @@ function actualizarHora(){
 actualizarHora();
 setInterval(actualizarHora, 60000);
 </script>
+<script>
+window.onload = function(){
 
+  fetch("https://raspy-sky-1be8.mxliahora.workers.dev")
+    .then(res => res.json())
+    .then(data => {
+
+      document.getElementById("centro-general").innerText = data.centro.general + " min";
+      document.getElementById("centro-ready").innerText = data.centro.ready + " min";
+      document.getElementById("centro-sentri").innerText = data.centro.sentri + " min";
+      document.getElementById("centro-peaton").innerText = data.centro.peaton + " min";
+
+      document.getElementById("nuevo-general").innerText = data.nuevo.general + " min";
+      document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
+      document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
+      document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
+
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+};
+</script>
 </body>
 </html>
