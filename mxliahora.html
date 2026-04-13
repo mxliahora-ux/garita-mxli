@@ -3,79 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MXLI AHORA</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:#0f172a;
+  font-family:Arial, sans-serif;
+  background: linear-gradient(180deg,#0b1c3d,#1f2f4a);
   color:white;
   text-align:center;
 }
 
+h1{
+  margin-top:40px;
+  font-size:40px;
+}
+
+.sub{
+  opacity:0.8;
+  margin-bottom:20px;
+}
+
 .card{
-  background:#1e293b;
-  padding:20px;
+  background:#2a3b55;
   margin:20px;
-  border-radius:15px;
+  padding:20px;
+  border-radius:20px;
+  text-align:left;
+}
+
+.title{
+  font-size:24px;
+  margin-bottom:15px;
 }
 
 .line{
-  margin:10px 0;
-  font-size:18px;
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
+
+.line:last-child{
+  border:none;
+}
+
+.green{color:#6ee7a2;}
+.yellow{color:#ffd166;}
+.red{color:#ff6b6b;}
 </style>
 </head>
 
 <body>
 
 <h1>📍 MXLI AHORA</h1>
+<div class="sub">Garitas Mexicali en tiempo real</div>
 
+<!-- CENTRO -->
 <div class="card">
-<h2>Centro</h2>
+  <div class="title">📍 Centro</div>
 
-<div class="line">General: <span id="centro-general">--</span></div>
-<div class="line">Ready: <span id="centro-ready">--</span></div>
-<div class="line">Sentri: <span id="centro-sentri">--</span></div>
-<div class="line">Peatonal: <span id="centro-peaton">--</span></div>
+  <div class="line">
+    <span>🚗 General</span>
+    <span id="centro-general">--</span>
+  </div>
 
+  <div class="line">
+    <span>🟦 Ready</span>
+    <span id="centro-ready">--</span>
+  </div>
+
+  <div class="line">
+    <span>⚡ Sentri</span>
+    <span id="centro-sentri">--</span>
+  </div>
+
+  <div class="line">
+    <span>🚶 Peatonal</span>
+    <span id="centro-peaton">--</span>
+  </div>
 </div>
 
+<!-- NUEVO MEXICALI -->
 <div class="card">
-<h2>Nuevo Mexicali</h2>
+  <div class="title">📍 Nuevo Mexicali</div>
 
-<div class="line">General: <span id="nuevo-general">--</span></div>
-<div class="line">Ready: <span id="nuevo-ready">--</span></div>
-<div class="line">Sentri: <span id="nuevo-sentri">--</span></div>
-<div class="line">Peatonal: <span id="nuevo-peaton">--</span></div>
+  <div class="line">
+    <span>🚗 General</span>
+    <span id="nuevo-general">--</span>
+  </div>
 
+  <div class="line">
+    <span>🟦 Ready</span>
+    <span id="nuevo-ready">--</span>
+  </div>
+
+  <div class="line">
+    <span>⚡ Sentri</span>
+    <span id="nuevo-sentri">--</span>
+  </div>
+
+  <div class="line">
+    <span>🚶 Peatonal</span>
+    <span id="nuevo-peaton">--</span>
+  </div>
 </div>
 
 <script>
-
 async function cargarDatos(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
     const data = await res.json();
 
+    // CENTRO
     document.getElementById("centro-general").innerText = data.centro.general + " min";
     document.getElementById("centro-ready").innerText = data.centro.ready + " min";
     document.getElementById("centro-sentri").innerText = data.centro.sentri + " min";
     document.getElementById("centro-peaton").innerText = data.centro.peaton + " min";
 
+    // NUEVO
     document.getElementById("nuevo-general").innerText = data.nuevo.general + " min";
     document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
     document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
     document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
 
   }catch(e){
-    console.log("Error:", e);
+    console.log("Error cargando datos", e);
   }
 }
 
-window.onload = cargarDatos;
+// cargar al inicio
+cargarDatos();
 
+// actualizar cada 30 segundos
+setInterval(cargarDatos,30000);
 </script>
 
 </body>
