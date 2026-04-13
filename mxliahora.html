@@ -180,7 +180,6 @@ function actualizarHora(){
 setInterval(actualizarHora,1000);
 actualizarHora();
 
-// 🚀 DATOS EN VIVO
 <script>
 async function cargarDatos(){
   try{
@@ -196,7 +195,6 @@ async function cargarDatos(){
     document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
     document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
     document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
-
   }catch(e){
     console.log("Error cargando datos:", e);
   }
@@ -205,5 +203,6 @@ async function cargarDatos(){
 cargarDatos();
 setInterval(cargarDatos, 30000);
 </script>
+
 </body>
 </html>
