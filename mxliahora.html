@@ -181,28 +181,29 @@ setInterval(actualizarHora,1000);
 actualizarHora();
 
 // 🚀 DATOS EN VIVO
+<script>
 async function cargarDatos(){
   try{
     const res = await fetch("https://raspy-sky-1be8.mxliahora.workers.dev");
     const data = await res.json();
 
-    document.getElementById("centro-general").innerText = data.centro.general+" min";
-    document.getElementById("centro-ready").innerText = data.centro.ready+" min";
-    document.getElementById("centro-sentri").innerText = data.centro.sentri+" min";
-    document.getElementById("centro-peaton").innerText = data.centro.peaton+" min";
+    document.getElementById("centro-general").innerText = data.centro.general + " min";
+    document.getElementById("centro-ready").innerText = data.centro.ready + " min";
+    document.getElementById("centro-sentri").innerText = data.centro.sentri + " min";
+    document.getElementById("centro-peaton").innerText = data.centro.peaton + " min";
 
-    document.getElementById("nuevo-general").innerText = data.nuevo.general+" min";
-    document.getElementById("nuevo-ready").innerText = data.nuevo.ready+" min";
-    document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri+" min";
-    document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton+" min";
+    document.getElementById("nuevo-general").innerText = data.nuevo.general + " min";
+    document.getElementById("nuevo-ready").innerText = data.nuevo.ready + " min";
+    document.getElementById("nuevo-sentri").innerText = data.nuevo.sentri + " min";
+    document.getElementById("nuevo-peaton").innerText = data.nuevo.peaton + " min";
 
   }catch(e){
+    console.log("Error cargando datos:", e);
   }
 }
 
 cargarDatos();
-setInterval(cargarDatos,30000);
+setInterval(cargarDatos, 30000);
 </script>
-
 </body>
 </html>
