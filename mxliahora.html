@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MXLI AHORA</title>
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:
+    radial-gradient(circle at 20% 30%, #ff6a6a33, transparent 50%),
+    radial-gradient(circle at 80% 70%, #6aa8ff33, transparent 50%),
+    #1b2235;
+  color:white;
+}
+
+.app{
+  max-width:430px;
+  margin:0 auto;
+  padding:16px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.logo{
+  font-size:32px;
+}
+
+.title{
+  font-size:28px;
+  font-weight:800;
+}
+
+.subtitle{
+  font-size:15px;
+  color:#c7d0f5;
+  margin-top:4px;
+}
+
+.infobar{
+  margin-bottom:16px;
+  padding:14px;
+  border-radius:18px;
+  text-align:center;
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:14px;
+}
+
+.card{
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:16px;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.card-title{
+  font-size:22px;
+  font-weight:700;
+}
+
+.live-link{
+  font-size:13px;
+  color:#9dd0ff;
+  text-decoration:none;
+  font-weight:bold;
+  background:rgba(255,255,255,0.08);
+  padding:8px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  font-size:18px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.row:first-of-type{
+  border-top:none;
+}
+
+.green{ color:#4cff88; font-weight:bold; }
+.yellow{ color:#ffd84d; font-weight:bold; }
+.red{ color:#ff6b6b; font-weight:bold; }
+
+.simple-title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.rate{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+}
+
+.rate div{
+  background:rgba(0,0,0,0.30);
+  padding:14px;
+  border-radius:14px;
+  width:48%;
+  text-align:center;
+}
+
+.rate-label{
+  display:block;
+  font-size:14px;
+  color:#d6ddf7;
+  margin-bottom:6px;
+}
+
+.rate-value{
+  font-size:22px;
+  font-weight:bold;
+  color:#ffd84d;
+}
+
+.sofia-img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:65% center;
+  border-radius:16px;
+  margin-bottom:10px;
+  display:block;
+}
+
+.text-soft{
+  color:#d6ddf7;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.ads{
+  text-align:center;
+}
+
+.ads-btn{
+  display:inline-block;
+  margin-top:12px;
+  background:#4fa3ff;
+  color:white;
+  padding:12px 18px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div class="logo">📍</div>
+    <div class="title">MXLI AHORA</div>
+    <div class="subtitle">Garitas Mexicali en tiempo real</div>
+  </div>
+
+  <div class="infobar" id="hora">
+    sábado 7:21 p.m. • 🌡️ 26°C Mexicali
+  </div>
+
+  <!-- CENTRO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Centro</div>
+      <a class="live-link" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
+    </div>
+
+    <div class="row">
+      <span>🚗 General</span>
+      <span class="yellow">45 min</span>
+    </div>
+    <div class="row">
+      <span>🟦 Ready</span>
+      <span class="red">60 min</span>
+    </div>
+    <div class="row">
+      <span>⚡ Sentri</span>
+      <span class="green">5 min</span>
+    </div>
+    <div class="row">
+      <span>🚶 Peatonal</span>
+      <span class="green">12 min</span>
+    </div>
+  </div>
+
+  <!-- NUEVO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Nuevo Mexicali</div>
+      <a class="live-link" href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷 Mira en vivo</a>
+    </div>
+
+    <div class="row">
+      <span>🚗 General</span>
+      <span class="red">90 min</span>
+    </div>
+    <div class="row">
+      <span>🟦 Ready</span>
+      <span class="yellow">15 min</span>
+    </div>
+    <div class="row">
+      <span>⚡ Sentri</span>
+      <span class="green">10 min</span>
+    </div>
+    <div class="row">
+      <span>🚶 Peatonal</span>
+      <span class="yellow">14 min</span>
+    </div>
+  </div>
+
+  <!-- TIPO DE CAMBIO -->
+  <div class="card">
+    <div class="simple-title">💵 Tipo de cambio</div>
+
+    <div class="rate">
+      <div>
+        <span class="rate-label">Compra</span>
+        <span class="rate-value">$16.85</span>
+      </div>
+      <div>
+        <span class="rate-label">Venta</span>
+        <span class="rate-value">$17.10</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOFIA -->
+  <div class="card">
+    <img src="sofia.jpg" class="sofia-img" alt="Reporte con Sofía">
+    <div class="simple-title">👩 Reporte en vivo con Sofía</div>
+    <div class="text-soft">📸 ¿Estás en la fila? Manda tu foto y aparece aquí</div>
+    <div class="text-soft" style="margin-top:8px;">📧 mxliahora@gmail.com</div>
+  </div>
+
+  <!-- PUBLICIDAD -->
+  <div class="card ads">
+    <div class="simple-title">📢 ¿Quieres anunciarte con nosotros?</div>
+    <div class="text-soft">Tu negocio puede aparecer aquí y ser visto por mucha gente todos los días.</div>
+    <a class="ads-btn" href="mailto:mxliahora@gmail.com">Envíanos un mensaje</a>
+  </div>
+
+</div>
+
+<script>
+function actualizarHora(){
+  const ahora = new Date();
+  const fecha = new Intl.DateTimeFormat("es-MX", {
+    timeZone: "America/Tijuana",
+    weekday: "long",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  }).format(ahora);
+
+  document.getElementById("hora").innerHTML =
+    fecha + " • 🌡️ 26°C Mexicali";
+}
+actualizarHora();
+setInterval(actualizarHora, 60000);
+</script>
+
+</body>
+</html>
