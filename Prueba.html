@@ -1,0 +1,408 @@
+export default {
+  async fetch(request) {
+    const CAMARAS_URL = "https://mxliahora-ux.github.io/garita-mxli/camaras.html";
+    const GUIAS_URL = "https://mxliahora-ux.github.io/garita-mxli/guias.html";
+    const FACEBOOK_URL = "https://www.facebook.com/garitamx/";
+    const WHATSAPP_URL = "https://wa.me/12174393549?text=Hola%20estoy%20en%20la%20garita.%20Tiempo%20aproximado%3A%20";
+
+    const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80";
+
+    const centroAllUrl = "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250302";
+    const nuevoAllUrl  = "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250301";
+
+    const weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=32.6245&longitude=-115.4523&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FTijuana&forecast_days=1";
+
+    try {
+      const [resCentroAll, resNuevoAll, resWeather] = await Promise.all([
+        fetch(centroAllUrl),
+        fetch(nuevoAllUrl),
+        fetch(weatherUrl)
+      ]);
+
+      const [xmlCentroAll, xmlNuevoAll, weatherJson] = await Promise.all([
+        resCentroAll.text(),
+        resNuevoAll.text(),
+        resWeather.json()
+      ]);
+
+      function sacar(xml, tipo) {
+        const regex = new RegExp(tipo + "[\\s\\S]*?PDT\\s+(\\d+)\\s+min\\s+delay", "i");
+        const match = xml.match(regex);
+        return match ? Number(match[1]) : null;
+      }
+
+      function sacarPeatonal(xml) {
+        const regex = /Pedestrian[\s\S]*?PDT\s+(\d+)\s+min\s+delay/i;
+        const match = xml.match(regex);
+        return match ? Number(match[1]) : null;
+      }
+
+      function mostrarValor(min) {
+        return Number.isFinite(min) ? `${min} min` : "Sin actualización";
+      }
+
+      function color(min) {
+        if (!Number.isFinite(min)) return "#64748b";
+        if (min <= 20) return "#16a34a";
+        if (min <= 45) return "#d97706";
+        return "#dc2626";
+      }
+
+      function traficoLabel(min) {
+        if (!Number.isFinite(min)) return { texto: "Sin actualización", color: "#475569", fondo: "#e2e8f0", emoji: "⚪" };
+        if (min <= 20) return { texto: "Ligero", color: "#166534", fondo: "#dcfce7", emoji: "🟢" };
+        if (min <= 45) return { texto: "Moderado", color: "#b45309", fondo: "#fef3c7", emoji: "🟡" };
+        return { texto: "Pesado", color: "#b91c1c", fondo: "#fee2e2", emoji: "🔴" };
+      }
+
+      function porcentajeBarra(min) {
+        if (!Number.isFinite(min)) return 10;
+        return Math.min(100, Math.max(8, Math.round((min / 120) * 100)));
+      }
+
+      function fila(icono, nombre, minutos) {
+        return `
+          <div class="fila">
+            <div class="fila-top">
+              <span class="label">${icono} ${nombre}</span>
+              <strong class="minutos" style="color:${color(minutos)}">${mostrarValor(minutos)}</strong>
+            </div>
+            <div class="barra">
+              <div class="barra-fill" style="width:${porcentajeBarra(minutos)}%; background:${color(minutos)}"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      function weatherText(code) {
+        const map = {
+          0: "Despejado", 1: "Mayormente despejado", 2: "Parcialmente nublado", 3: "Nublado",
+          45: "Neblina", 48: "Neblina", 51: "Llovizna ligera", 53: "Llovizna",
+          55: "Llovizna intensa", 61: "Lluvia ligera", 63: "Lluvia", 65: "Lluvia intensa",
+          80: "Chubascos ligeros", 81: "Chubascos", 82: "Chubascos intensos", 95: "Tormenta"
+        };
+        return map[code] || "Clima actual";
+      }
+
+      const centroGeneral = sacar(xmlCentroAll, "General");
+      const centroSentri = sacar(xmlCentroAll, "Sentri");
+      const centroReady = sacar(xmlCentroAll, "Ready");
+      const centroPeaton = sacarPeatonal(xmlCentroAll);
+
+      const nuevoGeneral = sacar(xmlNuevoAll, "General");
+      const nuevoSentri = sacar(xmlNuevoAll, "Sentri");
+      const nuevoReady = sacar(xmlNuevoAll, "Ready");
+      const nuevoPeaton = sacarPeatonal(xmlNuevoAll);
+
+      const traficoCentro = traficoLabel(centroGeneral);
+      const traficoNuevo = traficoLabel(nuevoGeneral);
+
+      const cambio = "17.00";
+
+      const horaMexicali = new Intl.DateTimeFormat("es-MX", {
+        timeZone: "America/Tijuana",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      }).format(new Date());
+
+      const climaActual = weatherJson?.current?.temperature_2m;
+      const sensacion = weatherJson?.current?.apparent_temperature;
+      const viento = weatherJson?.current?.wind_speed_10m;
+      const weatherCode = weatherJson?.current?.weather_code;
+      const maxHoy = weatherJson?.daily?.temperature_2m_max?.[0];
+      const minHoy = weatherJson?.daily?.temperature_2m_min?.[0];
+      const climaTexto = weatherText(weatherCode);
+
+      const html = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahora Garitas Mexicali</title>
+<meta name="theme-color" content="#2563eb">
+<meta http-equiv="refresh" content="300">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:12px;
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle at top left,rgba(255,255,255,.38),transparent 30%),linear-gradient(135deg,#e0f2fe 0%,#dbeafe 34%,#f5d0fe 100%);
+  color:#0f172a;
+}
+.wrap{width:100%;max-width:470px;margin:0 auto;padding-bottom:74px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:210px;
+  color:#fff;
+  border-radius:28px;
+  padding:18px 16px;
+  margin-bottom:12px;
+  box-shadow:0 18px 38px rgba(15,23,42,.20);
+  background:linear-gradient(135deg,rgba(15,23,42,.62),rgba(37,99,235,.38)),url('${HERO_IMAGE_URL}') center/cover no-repeat;
+}
+.hero-content{position:relative;z-index:2;min-height:174px;display:flex;flex-direction:column;justify-content:space-between}
+.live-badge{align-self:flex-start;background:#22c55e;color:#fff;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:900}
+.hero h1{margin:0;font-size:34px;line-height:.98;font-weight:900;text-shadow:0 4px 16px rgba(0,0,0,.38)}
+.hero .sub{margin-top:8px;font-size:15px;font-weight:800;text-shadow:0 3px 12px rgba(0,0,0,.35)}
+.hero-meta{margin-top:10px;font-size:12px;font-weight:800;color:rgba(255,255,255,.92)}
+
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.decision-card{background:rgba(255,255,255,.98);border-radius:22px;padding:14px 12px;box-shadow:0 12px 24px rgba(15,23,42,.13)}
+.decision-name{font-size:15px;font-weight:900;margin-bottom:8px}
+.decision-time{font-size:31px;font-weight:900;line-height:1}
+.decision-status{display:inline-flex;margin-top:9px;padding:7px 9px;border-radius:999px;font-size:12px;font-weight:900}
+
+.ad-banner{
+  display:block;
+  text-decoration:none;
+  background:linear-gradient(90deg,#fef3c7,#ffedd5);
+  border:1px solid rgba(245,158,11,.35);
+  color:#7c2d12;
+  border-radius:18px;
+  padding:10px 12px;
+  margin-bottom:12px;
+  box-shadow:0 9px 20px rgba(15,23,42,.10);
+  font-size:13px;
+  font-weight:900;
+  text-align:center;
+}
+.top-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.pill,.weather-card,.camera-card,.card,.community-card{
+  background:rgba(255,255,255,.96);
+  border-radius:22px;
+  padding:14px;
+  box-shadow:0 10px 22px rgba(15,23,42,.13);
+  border:1px solid rgba(255,255,255,.45);
+}
+.pill{text-align:center;border-radius:18px}
+.pill .kicker{font-size:12px;color:#475569;font-weight:800;margin-bottom:5px;text-transform:uppercase}
+.pill .value{font-size:28px;font-weight:900}
+.pill .note{font-size:11px;color:#64748b;margin-top:4px;font-weight:700}
+.weather-card,.camera-card{margin-bottom:12px}
+.weather-top{display:flex;justify-content:space-between;gap:10px}
+.weather-title,.camera-title{font-size:22px;font-weight:900}
+.weather-temp{font-size:34px;font-weight:900}
+.weather-desc,.camera-desc{font-size:14px;color:#475569;font-weight:700;margin-top:4px}
+.weather-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.weather-box{background:#f8fafc;border-radius:14px;padding:10px;text-align:center}
+.weather-box .small{font-size:11px;color:#64748b;font-weight:700;margin-bottom:4px}
+.weather-box .big{font-size:15px;font-weight:900}
+.camera-preview{
+  margin-top:12px;
+  height:118px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(14,165,233,.92),rgba(37,99,235,.92)),url('${HERO_IMAGE_URL}') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:900;
+  text-align:center;
+}
+.acciones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.acciones-sec{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.btn{
+  display:flex;align-items:center;justify-content:center;min-height:50px;text-align:center;border-radius:16px;text-decoration:none;
+  font-size:14px;font-weight:900;border:none;cursor:pointer;box-shadow:0 8px 18px rgba(15,23,42,.13);padding:10px 8px;
+}
+.btn-guia{background:#f59e0b;color:#fff}
+.btn-whatsapp{background:#22c55e;color:#fff;min-height:60px;font-size:16px}
+.btn-camaras{background:#0ea5e9;color:#fff}
+.btn-facebook{background:#1877f2;color:#fff}
+.btn-share{background:#16a34a;color:#fff}
+.separador-linea{width:100%;height:2px;margin:8px 0 14px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(30,64,175,.45),transparent)}
+.cards{display:grid;gap:12px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+.card-title-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.titulo{font-size:26px;font-weight:900}
+.cam-link{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:#dbeafe;color:#1d4ed8;text-decoration:none}
+.estado{padding:8px 11px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}
+.fila{background:#f8fafc;border-radius:16px;padding:12px;margin-bottom:10px}
+.fila-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.label{font-size:16px;font-weight:800}
+.minutos{font-size:23px;font-weight:900}
+.barra{width:100%;height:8px;border-radius:999px;background:#e2e8f0;overflow:hidden}
+.barra-fill{height:100%;border-radius:999px}
+.community-card{margin-top:12px}
+.community-title{font-size:18px;font-weight:900;margin-bottom:8px}
+.community-text{font-size:13px;color:#475569;font-weight:800;line-height:1.35}
+.floating-whatsapp{
+  position:fixed;left:50%;bottom:14px;transform:translateX(-50%);width:calc(100% - 24px);max-width:470px;z-index:50;
+  background:#22c55e;color:#fff;text-align:center;text-decoration:none;border-radius:18px;padding:14px 16px;font-size:16px;font-weight:900;
+  box-shadow:0 14px 30px rgba(22,163,74,.35);
+}
+.footer{text-align:center;font-size:12px;color:#334155;padding:12px 0 10px;font-weight:800}
+@media(max-width:420px){
+  .hero h1{font-size:31px}
+  .top-grid{grid-template-columns:1fr}
+  .decision-time{font-size:28px}
+  .titulo{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="live-badge">🟢 EN VIVO AHORA</div>
+      <div>
+        <h1>🚦 Garitas Mexicali</h1>
+        <div class="sub">¿Cómo está la fila hoy? 👀</div>
+        <div class="hero-meta">Hora Mexicali: ${horaMexicali} · Actualiza cada 5 min</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="decision-name">📍 Centro</div>
+      <div class="decision-time" style="color:${color(centroGeneral)}">${mostrarValor(centroGeneral)}</div>
+      <div class="decision-status" style="color:${traficoCentro.color};background:${traficoCentro.fondo}">${traficoCentro.emoji} ${traficoCentro.texto}</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-name">📍 Nuevo Mexicali</div>
+      <div class="decision-time" style="color:${color(nuevoGeneral)}">${mostrarValor(nuevoGeneral)}</div>
+      <div class="decision-status" style="color:${traficoNuevo.color};background:${traficoNuevo.fondo}">${traficoNuevo.emoji} ${traficoNuevo.texto}</div>
+    </div>
+  </div>
+
+  <a class="ad-banner" href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">
+    ⭐ Publicidad disponible · Tu negocio aquí mientras la gente cruza
+  </a>
+
+  <div class="top-grid">
+    <div class="pill">
+      <div class="kicker">Tipo de cambio</div>
+      <div class="value">$${cambio}</div>
+      <div class="note">MXN por dólar</div>
+    </div>
+    <div class="pill">
+      <div class="kicker">Consulta rápida</div>
+      <div class="value">Centro / Nuevo</div>
+      <div class="note">Garitas + cámaras</div>
+    </div>
+  </div>
+
+  <div class="weather-card">
+    <div class="weather-top">
+      <div>
+        <div class="weather-title">☀️ Clima en Mexicali</div>
+        <div class="weather-desc">${climaTexto}</div>
+      </div>
+      <div class="weather-temp">${Number.isFinite(climaActual) ? Math.round(climaActual) + "°" : "—"}</div>
+    </div>
+    <div class="weather-grid">
+      <div class="weather-box"><div class="small">Sensación</div><div class="big">${Number.isFinite(sensacion) ? Math.round(sensacion) + "°" : "—"}</div></div>
+      <div class="weather-box"><div class="small">Máx / Mín</div><div class="big">${Number.isFinite(maxHoy) && Number.isFinite(minHoy) ? Math.round(maxHoy) + "° / " + Math.round(minHoy) + "°" : "—"}</div></div>
+      <div class="weather-box"><div class="small">Viento</div><div class="big">${Number.isFinite(viento) ? Math.round(viento) + " km/h" : "—"}</div></div>
+    </div>
+  </div>
+
+  <div class="camera-card">
+    <div class="camera-title">🎥 Cámaras en vivo</div>
+    <div class="camera-desc">Mira la fila antes de cruzar 👀</div>
+    <div class="camera-preview">🔴 VISTA EN VIVO<br><span style="font-size:12px;opacity:.9;">Centro · Nuevo Mexicali</span></div>
+    <a class="btn btn-camaras" href="${CAMARAS_URL}" target="_blank" rel="noopener noreferrer" style="margin-top:10px;min-height:48px;">
+      👀 Ver todas las cámaras
+    </a>
+  </div>
+
+  <div class="acciones">
+    <a class="btn btn-guia" href="${GUIAS_URL}" target="_blank" rel="noopener noreferrer">📚 Guías</a>
+    <a class="btn btn-whatsapp" href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">📸 Reportar fila</a>
+  </div>
+
+  <div class="acciones-sec">
+    <a class="btn btn-camaras" href="${CAMARAS_URL}" target="_blank" rel="noopener noreferrer">📷 Cámaras</a>
+    <a class="btn btn-facebook" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">👍 Facebook</a>
+    <button class="btn btn-share" onclick="compartirPagina()">📤 Compartir</button>
+  </div>
+
+  <div class="separador-linea"></div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title-wrap">
+          <div class="titulo">📍 Centro</div>
+          <a class="cam-link" href="${CAMARAS_URL}" title="Ver cámaras">📷</a>
+        </div>
+        <div class="estado" style="color:${traficoCentro.color};background:${traficoCentro.fondo}">
+          ${traficoCentro.emoji} ${traficoCentro.texto}
+        </div>
+      </div>
+      ${fila("🚗", "General", centroGeneral)}
+      ${fila("⚡", "Sentri", centroSentri)}
+      ${fila("🟦", "Ready", centroReady)}
+      ${fila("🚶", "Peatonal", centroPeaton)}
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title-wrap">
+          <div class="titulo">📍 Nuevo Mexicali</div>
+          <a class="cam-link" href="${CAMARAS_URL}" title="Ver cámaras">📷</a>
+        </div>
+        <div class="estado" style="color:${traficoNuevo.color};background:${traficoNuevo.fondo}">
+          ${traficoNuevo.emoji} ${traficoNuevo.texto}
+        </div>
+      </div>
+      ${fila("🚗", "General", nuevoGeneral)}
+      ${fila("⚡", "Sentri", nuevoSentri)}
+      ${fila("🟦", "Ready", nuevoReady)}
+      ${fila("🚶", "Peatonal", nuevoPeaton)}
+    </div>
+  </div>
+
+  <div class="community-card">
+    <div class="community-title">📸 Reportes de la comunidad</div>
+    <div class="community-text">¿Estás en la garita? Mándanos tu tiempo o una foto por WhatsApp. Tu reporte ayuda a todos.</div>
+  </div>
+
+  <div class="footer">Fuente: CBP Border Wait Times · Clima: Open-Meteo</div>
+</div>
+
+<a class="floating-whatsapp" href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">
+  📸 Reportar fila por WhatsApp
+</a>
+
+<script>
+async function compartirPagina() {
+  const data = {
+    title: "Ahora Garitas Mexicali",
+    text: "Consulta garitas, clima, guías, cámaras y tipo de cambio.",
+    url: window.location.href
+  };
+  if (navigator.share) {
+    try { await navigator.share(data); } catch (e) {}
+  } else {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Link copiado");
+    } catch (e) {
+      alert(window.location.href);
+    }
+  }
+}
+</script>
+</body>
+</html>
+`;
+
+      return new Response(html, {
+        headers: {
+          "Content-Type": "text/html; charset=UTF-8",
+          "Cache-Control": "no-store"
+        }
+      });
+
+    } catch (e) {
+      return new Response("Error cargando datos de garitas", { status: 500 });
+    }
+  }
+};
