@@ -1,279 +1,502 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Garitas Mexicali</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f4f6;
-  color:#111827;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f4f7fb;
+  color:#071126;
 }
-
 .app{
   max-width:430px;
-  margin:auto;
-  padding-bottom:90px;
+  margin:0 auto;
+  background:#fff;
+  min-height:100vh;
+  padding-bottom:92px;
 }
 
 /* HERO */
 .hero{
-  padding:20px;
-  min-height:420px;
+  position:relative;
+  padding:20px 18px 26px;
+  min-height:415px;
+  overflow:hidden;
   background:
-    linear-gradient(90deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 40%,rgba(255,255,255,.2) 70%),
+    linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.92) 38%,rgba(255,255,255,.35) 62%,rgba(255,255,255,.05) 100%),
     url("hero-garita.jpg") center/cover no-repeat;
 }
-
 .top{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
-  align-items:center;
+  gap:12px;
 }
-
+.menu{
+  font-size:32px;
+  font-weight:900;
+}
 .logo{
+  flex:1;
+  font-size:27px;
   font-weight:900;
-  font-size:22px;
+  line-height:.92;
+  letter-spacing:-1px;
 }
-
 .logo span{
-  color:#ef4444;
+  color:#ef1717;
+  font-style:italic;
 }
-
-.people{
+.live-box{
   background:white;
-  padding:10px 14px;
-  border-radius:14px;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  border-radius:17px;
+  padding:10px 13px;
+  box-shadow:0 8px 22px rgba(15,23,42,.16);
   font-weight:900;
   font-size:13px;
 }
-
 .hero h1{
-  margin-top:50px;
-  font-size:48px;
-  line-height:1;
+  margin:44px 0 8px;
+  font-size:58px;
+  line-height:.92;
+  letter-spacing:-3px;
   font-weight:900;
 }
-
 .hero h1 span{
-  color:#ef4444;
+  color:#ef1717;
 }
-
-.sub{
-  margin-top:10px;
-  font-weight:900;
+.hero-sub{
   font-size:18px;
+  font-weight:900;
+  letter-spacing:.2px;
 }
-
 .meta{
-  margin-top:10px;
-  font-size:13px;
-  font-weight:800;
+  margin-top:13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  font-weight:900;
+}
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#16a34a;
+  display:inline-block;
 }
 
-/* CARDS */
+/* MAIN CARDS */
 .cards{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin:-70px 16px 20px;
+  gap:12px;
+  margin:-46px 14px 14px;
+  position:relative;
+  z-index:3;
 }
-
 .card{
   background:white;
-  border-radius:24px;
-  padding:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,.15);
+  border-radius:25px;
+  padding:15px 12px;
+  box-shadow:0 16px 34px rgba(15,23,42,.15);
 }
-
-.card.red{
-  border-top:6px solid #ef4444;
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
 }
-
-.card.green{
-  border-top:6px solid #16a34a;
-}
-
-.title{
+.kicker{
+  font-size:13px;
   font-weight:900;
-  font-size:18px;
 }
-
-.big{
-  font-size:64px;
+.name{
+  font-size:26px;
   font-weight:900;
-  margin:10px 0;
+  line-height:.95;
 }
-
-.red-text{color:#ef4444}
-.green-text{color:#16a34a}
-
+.circle{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+}
+.circle.red{background:#fee2e2}
+.circle.green{background:#dcfce7}
+.status{
+  margin:12px 0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:900;
+  color:#fff;
+}
+.status.red{background:#ef1717}
+.status.green{background:#16a34a}
+.bigbox{
+  border-radius:18px;
+  padding:12px 8px 9px;
+  text-align:center;
+  color:#fff;
+  margin-bottom:12px;
+}
+.bigbox.red{background:#ef1717}
+.bigbox.green{background:#079b35}
+.bigbox .num{
+  font-size:66px;
+  font-weight:900;
+  line-height:.86;
+}
+.bigbox .min{
+  font-size:20px;
+  font-weight:900;
+}
+.estimate{
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:8px;
+}
 .row{
   display:flex;
   justify-content:space-between;
-  padding:8px 0;
+  align-items:center;
+  gap:6px;
   border-top:1px solid #e5e7eb;
+  padding:8px 0;
+  font-size:12px;
   font-weight:900;
 }
-
-/* CAMERA */
-.camera{
-  margin:20px 16px;
-  border-radius:20px;
-  overflow:hidden;
-  background:black;
-}
-
-.camera img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-
-.camera-title{
-  padding:14px;
-  color:white;
-  font-weight:900;
-  background:linear-gradient(transparent,rgba(0,0,0,.8));
-  margin-top:-60px;
-}
-
-/* REPORT */
-.report{
-  margin:20px 16px;
-  background:linear-gradient(135deg,#fde047,#facc15);
-  padding:20px;
-  border-radius:20px;
-  font-weight:900;
-}
-
-.report button{
+.red-text{color:#ef1717}
+.green-text{color:#16a34a}
+.detail{
+  display:block;
   margin-top:10px;
-  width:100%;
-  padding:14px;
-  border:none;
+  text-align:center;
+  padding:11px 8px;
   border-radius:14px;
-  background:#ef4444;
+  font-weight:900;
+  font-size:12px;
+  text-decoration:none;
+}
+.detail.red{background:#fee2e2;color:#b91c1c}
+.detail.green{background:#dcfce7;color:#166534}
+
+/* MID GRID */
+.mid-grid{
+  margin:14px;
+  display:grid;
+  grid-template-columns:1.35fr .95fr;
+  gap:12px;
+}
+.camera-card{
+  background:#071126;
+  color:#fff;
+  border-radius:22px;
+  padding:14px;
+  box-shadow:0 12px 28px rgba(15,23,42,.22);
+}
+.camera-title{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.en-vivo{
+  display:inline-block;
+  background:#ef1717;
+  color:#fff;
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.camera-img{
+  height:130px;
+  border-radius:15px;
+  background:url("hero-garita.jpg") center/cover no-repeat;
+  position:relative;
+  overflow:hidden;
+}
+.camera-img:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.7));
+}
+.camera-btn{
+  position:absolute;
+  z-index:2;
+  left:10px;
+  bottom:10px;
+  background:rgba(0,0,0,.8);
   color:white;
-  font-size:16px;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:12px;
   font-weight:900;
 }
 
-/* INFO BAR */
-.info{
-  margin:20px 16px;
+.report-card{
+  background:#facc15;
+  color:#071126;
+  border-radius:22px;
+  padding:15px 13px;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(245,158,11,.22);
+}
+.report-icon{
+  width:58px;
+  height:58px;
   background:white;
-  border-radius:20px;
-  padding:15px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin:0 auto 10px;
+}
+.report-card h2{
+  margin:0;
+  font-size:28px;
+  line-height:.95;
+  font-weight:900;
+}
+.report-card p{
+  margin:8px 0 12px;
+  font-size:13px;
+  font-weight:900;
+}
+.report-btn{
+  display:block;
+  background:#071126;
+  color:white;
+  text-decoration:none;
+  padding:11px 8px;
+  border-radius:12px;
+  font-weight:900;
+  font-size:12px;
+}
+.count{
+  margin-top:10px;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* INFO */
+.info-bar{
+  margin:14px;
+  background:white;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(15,23,42,.12);
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
-  text-align:center;
-  font-weight:900;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  overflow:hidden;
 }
-
-.info div{
+.info{
+  padding:13px 10px;
   border-right:1px solid #e5e7eb;
+  font-size:11px;
+  font-weight:900;
 }
+.info:last-child{border-right:none}
+.info strong{
+  display:block;
+  font-size:25px;
+  margin:4px 0;
+}
+.money-green{color:#16a34a}
+.money-red{color:#ef1717}
 
-.info div:last-child{
-  border:none;
+/* SERVICES */
+.services{
+  margin:14px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  background:#eef2f7;
+  border-radius:20px;
+  padding:8px;
+}
+.service{
+  background:#fff;
+  border-radius:15px;
+  padding:10px 5px;
+  text-align:center;
+  font-size:11px;
+  font-weight:900;
 }
 
 /* NAV */
 .nav{
   position:fixed;
-  bottom:10px;
   left:50%;
+  bottom:10px;
   transform:translateX(-50%);
-  width:90%;
-  max-width:420px;
-  background:white;
-  border-radius:20px;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  width:calc(100% - 22px);
+  max-width:408px;
+  background:#071126;
+  border-radius:26px;
+  padding:9px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  box-shadow:0 16px 36px rgba(15,23,42,.28);
+  z-index:50;
+}
+.nav a{
+  text-align:center;
+  color:white;
+  text-decoration:none;
+  font-size:11px;
   font-weight:900;
+  padding:9px 4px;
+  border-radius:18px;
+}
+.nav a.active{
+  background:#ef1717;
 }
 
-.nav span{
-  font-size:12px;
+@media(max-width:380px){
+  .hero h1{font-size:52px}
+  .bigbox .num{font-size:58px}
+  .name{font-size:23px}
+  .mid-grid{grid-template-columns:1fr}
 }
-
-.active{
-  color:#ef4444;
-}
-
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-<div class="hero">
-  <div class="top">
-    <div class="logo">GARITAS <span>MEXICALI</span></div>
-    <div class="people">👥 137</div>
+  <section class="hero">
+    <div class="top">
+      <div class="menu">☰</div>
+      <div class="logo">GARITAS<br><span>MEXICALI</span></div>
+      <div class="live-box">🟢 EN VIVO<br>👥 142 personas</div>
+    </div>
+
+    <h1>¿VAS A<br><span>CRUZAR?</span></h1>
+    <div class="hero-sub">REVISA ANTES Y AHORRA TIEMPO</div>
+
+    <div class="meta">
+      <span><span class="dot"></span> Actualizado hace 2 min</span>
+      <span>🛡️ Información 100% real</span>
+    </div>
+  </section>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="kicker">GARITA</div>
+          <div class="name">CENTRO</div>
+        </div>
+        <div class="circle red">🚗</div>
+      </div>
+
+      <div class="status red">⚠ TRÁFICO MUY PESADO</div>
+
+      <div class="bigbox red">
+        <div class="num">120</div>
+        <div class="min">MINUTOS</div>
+      </div>
+
+      <div class="estimate">TIEMPO ESTIMADO GENERAL</div>
+      <div class="row"><span>🟦 Ready Lane</span><span class="red-text">90 min</span></div>
+      <div class="row"><span>⚡ Sentri</span><span class="red-text">15 min</span></div>
+      <div class="row"><span>🚶 Peatonal</span><span class="red-text">90 min</span></div>
+
+      <a class="detail red" href="#">VER MÁS DETALLES →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="kicker">GARITA</div>
+          <div class="name">NUEVO</div>
+        </div>
+        <div class="circle green">🚗</div>
+      </div>
+
+      <div class="status green">✓ TRÁFICO FLUIDO</div>
+
+      <div class="bigbox green">
+        <div class="num">20</div>
+        <div class="min">MINUTOS</div>
+      </div>
+
+      <div class="estimate">TIEMPO ESTIMADO GENERAL</div>
+      <div class="row"><span>🟦 Ready Lane</span><span class="green-text">60 min</span></div>
+      <div class="row"><span>⚡ Sentri</span><span class="green-text">10 min</span></div>
+      <div class="row"><span>🚶 Peatonal</span><span class="green-text">5 min</span></div>
+
+      <a class="detail green" href="#">VER MÁS DETALLES →</a>
+    </div>
   </div>
 
-  <h1>¿VAS A <br><span>CRUZAR?</span></h1>
-  <div class="sub">Revisa antes y ahorra tiempo</div>
-  <div class="meta">🟢 Actualizado hace 2 min</div>
-</div>
+  <div class="mid-grid">
+    <div class="camera-card">
+      <div class="en-vivo">EN VIVO</div>
+      <div class="camera-title">🎥 CÁMARA EN VIVO<br>CENTRO</div>
+      <div class="camera-img">
+        <div class="camera-btn">▶ VER EN VIVO</div>
+      </div>
+    </div>
 
-<div class="cards">
-  <div class="card red">
-    <div class="title">CENTRO</div>
-    <div class="big red-text">120</div>
-    <div class="row"><span>Ready</span><span>90 min</span></div>
-    <div class="row"><span>Sentri</span><span>15 min</span></div>
-    <div class="row"><span>Peatonal</span><span>90 min</span></div>
+    <div class="report-card">
+      <div class="report-icon">📸</div>
+      <h2>¿HAY FILA?</h2>
+      <p>REPORTA TU TIEMPO<br>Y AYUDA A OTROS</p>
+      <a class="report-btn" href="https://wa.me/12174393549" target="_blank">💬 REPORTAR AHORA</a>
+      <div class="count">+532 reportes hoy</div>
+    </div>
   </div>
 
-  <div class="card green">
-    <div class="title">NUEVO</div>
-    <div class="big green-text">20</div>
-    <div class="row"><span>Ready</span><span>60 min</span></div>
-    <div class="row"><span>Sentri</span><span>10 min</span></div>
-    <div class="row"><span>Peatonal</span><span>5 min</span></div>
+  <div class="info-bar">
+    <div class="info">
+      ☀️ CLIMA<br>
+      <strong>38°C</strong>
+      Soleado
+    </div>
+    <div class="info">
+      💡 TIP DEL DÍA<br>
+      Cruza antes de 10 AM
+    </div>
+    <div class="info">
+      💵 DÓLAR HOY<br>
+      <strong class="money-green">$16.45</strong>
+      <strong class="money-red">$17.30</strong>
+    </div>
   </div>
-</div>
 
-<div class="camera">
-  <img src="hero-garita.jpg">
-  <div class="camera-title">🎥 Cámara en vivo - Centro</div>
-</div>
-
-<div class="report">
-  ¿Hay fila? Reporta tu tiempo  
-  <button onclick="location.href='https://wa.me/12174393549'">
-    REPORTAR AHORA
-  </button>
-</div>
-
-<div class="info">
-  <div>☀️ 38°C</div>
-  <div>💵 $16.45</div>
-  <div>💡 Tips</div>
-</div>
+  <div class="services">
+    <div class="service">🛡️<br>CBP</div>
+    <div class="service">📄<br>I-94</div>
+    <div class="service">📋<br>REQUISITOS</div>
+    <div class="service">💡<br>CONSEJOS</div>
+  </div>
 
 </div>
 
-<div class="nav">
-  <span class="active">Inicio</span>
-  <span>Tiempos</span>
-  <span>Cámara</span>
-  <span>Guías</span>
-  <span>Reporte</span>
-</div>
+<nav class="nav">
+  <a class="active" href="#">🏠<br>INICIO</a>
+  <a href="#">🕒<br>TIEMPOS</a>
+  <a href="#">📷<br>CÁMARAS</a>
+  <a href="#">📖<br>GUÍAS</a>
+  <a href="#">👤<br>REPORTE</a>
+</nav>
 
 </body>
 </html>
