@@ -3,286 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garitas Mexicali</title>
-
+<title>Garitas Mexicali | Prueba</title>
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#050816;
-  color:#fff;
+  background:linear-gradient(180deg,#fff7ed,#e0f2fe);
+  color:#111827;
 }
-.app{
-  max-width:430px;
-  margin:auto;
-  min-height:100vh;
-  background:#070b18;
-  padding-bottom:95px;
-}
+.app{max-width:430px;margin:auto;min-height:100vh;padding-bottom:90px}
+
 .hero{
-  position:relative;
-  padding:22px 18px 26px;
-  background:
-    linear-gradient(180deg,rgba(5,8,22,.55),#070b18 92%),
-    url("hero-garita.jpg") center/cover no-repeat;
-}
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:28px;
-}
-.logo{
-  font-size:22px;
-  font-weight:900;
-  line-height:1;
-}
-.menu{
-  font-size:30px;
-  font-weight:900;
-}
-.report-top{
-  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  padding:18px;
+  min-height:330px;
   color:#fff;
-  text-decoration:none;
-  padding:12px 16px;
-  border-radius:22px;
+  background:
+    linear-gradient(180deg,rgba(255,153,0,.15),rgba(0,0,0,.55)),
+    url("hero-garita.jpg") center/cover no-repeat;
+  border-bottom-left-radius:32px;
+  border-bottom-right-radius:32px;
+}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:900;line-height:1}
+.live{background:#22c55e;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:900}
+
+.hero h1{
+  margin:48px 0 8px;
+  font-size:42px;
+  line-height:1;
   font-weight:900;
-  font-size:13px;
-  box-shadow:0 10px 25px rgba(124,58,237,.35);
+  text-align:center;
+  text-shadow:0 4px 18px rgba(0,0,0,.45);
 }
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.18);
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:800;
-}
-h1{
-  font-size:43px;
-  line-height:.98;
-  margin:18px 0 12px;
-  font-weight:900;
-}
-h1 span{color:#7c3aed}
-.sub{
-  font-size:17px;
-  line-height:1.35;
-  font-weight:700;
-  color:#f8fafc;
-}
-.updated{
-  margin-top:14px;
-  font-size:14px;
-  font-weight:900;
-  color:#d1fae5;
-}
+.hero h1 span{color:#facc15}
+.sub{text-align:center;font-size:17px;font-weight:800;text-shadow:0 3px 12px rgba(0,0,0,.5)}
+
 .cards{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:22px;
+  gap:12px;
+  margin:-52px 16px 14px;
+  position:relative;
+  z-index:5;
 }
 .card{
   background:#fff;
-  color:#111827;
   border-radius:24px;
-  padding:16px 14px;
-  box-shadow:0 16px 35px rgba(0,0,0,.35);
+  padding:16px 12px;
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
 }
-.card.red{box-shadow:0 0 20px rgba(239,68,68,.45)}
-.card.green{box-shadow:0 0 20px rgba(34,197,94,.45)}
-.card-title{
-  font-size:16px;
-  font-weight:900;
-  line-height:1.15;
-}
-.status{
-  display:inline-block;
-  margin:10px 0;
-  padding:6px 9px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-}
-.status-red{background:#fee2e2;color:#b91c1c}
-.status-green{background:#dcfce7;color:#166534}
-.time{
-  font-size:54px;
-  font-weight:900;
-  line-height:1;
-}
-.time span{
-  font-size:18px;
-}
+.card-title{font-size:15px;font-weight:900}
+.status{display:inline-block;margin:8px 0;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:900}
+.red{background:#fee2e2;color:#b91c1c}
+.green{background:#dcfce7;color:#166534}
+.time{font-size:52px;font-weight:900;line-height:1}
+.time span{font-size:17px}
 .red-time{color:#ef4444}
 .green-time{color:#16a34a}
-.small{
-  font-size:12px;
-  color:#475569;
-  font-weight:700;
-  margin:8px 0 12px;
-}
-.row{
-  display:flex;
-  justify-content:space-between;
-  border-top:1px solid #e5e7eb;
-  padding:8px 0;
-  font-size:12px;
-  font-weight:900;
-}
-.info-strip{
+.row{display:flex;justify-content:space-between;border-top:1px solid #e5e7eb;padding:8px 0;font-size:12px;font-weight:900}
+
+.strip{
   margin:14px 16px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:8px;
 }
-.info{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.08);
+.strip div{
+  background:#fff;
   border-radius:18px;
-  padding:12px 8px;
+  padding:12px 6px;
   text-align:center;
   font-size:11px;
-  font-weight:800;
-  color:#e5e7eb;
+  font-weight:900;
+  box-shadow:0 8px 18px rgba(15,23,42,.08);
 }
+
 .section{
   margin:14px 16px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:24px;
+  background:#fff;
+  border-radius:26px;
   padding:16px;
+  box-shadow:0 12px 28px rgba(15,23,42,.10);
 }
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-.section h2{
-  margin:0;
-  font-size:19px;
-}
-.section a{
-  color:#a78bfa;
-  font-weight:900;
-  text-decoration:none;
-  font-size:13px;
-}
-.cams{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:2px;
-}
-.cam{
-  min-width:150px;
-  border-radius:16px;
+.section h2{margin:0 0 12px;font-size:21px}
+
+.camera-box{
+  height:190px;
+  border-radius:20px;
   overflow:hidden;
-  background:#0f172a;
-}
-.cam-img{
-  height:95px;
   background:url("hero-garita.jpg") center/cover no-repeat;
   position:relative;
 }
-.live{
+.camera-box::after{
+  content:"";
   position:absolute;
-  top:8px;
-  left:8px;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55));
+}
+.camera-label{
+  position:absolute;
+  z-index:2;
+  left:12px;
+  bottom:12px;
+  color:#fff;
+  font-weight:900;
+}
+.en-vivo{
+  position:absolute;
+  z-index:2;
+  top:12px;
+  left:12px;
   background:#ef4444;
   color:#fff;
-  padding:5px 7px;
-  border-radius:7px;
-  font-size:10px;
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:11px;
   font-weight:900;
 }
-.cam-name{
-  padding:9px;
-  font-size:12px;
+.refresh{
+  display:block;
+  margin-top:10px;
+  background:#0ea5e9;
+  color:white;
+  text-align:center;
+  padding:13px;
+  border-radius:16px;
+  text-decoration:none;
   font-weight:900;
 }
-.cta{
-  margin:14px 16px;
-  background:linear-gradient(135deg,#9333ea,#4f46e5);
-  border-radius:24px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 14px 30px rgba(124,58,237,.35);
-}
-.cta strong{
-  font-size:20px;
-}
-.cta span{
-  font-size:13px;
-  color:#ede9fe;
-}
-.cta .circle{
-  width:54px;
-  height:54px;
-  background:#fff;
-  color:#111827;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  font-weight:900;
-}
+
 .ad{
   margin:14px 16px;
-  background:#fff7d6;
-  color:#111827;
+  background:linear-gradient(90deg,#fef3c7,#ffedd5);
   border-radius:22px;
   padding:14px;
+  box-shadow:0 10px 24px rgba(15,23,42,.10);
 }
-.ad small{
-  background:#facc15;
-  color:#713f12;
-  padding:5px 8px;
-  border-radius:7px;
+.ad small{font-weight:900;color:#92400e}
+.ad strong{font-size:19px}
+
+.cta{
+  margin:14px 16px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+  border-radius:24px;
+  padding:18px;
+  text-align:center;
   font-weight:900;
+  font-size:18px;
+  box-shadow:0 14px 30px rgba(22,163,74,.25);
 }
-.ad-title{
-  margin-top:8px;
-  font-size:20px;
-  font-weight:900;
-}
-.ad-grid{
+
+.services{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:10px;
 }
-.ad-price{
-  background:#fff;
-  border-radius:14px;
-  padding:10px;
-  text-align:center;
+.service{
+  background:#f8fafc;
+  border-radius:18px;
+  padding:14px;
   font-weight:900;
+  font-size:14px;
 }
-.ad-price b{
-  color:#16a34a;
-  font-size:20px;
-}
-.nav{
+
+.bottom-nav{
   position:fixed;
-  bottom:12px;
   left:50%;
+  bottom:12px;
   transform:translateX(-50%);
   width:calc(100% - 24px);
   max-width:406px;
-  background:rgba(15,23,42,.92);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.12);
+  background:#111827;
   border-radius:24px;
   padding:10px;
   display:grid;
@@ -290,119 +183,97 @@ h1 span{color:#7c3aed}
   gap:4px;
   z-index:50;
 }
-.nav a{
-  color:#fff;
+.bottom-nav a{
+  color:white;
   text-decoration:none;
   text-align:center;
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
-  padding:10px 4px;
+  padding:9px 4px;
   border-radius:16px;
 }
-.nav a.active{
-  background:#6d28d9;
-}
+.bottom-nav a.active{background:#f59e0b;color:#111827}
 </style>
 </head>
-
 <body>
+
 <div class="app">
 
   <section class="hero">
     <div class="top">
       <div class="logo">🚦 GARITAS<br>MEXICALI</div>
-      <a class="report-top" href="https://wa.me/12174393549" target="_blank">📸 ¿Cómo está?</a>
-      <div class="menu">☰</div>
+      <div class="live">🟢 EN VIVO</div>
     </div>
 
-    <div class="badge">🟢 Información en tiempo real</div>
-
-    <h1>Antes de cruzar,<br>revisa <span>aquí</span></h1>
-
-    <div class="sub">
-      Tiempos actualizados al momento para que cruces más rápido.
-    </div>
-
-    <div class="updated">🟢 Actualizado hace 2 min</div>
-
-    <div class="cards">
-      <div class="card red">
-        <div class="card-title">🚗 GARITA<br>CENTRO</div>
-        <div class="status status-red">Tráfico pesado</div>
-        <div class="time red-time">75 <span>min</span></div>
-        <div class="small">Tiempo estimado General</div>
-        <div class="row"><span>Ready Lane</span><span>60 min</span></div>
-        <div class="row"><span>Sentri</span><span>15 min</span></div>
-        <div class="row"><span>Peatonal</span><span>25 min</span></div>
-      </div>
-
-      <div class="card green">
-        <div class="card-title">🚗 GARITA<br>NUEVO</div>
-        <div class="status status-green">Tráfico fluido</div>
-        <div class="time green-time">30 <span>min</span></div>
-        <div class="small">Tiempo estimado General</div>
-        <div class="row"><span>Ready Lane</span><span>25 min</span></div>
-        <div class="row"><span>Sentri</span><span>5 min</span></div>
-        <div class="row"><span>Peatonal</span><span>15 min</span></div>
-      </div>
-    </div>
+    <h1>¿VAS A<br><span>CRUZAR?</span></h1>
+    <div class="sub">Mira tiempos y cámara antes de salir</div>
   </section>
 
-  <div class="info-strip">
-    <div class="info">🕒<br>24/7</div>
-    <div class="info">✅<br>CBP</div>
-    <div class="info">👥<br>Reportes</div>
-    <div class="info">🔔<br>Alertas</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">📍 CENTRO</div>
+      <div class="status red">Pesado</div>
+      <div class="time red-time">75 <span>min</span></div>
+      <div class="row"><span>Ready</span><span>60</span></div>
+      <div class="row"><span>Sentri</span><span>15</span></div>
+      <div class="row"><span>Peatonal</span><span>25</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📍 NUEVO</div>
+      <div class="status green">Fluido</div>
+      <div class="time green-time">30 <span>min</span></div>
+      <div class="row"><span>Ready</span><span>25</span></div>
+      <div class="row"><span>Sentri</span><span>5</span></div>
+      <div class="row"><span>Peatonal</span><span>15</span></div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div>🕒<br>24/7</div>
+    <div>✅<br>CBP</div>
+    <div>🎥<br>Cámara</div>
+    <div>📸<br>Reportes</div>
   </div>
 
   <section class="section">
-    <div class="section-head">
-      <h2>🎥 Cámaras en vivo</h2>
-      <a href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">Ver todas →</a>
+    <h2>🎥 Cámara en vivo - Centro</h2>
+    <div class="camera-box">
+      <div class="en-vivo">EN VIVO</div>
+      <div class="camera-label">Garita Centro · Vista actual</div>
     </div>
-
-    <div class="cams">
-      <div class="cam">
-        <div class="cam-img"><div class="live">EN VIVO</div></div>
-        <div class="cam-name">🟢 Centro - General</div>
-      </div>
-      <div class="cam">
-        <div class="cam-img"><div class="live">EN VIVO</div></div>
-        <div class="cam-name">🟢 Centro - Ready</div>
-      </div>
-      <div class="cam">
-        <div class="cam-img"><div class="live">EN VIVO</div></div>
-        <div class="cam-name">🟢 Nuevo - General</div>
-      </div>
-    </div>
+    <a class="refresh" href="#" onclick="location.reload()">↻ Actualizar cámara</a>
   </section>
 
-  <div class="cta">
-    <div>
-      <strong>📸 ¿Hay fila?</strong><br>
-      <span>Ayuda a otros reportando tu tiempo</span>
-    </div>
-    <div class="circle">→</div>
+  <div class="ad">
+    <small>PUBLICIDAD DISPONIBLE</small><br>
+    <strong>Tu negocio puede aparecer aquí</strong><br>
+    Frente a gente que va a cruzar.
   </div>
 
-  <section class="ad">
-    <small>Publicidad</small>
-    <div class="ad-title">Casa de Cambio López</div>
-    <div>La mejor tasa, todos los días</div>
-    <div class="ad-grid">
-      <div class="ad-price">Compra<br><b>$16.45</b></div>
-      <div class="ad-price">Venta<br><b>$17.30</b></div>
+  <div class="cta">
+    📸 ¿Estás en la fila?<br>
+    Mándanos tu tiempo por WhatsApp
+  </div>
+
+  <section class="section">
+    <h2>📚 Guías y servicios</h2>
+    <div class="services">
+      <div class="service">📄 Permiso I-94</div>
+      <div class="service">💵 Tipo de cambio</div>
+      <div class="service">☀️ Clima</div>
+      <div class="service">💡 Tips para cruzar</div>
     </div>
   </section>
 
 </div>
 
-<nav class="nav">
+<nav class="bottom-nav">
   <a class="active" href="#">🏠<br>Inicio</a>
   <a href="#">🚗<br>Tiempos</a>
-  <a href="https://mxliahora-ux.github.io/garita-mxli/camaras.html">📷<br>Cámaras</a>
-  <a href="https://mxliahora-ux.github.io/garita-mxli/guias.html">📚<br>Guías</a>
-  <a href="https://wa.me/12174393549" target="_blank">👤<br>Reporte</a>
+  <a href="#">🎥<br>Cámara</a>
+  <a href="#">📚<br>Guías</a>
+  <a href="#">📸<br>Reporte</a>
 </nav>
 
 </body>
