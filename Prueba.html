@@ -1,377 +1,423 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garitas Mexicali</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:#f4f7fb;
+  background:#eef3f8;
   color:#071126;
 }
+
 .app{
   max-width:430px;
   margin:0 auto;
-  background:#fff;
+  background:#f8fafc;
   min-height:100vh;
-  padding-bottom:92px;
+  padding-bottom:125px;
 }
 
 /* HERO */
 .hero{
   position:relative;
-  padding:20px 18px 26px;
-  min-height:415px;
+  padding:24px 20px 90px;
+  min-height:430px;
   overflow:hidden;
   background:
-    linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.92) 38%,rgba(255,255,255,.35) 62%,rgba(255,255,255,.05) 100%),
+    linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.90) 42%,rgba(255,255,255,.35) 68%,rgba(255,255,255,.05) 100%),
     url("hero-garita.jpg") center/cover no-repeat;
 }
+
 .top{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:12px;
+  gap:14px;
 }
+
 .menu{
   font-size:32px;
   font-weight:900;
 }
+
 .logo{
   flex:1;
-  font-size:27px;
+  font-size:28px;
   font-weight:900;
   line-height:.92;
   letter-spacing:-1px;
 }
+
 .logo span{
   color:#ef1717;
   font-style:italic;
 }
+
 .live-box{
   background:white;
-  border-radius:17px;
-  padding:10px 13px;
-  box-shadow:0 8px 22px rgba(15,23,42,.16);
+  border-radius:18px;
+  padding:12px 14px;
+  box-shadow:0 10px 24px rgba(15,23,42,.16);
   font-weight:900;
   font-size:13px;
 }
+
 .hero h1{
-  margin:44px 0 8px;
-  font-size:58px;
+  margin:54px 0 10px;
+  font-size:60px;
   line-height:.92;
   letter-spacing:-3px;
   font-weight:900;
 }
+
 .hero h1 span{
   color:#ef1717;
 }
+
 .hero-sub{
-  font-size:18px;
+  font-size:19px;
   font-weight:900;
   letter-spacing:.2px;
 }
+
 .meta{
-  margin-top:13px;
+  margin-top:18px;
   display:flex;
-  align-items:center;
+  flex-wrap:wrap;
   gap:10px;
-  font-size:12px;
+  font-size:13px;
   font-weight:900;
 }
-.dot{
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:#16a34a;
-  display:inline-block;
+
+.meta-pill{
+  background:rgba(255,255,255,.82);
+  padding:8px 10px;
+  border-radius:999px;
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
 }
 
 /* MAIN CARDS */
 .cards{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin:-46px 14px 14px;
+  gap:18px;
+  margin:-70px 18px 24px;
   position:relative;
   z-index:3;
 }
+
 .card{
   background:white;
-  border-radius:25px;
-  padding:15px 12px;
-  box-shadow:0 16px 34px rgba(15,23,42,.15);
+  border-radius:30px;
+  padding:20px 16px;
+  box-shadow:0 18px 42px rgba(15,23,42,.16);
 }
+
 .card-head{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:8px;
+  gap:10px;
 }
+
 .kicker{
   font-size:13px;
   font-weight:900;
 }
+
 .name{
-  font-size:26px;
+  font-size:29px;
   font-weight:900;
   line-height:.95;
 }
+
 .circle{
-  width:50px;
-  height:50px;
+  width:54px;
+  height:54px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
+  font-size:27px;
 }
+
 .circle.red{background:#fee2e2}
 .circle.green{background:#dcfce7}
+
 .status{
-  margin:12px 0;
+  margin:15px 0 14px;
   display:inline-flex;
-  align-items:center;
-  justify-content:center;
   border-radius:999px;
-  padding:7px 10px;
-  font-size:11px;
+  padding:9px 12px;
+  font-size:12px;
   font-weight:900;
   color:#fff;
 }
+
 .status.red{background:#ef1717}
 .status.green{background:#16a34a}
+
 .bigbox{
-  border-radius:18px;
-  padding:12px 8px 9px;
+  border-radius:20px;
+  padding:16px 8px 12px;
   text-align:center;
   color:#fff;
-  margin-bottom:12px;
+  margin-bottom:16px;
 }
+
 .bigbox.red{background:#ef1717}
 .bigbox.green{background:#079b35}
+
 .bigbox .num{
-  font-size:66px;
+  font-size:78px;
   font-weight:900;
   line-height:.86;
 }
+
 .bigbox .min{
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
 }
+
 .estimate{
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
+
 .row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:6px;
+  gap:8px;
   border-top:1px solid #e5e7eb;
-  padding:8px 0;
-  font-size:12px;
+  padding:11px 0;
+  font-size:14px;
   font-weight:900;
 }
+
 .red-text{color:#ef1717}
 .green-text{color:#16a34a}
+
 .detail{
   display:block;
-  margin-top:10px;
+  margin-top:14px;
   text-align:center;
-  padding:11px 8px;
-  border-radius:14px;
+  padding:13px 8px;
+  border-radius:16px;
   font-weight:900;
-  font-size:12px;
+  font-size:13px;
   text-decoration:none;
 }
+
 .detail.red{background:#fee2e2;color:#b91c1c}
 .detail.green{background:#dcfce7;color:#166534}
 
-/* MID GRID */
+/* CAMERA + REPORT */
 .mid-grid{
-  margin:14px;
+  margin:24px 18px;
   display:grid;
-  grid-template-columns:1.35fr .95fr;
-  gap:12px;
+  grid-template-columns:1.28fr .95fr;
+  gap:18px;
 }
+
 .camera-card{
   background:#071126;
   color:#fff;
-  border-radius:22px;
-  padding:14px;
-  box-shadow:0 12px 28px rgba(15,23,42,.22);
+  border-radius:28px;
+  padding:18px;
+  box-shadow:0 16px 36px rgba(15,23,42,.24);
 }
-.camera-title{
-  font-size:18px;
-  font-weight:900;
-  margin-bottom:10px;
-}
+
 .en-vivo{
   display:inline-block;
   background:#ef1717;
   color:#fff;
-  padding:6px 9px;
-  border-radius:8px;
-  font-size:11px;
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:12px;
   font-weight:900;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
+
+.camera-title{
+  font-size:22px;
+  font-weight:900;
+  line-height:1.05;
+  margin-bottom:14px;
+}
+
 .camera-img{
-  height:130px;
-  border-radius:15px;
+  height:165px;
+  border-radius:18px;
   background:url("hero-garita.jpg") center/cover no-repeat;
   position:relative;
   overflow:hidden;
 }
+
 .camera-img:after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.7));
 }
+
 .camera-btn{
   position:absolute;
   z-index:2;
-  left:10px;
-  bottom:10px;
-  background:rgba(0,0,0,.8);
+  left:12px;
+  bottom:12px;
+  background:rgba(0,0,0,.82);
   color:white;
-  padding:8px 10px;
-  border-radius:10px;
-  font-size:12px;
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:13px;
   font-weight:900;
 }
 
 .report-card{
   background:#facc15;
   color:#071126;
-  border-radius:22px;
-  padding:15px 13px;
+  border-radius:28px;
+  padding:18px 14px;
   text-align:center;
-  box-shadow:0 12px 28px rgba(245,158,11,.22);
+  box-shadow:0 16px 36px rgba(245,158,11,.25);
 }
+
 .report-icon{
-  width:58px;
-  height:58px;
+  width:66px;
+  height:66px;
   background:white;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:30px;
-  margin:0 auto 10px;
+  font-size:34px;
+  margin:0 auto 14px;
 }
+
 .report-card h2{
   margin:0;
-  font-size:28px;
-  line-height:.95;
+  font-size:31px;
+  line-height:.92;
   font-weight:900;
 }
+
 .report-card p{
-  margin:8px 0 12px;
-  font-size:13px;
+  margin:12px 0 15px;
+  font-size:14px;
   font-weight:900;
 }
+
 .report-btn{
   display:block;
   background:#071126;
   color:white;
   text-decoration:none;
-  padding:11px 8px;
-  border-radius:12px;
+  padding:13px 9px;
+  border-radius:14px;
   font-weight:900;
-  font-size:12px;
+  font-size:13px;
 }
+
 .count{
-  margin-top:10px;
+  margin-top:12px;
   font-size:12px;
   font-weight:900;
 }
 
 /* INFO */
 .info-bar{
-  margin:14px;
+  margin:24px 18px;
   background:white;
-  border-radius:22px;
-  box-shadow:0 12px 28px rgba(15,23,42,.12);
+  border-radius:26px;
+  box-shadow:0 14px 32px rgba(15,23,42,.12);
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   overflow:hidden;
 }
+
 .info{
-  padding:13px 10px;
+  padding:17px 12px;
   border-right:1px solid #e5e7eb;
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
 }
+
 .info:last-child{border-right:none}
+
 .info strong{
   display:block;
-  font-size:25px;
-  margin:4px 0;
+  font-size:28px;
+  margin:6px 0;
 }
+
 .money-green{color:#16a34a}
 .money-red{color:#ef1717}
 
 /* SERVICES */
 .services{
-  margin:14px;
+  margin:24px 18px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:6px;
-  background:#eef2f7;
-  border-radius:20px;
-  padding:8px;
+  gap:10px;
 }
+
 .service{
-  background:#fff;
-  border-radius:15px;
-  padding:10px 5px;
+  background:white;
+  border-radius:20px;
+  padding:14px 6px;
   text-align:center;
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
 }
 
 /* NAV */
 .nav{
   position:fixed;
   left:50%;
-  bottom:10px;
+  bottom:16px;
   transform:translateX(-50%);
-  width:calc(100% - 22px);
+  width:calc(100% - 28px);
   max-width:408px;
   background:#071126;
-  border-radius:26px;
-  padding:9px;
+  border-radius:28px;
+  padding:10px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:5px;
-  box-shadow:0 16px 36px rgba(15,23,42,.28);
+  gap:6px;
+  box-shadow:0 18px 40px rgba(15,23,42,.30);
   z-index:50;
 }
+
 .nav a{
   text-align:center;
   color:white;
   text-decoration:none;
   font-size:11px;
   font-weight:900;
-  padding:9px 4px;
-  border-radius:18px;
+  padding:11px 4px;
+  border-radius:19px;
 }
+
 .nav a.active{
   background:#ef1717;
 }
 
-@media(max-width:380px){
-  .hero h1{font-size:52px}
-  .bigbox .num{font-size:58px}
-  .name{font-size:23px}
+/* CELULARES PEQUEÑOS */
+@media(max-width:390px){
+  .hero h1{font-size:54px}
+  .bigbox .num{font-size:68px}
+  .name{font-size:25px}
+  .cards{gap:14px;margin-left:14px;margin-right:14px}
+  .card{padding:18px 13px}
   .mid-grid{grid-template-columns:1fr}
 }
 </style>
@@ -391,8 +437,8 @@ body{
     <div class="hero-sub">REVISA ANTES Y AHORRA TIEMPO</div>
 
     <div class="meta">
-      <span><span class="dot"></span> Actualizado hace 2 min</span>
-      <span>🛡️ Información 100% real</span>
+      <span class="meta-pill">🟢 Actualizado hace 2 min</span>
+      <span class="meta-pill">🛡️ Información 100% real</span>
     </div>
   </section>
 
