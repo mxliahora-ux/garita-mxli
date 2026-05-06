@@ -15,18 +15,18 @@ box-sizing:border-box;
 
 :root{
 --bg:#ECE8E1;
---black:#090D12;
---card:#10151C;
+--black:#0B0F14;
+--card:#ffffff;
 --red:#FF3B30;
 --green:#27C93F;
 --yellow:#FFC107;
---white:#ffffff;
+--text:#111827;
 }
 
 body{
 font-family:Arial,Helvetica,sans-serif;
 background:var(--bg);
-color:#111;
+color:var(--text);
 }
 
 .app{
@@ -41,7 +41,7 @@ padding-bottom:95px;
 
 .header{
 background:var(--black);
-padding:20px 22px;
+padding:18px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -59,24 +59,29 @@ color:var(--yellow);
 }
 
 .weather{
-font-size:20px;
+font-size:18px;
 font-weight:900;
 }
 
 .menu{
-font-size:34px;
+font-size:30px;
 }
 
 /* HERO */
 
 .hero{
-min-height:280px;
-padding:30px 22px 70px;
+height:240px;
+padding:30px 20px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+
 background:
-linear-gradient(90deg,
-rgba(236,232,225,.98) 0%,
-rgba(236,232,225,.90) 45%,
-rgba(236,232,225,.45) 75%
+linear-gradient(
+90deg,
+rgba(236,232,225,.96) 0%,
+rgba(236,232,225,.82) 45%,
+rgba(236,232,225,.30) 100%
 ),
 url('hero-garita.jpg');
 
@@ -85,10 +90,10 @@ background-position:center;
 }
 
 .hero h1{
-font-size:38px;
+font-size:34px;
 line-height:1.05;
 font-weight:900;
-margin-top:10px;
+margin-bottom:12px;
 }
 
 .hero h1 span{
@@ -96,54 +101,49 @@ color:var(--yellow);
 }
 
 .hero p{
-margin-top:18px;
-font-size:18px;
-line-height:1.45;
+font-size:16px;
 font-weight:700;
-}
-
-.line{
-width:60px;
-height:4px;
-background:var(--yellow);
-border-radius:999px;
-margin-top:22px;
+line-height:1.4;
+max-width:260px;
 }
 
 /* TIMES */
 
 .times{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-padding:0 14px;
-margin-top:-45px;
+padding:16px;
+display:flex;
+flex-direction:column;
+gap:14px;
+margin-top:-25px;
 position:relative;
-z-index:5;
+z-index:10;
 }
 
 .time-card{
-background:linear-gradient(180deg,#151B24,#06080C);
-color:white;
-border-radius:18px;
-padding:18px 12px;
-box-shadow:0 12px 28px rgba(0,0,0,.25);
-text-align:center;
+background:white;
+border-radius:20px;
+padding:18px;
+box-shadow:0 10px 24px rgba(0,0,0,.08);
 }
 
-.time-card h2{
+.time-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+}
+
+.time-title{
 font-size:18px;
-line-height:1.08;
-margin-bottom:10px;
+font-weight:900;
+line-height:1.1;
 }
 
-.badge{
-display:inline-block;
-padding:7px 10px;
-border-radius:999px;
+.time-status{
 font-size:11px;
 font-weight:900;
-margin-bottom:12px;
+padding:7px 10px;
+border-radius:999px;
 color:white;
 }
 
@@ -155,8 +155,15 @@ background:var(--red);
 background:var(--green);
 }
 
+.time-main{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+margin-bottom:16px;
+}
+
 .big{
-font-size:72px;
+font-size:68px;
 font-weight:900;
 line-height:.9;
 }
@@ -170,31 +177,33 @@ color:var(--green);
 }
 
 .min{
-font-size:22px;
+font-size:18px;
 font-weight:900;
-margin-bottom:15px;
+margin-top:6px;
+}
+
+.traffic{
+font-size:13px;
+font-weight:900;
+text-align:right;
+line-height:1.4;
 }
 
 .details{
-border-top:1px solid rgba(255,255,255,.18);
-padding-top:12px;
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
-gap:6px;
+gap:10px;
+padding-top:14px;
+border-top:1px solid #ececec;
 }
 
 .detail{
-font-size:9px;
+text-align:center;
+font-size:10px;
 font-weight:900;
-border-right:1px solid rgba(255,255,255,.15);
-padding:0 4px;
 }
 
-.detail:last-child{
-border-right:none;
-}
-
-.icon{
+.detail span{
 display:block;
 font-size:20px;
 margin-bottom:5px;
@@ -206,62 +215,88 @@ margin-top:5px;
 font-size:13px;
 }
 
-.more{
-margin-top:14px;
-border:1px solid rgba(255,255,255,.25);
-padding:10px;
-border-radius:10px;
-font-size:12px;
-font-weight:900;
-}
-
 /* STATS */
 
 .stats{
-margin:14px;
-background:white;
-border-radius:14px;
+padding:0 16px 18px;
 display:grid;
-grid-template-columns:1fr 1fr 1fr 1.1fr;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,.10);
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
 }
 
 .stat{
-padding:14px 8px;
+background:white;
+border-radius:16px;
+padding:14px 10px;
 text-align:center;
-font-size:13px;
+box-shadow:0 8px 20px rgba(0,0,0,.07);
+font-size:14px;
 font-weight:900;
-border-right:1px solid #e5e5e5;
-}
-
-.stat:last-child{
-border-right:none;
 }
 
 .stat small{
 display:block;
-margin-top:4px;
+margin-top:5px;
 font-size:10px;
-font-weight:700;
 color:#666;
 }
 
+/* REPORT */
+
 .report{
+margin:0 16px 20px;
 background:var(--yellow);
+border-radius:18px;
+padding:18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+}
+
+.report-left{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.report-icon{
+width:54px;
+height:54px;
+background:white;
+border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-flex-direction:column;
+font-size:26px;
+}
+
+.report-text h3{
+font-size:20px;
+margin-bottom:5px;
+}
+
+.report-text p{
+font-size:13px;
+font-weight:700;
+}
+
+.report-btn{
+background:black;
+color:white;
+padding:12px 16px;
+border-radius:14px;
 font-size:12px;
 font-weight:900;
+text-decoration:none;
+white-space:nowrap;
 }
 
 /* CAMERAS */
 
 .section{
-padding:0 14px;
-margin-top:22px;
+padding:0 16px;
+margin-bottom:22px;
 }
 
 .section-head{
@@ -271,35 +306,35 @@ align-items:center;
 margin-bottom:14px;
 }
 
-.section-head h3{
+.section-head h2{
 font-size:22px;
 font-weight:900;
 }
 
 .section-head a{
-text-decoration:none;
 font-size:13px;
 font-weight:900;
+text-decoration:none;
 color:#111;
 }
 
 .cameras{
 display:flex;
-gap:10px;
+gap:12px;
 overflow-x:auto;
-padding-bottom:10px;
+padding-bottom:8px;
 }
 
 .camera{
-min-width:150px;
+min-width:175px;
 background:#10151C;
-border-radius:14px;
+border-radius:18px;
 overflow:hidden;
 color:white;
-box-shadow:0 10px 22px rgba(0,0,0,.18);
+box-shadow:0 10px 24px rgba(0,0,0,.12);
 }
 
-.camera-image{
+.camera-img{
 height:135px;
 background:
 url('hero-garita.jpg');
@@ -311,34 +346,34 @@ position:relative;
 
 .live{
 position:absolute;
-top:8px;
-left:8px;
+top:10px;
+left:10px;
 background:var(--red);
-padding:5px 7px;
-border-radius:6px;
+padding:5px 8px;
+border-radius:8px;
 font-size:10px;
 font-weight:900;
 }
 
 .expand{
 position:absolute;
-top:8px;
-right:8px;
-background:rgba(0,0,0,.6);
-padding:4px 7px;
-border-radius:6px;
+top:10px;
+right:10px;
+background:rgba(0,0,0,.55);
+padding:5px 8px;
+border-radius:8px;
 font-size:12px;
 }
 
 .camera-info{
-padding:12px 10px 14px;
+padding:14px;
 }
 
 .camera-info strong{
 display:block;
-font-size:14px;
-line-height:1.1;
+font-size:15px;
 margin-bottom:7px;
+line-height:1.1;
 }
 
 .camera-info p{
@@ -346,37 +381,37 @@ font-size:11px;
 color:#ddd;
 }
 
-/* INFO GRID */
+/* INFO */
 
-.info-grid{
+.info{
+padding:0 16px 24px;
 display:grid;
-grid-template-columns:1fr 1.2fr 1.1fr;
-gap:10px;
-padding:22px 14px;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
 .info-card{
 background:white;
-border-radius:14px;
-padding:16px 12px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+border-radius:18px;
+padding:16px;
+box-shadow:0 8px 20px rgba(0,0,0,.07);
 }
 
 .info-card h4{
-font-size:11px;
+font-size:12px;
 margin-bottom:8px;
 }
 
 .info-card strong{
 display:block;
-font-size:28px;
+font-size:30px;
 margin-bottom:6px;
 }
 
 .info-card p{
-font-size:11px;
+font-size:12px;
 line-height:1.4;
-color:#444;
+color:#555;
 }
 
 /* NAV */
@@ -392,7 +427,7 @@ background:var(--black);
 display:grid;
 grid-template-columns:repeat(5,1fr);
 padding:12px 0 15px;
-z-index:99;
+z-index:999;
 }
 
 .nav a{
@@ -406,29 +441,11 @@ font-weight:900;
 .nav a span{
 display:block;
 font-size:22px;
-margin-bottom:5px;
+margin-bottom:4px;
 }
 
 .nav .active{
 color:var(--yellow);
-}
-
-/* MOBILE */
-
-@media(max-width:390px){
-
-.big{
-font-size:62px;
-}
-
-.hero h1{
-font-size:34px;
-}
-
-.camera{
-min-width:145px;
-}
-
 }
 
 </style>
@@ -446,7 +463,7 @@ GARITA<br>
 </div>
 
 <div class="weather">
-☀️ 32°C
+☀️ 32°
 </div>
 
 <div class="menu">
@@ -458,16 +475,13 @@ GARITA<br>
 <section class="hero">
 
 <h1>
-CRUZA INFORMADO.<br>
-CRUZA <span>MÁS RÁPIDO.</span>
+CRUZA MÁS<br>
+<span>RÁPIDO.</span>
 </h1>
 
 <p>
-Tiempos en vivo de las garitas<br>
-de Mexicali y Caléxico.
+Tiempos en vivo y cámaras reales de las garitas de Mexicali.
 </p>
-
-<div class="line"></div>
 
 </section>
 
@@ -475,12 +489,22 @@ de Mexicali y Caléxico.
 
 <div class="time-card">
 
-<h2>GARITA CENTRO</h2>
+<div class="time-top">
 
-<div class="badge red">
-TRÁFICO MUY PESADO
+<div class="time-title">
+🚗 GARITA<br>
+CENTRO
 </div>
 
+<div class="time-status red">
+PESADO
+</div>
+
+</div>
+
+<div class="time-main">
+
+<div>
 <div class="big red-text">
 120
 </div>
@@ -488,43 +512,63 @@ TRÁFICO MUY PESADO
 <div class="min red-text">
 MIN
 </div>
+</div>
+
+<div class="traffic">
+🔴 Mucho tráfico<br>
+Actualizado ahora
+</div>
+
+</div>
 
 <div class="details">
 
 <div class="detail">
-<span class="icon">🚗</span>
-READY LANE
-<strong class="red-text">90 MIN</strong>
+<span>🚗</span>
+READY
+<strong class="red-text">
+90 MIN
+</strong>
 </div>
 
 <div class="detail">
-<span class="icon">🚶</span>
+<span>🚶</span>
 PEATONAL
-<strong class="red-text">90 MIN</strong>
+<strong class="red-text">
+90 MIN
+</strong>
 </div>
 
 <div class="detail">
-<span class="icon">⚡</span>
+<span>⚡</span>
 SENTRI
-<strong class="red-text">15 MIN</strong>
+<strong class="red-text">
+15 MIN
+</strong>
 </div>
 
-</div>
-
-<div class="more">
-⌁ VER DETALLE
 </div>
 
 </div>
 
 <div class="time-card">
 
-<h2>GARITA NUEVO MEXICALI</h2>
+<div class="time-top">
 
-<div class="badge green">
-TRÁFICO FLUIDO
+<div class="time-title">
+🚗 NUEVO<br>
+MEXICALI
 </div>
 
+<div class="time-status green">
+FLUIDO
+</div>
+
+</div>
+
+<div class="time-main">
+
+<div>
 <div class="big green-text">
 20
 </div>
@@ -532,31 +576,41 @@ TRÁFICO FLUIDO
 <div class="min green-text">
 MIN
 </div>
+</div>
+
+<div class="traffic">
+🟢 Tráfico fluido<br>
+Actualizado ahora
+</div>
+
+</div>
 
 <div class="details">
 
 <div class="detail">
-<span class="icon">🚗</span>
-READY LANE
-<strong class="green-text">60 MIN</strong>
+<span>🚗</span>
+READY
+<strong class="green-text">
+60 MIN
+</strong>
 </div>
 
 <div class="detail">
-<span class="icon">🚶</span>
+<span>🚶</span>
 PEATONAL
-<strong class="green-text">5 MIN</strong>
+<strong class="green-text">
+5 MIN
+</strong>
 </div>
 
 <div class="detail">
-<span class="icon">⚡</span>
+<span>⚡</span>
 SENTRI
-<strong class="green-text">10 MIN</strong>
+<strong class="green-text">
+10 MIN
+</strong>
 </div>
 
-</div>
-
-<div class="more">
-⌁ VER DETALLE
 </div>
 
 </div>
@@ -567,23 +621,50 @@ SENTRI
 
 <div class="stat">
 👥 142
-<small>personas viendo</small>
+<small>
+viendo ahora
+</small>
 </div>
 
 <div class="stat">
 📸 38
-<small>reportes hoy</small>
+<small>
+reportes hoy
+</small>
 </div>
 
 <div class="stat">
-🔄
-<small>Actualizado<br>hace 2 min</small>
+🔄 2 MIN
+<small>
+actualizado
+</small>
 </div>
 
-<div class="report">
-📸 REPORTAR<br>
-AHORA
+</section>
+
+<section class="report">
+
+<div class="report-left">
+
+<div class="report-icon">
+📸
 </div>
+
+<div class="report-text">
+<h3>
+¿Estás en la fila?
+</h3>
+
+<p>
+Comparte tu tiempo real
+</p>
+</div>
+
+</div>
+
+<a href="#" class="report-btn">
+REPORTAR
+</a>
 
 </section>
 
@@ -591,12 +672,12 @@ AHORA
 
 <div class="section-head">
 
-<h3>
-📹 CÁMARAS EN VIVO
-</h3>
+<h2>
+📹 Cámaras en vivo
+</h2>
 
 <a href="#">
-VER TODAS →
+Ver todas →
 </a>
 
 </div>
@@ -605,80 +686,112 @@ VER TODAS →
 
 <div class="camera">
 
-<div class="camera-image">
-<div class="live">EN VIVO</div>
-<div class="expand">↗</div>
+<div class="camera-img">
+
+<div class="live">
+EN VIVO
+</div>
+
+<div class="expand">
+↗
+</div>
+
 </div>
 
 <div class="camera-info">
+
 <strong>
-① GARITA<br>
-CENTRO
+Garita Centro
 </strong>
 
 <p>
 Actualizado hace 2 min
 </p>
+
 </div>
 
 </div>
 
 <div class="camera">
 
-<div class="camera-image">
-<div class="live">EN VIVO</div>
-<div class="expand">↗</div>
+<div class="camera-img">
+
+<div class="live">
+EN VIVO
+</div>
+
+<div class="expand">
+↗
+</div>
+
 </div>
 
 <div class="camera-info">
+
 <strong>
-② READY<br>
-LANE
+Ready Lane
 </strong>
 
 <p>
 Actualizado hace 2 min
 </p>
+
 </div>
 
 </div>
 
 <div class="camera">
 
-<div class="camera-image">
-<div class="live">EN VIVO</div>
-<div class="expand">↗</div>
+<div class="camera-img">
+
+<div class="live">
+EN VIVO
+</div>
+
+<div class="expand">
+↗
+</div>
+
 </div>
 
 <div class="camera-info">
+
 <strong>
-③ NUEVO<br>
-MEXICALI
+Nuevo Mexicali
 </strong>
 
 <p>
 Actualizado hace 2 min
 </p>
+
 </div>
 
 </div>
 
 <div class="camera">
 
-<div class="camera-image">
-<div class="live">EN VIVO</div>
-<div class="expand">↗</div>
+<div class="camera-img">
+
+<div class="live">
+EN VIVO
+</div>
+
+<div class="expand">
+↗
+</div>
+
 </div>
 
 <div class="camera-info">
+
 <strong>
-④ CALÉXICO →<br>
-MEXICALI
+Calexico → Mexicali
 </strong>
 
 <p>
 Actualizado hace 2 min
 </p>
+
 </div>
 
 </div>
@@ -687,7 +800,7 @@ Actualizado hace 2 min
 
 </section>
 
-<section class="info-grid">
+<section class="info">
 
 <div class="info-card">
 
@@ -700,8 +813,7 @@ Actualizado hace 2 min
 </strong>
 
 <p>
-Soleado<br>
-Sensación 34°C
+Soleado · Sensación 34°
 </p>
 
 </div>
@@ -709,16 +821,15 @@ Sensación 34°C
 <div class="info-card">
 
 <h4>
-💵 TIPO DE CAMBIO
+💵 DÓLAR
 </h4>
 
 <strong>
-$16.85
+16.85
 </strong>
 
 <p>
-Dólar Americano<br>
-Compra: $16.40 · Venta: $17.30
+Tipo de cambio actual
 </p>
 
 </div>
@@ -726,13 +837,23 @@ Compra: $16.40 · Venta: $17.30
 <div class="info-card">
 
 <h4>
-ℹ️ INFORMACIÓN ÚTIL
+ℹ️ INFORMACIÓN
 </h4>
 
 <p>
-Documentos necesarios ›<br>
-Reglas actuales ›<br>
-Teléfonos de emergencia ›
+Documentos y reglas actualizadas.
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>
+👥 COMUNIDAD
+</h4>
+
+<p>
+Reportes reales de usuarios.
 </p>
 
 </div>
@@ -745,27 +866,27 @@ Teléfonos de emergencia ›
 
 <a href="#" class="active">
 <span>⌂</span>
-INICIO
+Inicio
 </a>
 
 <a href="#">
 <span>📷</span>
-CÁMARAS
+Cámaras
 </a>
 
 <a href="#">
-<span>🔔</span>
-REPORTES
+<span>📍</span>
+Reportes
 </a>
 
 <a href="#">
-<span>ⓘ</span>
-INFO
+<span>ℹ️</span>
+Info
 </a>
 
 <a href="#">
 <span>👥</span>
-COMUNIDAD
+Comunidad
 </a>
 
 </nav>
