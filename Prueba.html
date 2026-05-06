@@ -1,39 +1,774 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garita MXLI</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 :root{
-  --bg:#ECE8E1;
-  --black:#090D12;
-  --card:#10151C;
-  --red:#FF3B30;
-  --green:#27C93F;
-  --yellow:#FFC107;
-  --text:#101318;
+--bg:#ECE8E1;
+--black:#090D12;
+--card:#10151C;
+--red:#FF3B30;
+--green:#27C93F;
+--yellow:#FFC107;
+--white:#ffffff;
 }
+
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:#111;
 }
+
 .app{
-  max-width:430px;
-  margin:auto;
-  background:var(--bg);
-  min-height:100vh;
-  padding-bottom:95px;
+max-width:430px;
+margin:auto;
+background:var(--bg);
+min-height:100vh;
+padding-bottom:95px;
 }
 
 /* HEADER */
+
 .header{
-  background:var(--black);
-  color:#fff;
-  padding:20px 22px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between
+background:var(--black);
+padding:20px 22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+line-height:.9;
+}
+
+.logo span{
+color:var(--yellow);
+}
+
+.weather{
+font-size:20px;
+font-weight:900;
+}
+
+.menu{
+font-size:34px;
+}
+
+/* HERO */
+
+.hero{
+min-height:280px;
+padding:30px 22px 70px;
+background:
+linear-gradient(90deg,
+rgba(236,232,225,.98) 0%,
+rgba(236,232,225,.90) 45%,
+rgba(236,232,225,.45) 75%
+),
+url('hero-garita.jpg');
+
+background-size:cover;
+background-position:center;
+}
+
+.hero h1{
+font-size:38px;
+line-height:1.05;
+font-weight:900;
+margin-top:10px;
+}
+
+.hero h1 span{
+color:var(--yellow);
+}
+
+.hero p{
+margin-top:18px;
+font-size:18px;
+line-height:1.45;
+font-weight:700;
+}
+
+.line{
+width:60px;
+height:4px;
+background:var(--yellow);
+border-radius:999px;
+margin-top:22px;
+}
+
+/* TIMES */
+
+.times{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:0 14px;
+margin-top:-45px;
+position:relative;
+z-index:5;
+}
+
+.time-card{
+background:linear-gradient(180deg,#151B24,#06080C);
+color:white;
+border-radius:18px;
+padding:18px 12px;
+box-shadow:0 12px 28px rgba(0,0,0,.25);
+text-align:center;
+}
+
+.time-card h2{
+font-size:18px;
+line-height:1.08;
+margin-bottom:10px;
+}
+
+.badge{
+display:inline-block;
+padding:7px 10px;
+border-radius:999px;
+font-size:11px;
+font-weight:900;
+margin-bottom:12px;
+color:white;
+}
+
+.red{
+background:var(--red);
+}
+
+.green{
+background:var(--green);
+}
+
+.big{
+font-size:72px;
+font-weight:900;
+line-height:.9;
+}
+
+.red-text{
+color:var(--red);
+}
+
+.green-text{
+color:var(--green);
+}
+
+.min{
+font-size:22px;
+font-weight:900;
+margin-bottom:15px;
+}
+
+.details{
+border-top:1px solid rgba(255,255,255,.18);
+padding-top:12px;
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:6px;
+}
+
+.detail{
+font-size:9px;
+font-weight:900;
+border-right:1px solid rgba(255,255,255,.15);
+padding:0 4px;
+}
+
+.detail:last-child{
+border-right:none;
+}
+
+.icon{
+display:block;
+font-size:20px;
+margin-bottom:5px;
+}
+
+.detail strong{
+display:block;
+margin-top:5px;
+font-size:13px;
+}
+
+.more{
+margin-top:14px;
+border:1px solid rgba(255,255,255,.25);
+padding:10px;
+border-radius:10px;
+font-size:12px;
+font-weight:900;
+}
+
+/* STATS */
+
+.stats{
+margin:14px;
+background:white;
+border-radius:14px;
+display:grid;
+grid-template-columns:1fr 1fr 1fr 1.1fr;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.10);
+}
+
+.stat{
+padding:14px 8px;
+text-align:center;
+font-size:13px;
+font-weight:900;
+border-right:1px solid #e5e5e5;
+}
+
+.stat:last-child{
+border-right:none;
+}
+
+.stat small{
+display:block;
+margin-top:4px;
+font-size:10px;
+font-weight:700;
+color:#666;
+}
+
+.report{
+background:var(--yellow);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+font-size:12px;
+font-weight:900;
+}
+
+/* CAMERAS */
+
+.section{
+padding:0 14px;
+margin-top:22px;
+}
+
+.section-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+}
+
+.section-head h3{
+font-size:22px;
+font-weight:900;
+}
+
+.section-head a{
+text-decoration:none;
+font-size:13px;
+font-weight:900;
+color:#111;
+}
+
+.cameras{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:10px;
+}
+
+.camera{
+min-width:150px;
+background:#10151C;
+border-radius:14px;
+overflow:hidden;
+color:white;
+box-shadow:0 10px 22px rgba(0,0,0,.18);
+}
+
+.camera-image{
+height:135px;
+background:
+url('hero-garita.jpg');
+
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.live{
+position:absolute;
+top:8px;
+left:8px;
+background:var(--red);
+padding:5px 7px;
+border-radius:6px;
+font-size:10px;
+font-weight:900;
+}
+
+.expand{
+position:absolute;
+top:8px;
+right:8px;
+background:rgba(0,0,0,.6);
+padding:4px 7px;
+border-radius:6px;
+font-size:12px;
+}
+
+.camera-info{
+padding:12px 10px 14px;
+}
+
+.camera-info strong{
+display:block;
+font-size:14px;
+line-height:1.1;
+margin-bottom:7px;
+}
+
+.camera-info p{
+font-size:11px;
+color:#ddd;
+}
+
+/* INFO GRID */
+
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1.2fr 1.1fr;
+gap:10px;
+padding:22px 14px;
+}
+
+.info-card{
+background:white;
+border-radius:14px;
+padding:16px 12px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.info-card h4{
+font-size:11px;
+margin-bottom:8px;
+}
+
+.info-card strong{
+display:block;
+font-size:28px;
+margin-bottom:6px;
+}
+
+.info-card p{
+font-size:11px;
+line-height:1.4;
+color:#444;
+}
+
+/* NAV */
+
+.nav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:100%;
+max-width:430px;
+background:var(--black);
+display:grid;
+grid-template-columns:repeat(5,1fr);
+padding:12px 0 15px;
+z-index:99;
+}
+
+.nav a{
+text-decoration:none;
+color:white;
+text-align:center;
+font-size:11px;
+font-weight:900;
+}
+
+.nav a span{
+display:block;
+font-size:22px;
+margin-bottom:5px;
+}
+
+.nav .active{
+color:var(--yellow);
+}
+
+/* MOBILE */
+
+@media(max-width:390px){
+
+.big{
+font-size:62px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.camera{
+min-width:145px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+<div class="logo">
+GARITA<br>
+<span>MXLI</span>
+</div>
+
+<div class="weather">
+☀️ 32°C
+</div>
+
+<div class="menu">
+☰
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>
+CRUZA INFORMADO.<br>
+CRUZA <span>MÁS RÁPIDO.</span>
+</h1>
+
+<p>
+Tiempos en vivo de las garitas<br>
+de Mexicali y Caléxico.
+</p>
+
+<div class="line"></div>
+
+</section>
+
+<section class="times">
+
+<div class="time-card">
+
+<h2>GARITA CENTRO</h2>
+
+<div class="badge red">
+TRÁFICO MUY PESADO
+</div>
+
+<div class="big red-text">
+120
+</div>
+
+<div class="min red-text">
+MIN
+</div>
+
+<div class="details">
+
+<div class="detail">
+<span class="icon">🚗</span>
+READY LANE
+<strong class="red-text">90 MIN</strong>
+</div>
+
+<div class="detail">
+<span class="icon">🚶</span>
+PEATONAL
+<strong class="red-text">90 MIN</strong>
+</div>
+
+<div class="detail">
+<span class="icon">⚡</span>
+SENTRI
+<strong class="red-text">15 MIN</strong>
+</div>
+
+</div>
+
+<div class="more">
+⌁ VER DETALLE
+</div>
+
+</div>
+
+<div class="time-card">
+
+<h2>GARITA NUEVO MEXICALI</h2>
+
+<div class="badge green">
+TRÁFICO FLUIDO
+</div>
+
+<div class="big green-text">
+20
+</div>
+
+<div class="min green-text">
+MIN
+</div>
+
+<div class="details">
+
+<div class="detail">
+<span class="icon">🚗</span>
+READY LANE
+<strong class="green-text">60 MIN</strong>
+</div>
+
+<div class="detail">
+<span class="icon">🚶</span>
+PEATONAL
+<strong class="green-text">5 MIN</strong>
+</div>
+
+<div class="detail">
+<span class="icon">⚡</span>
+SENTRI
+<strong class="green-text">10 MIN</strong>
+</div>
+
+</div>
+
+<div class="more">
+⌁ VER DETALLE
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat">
+👥 142
+<small>personas viendo</small>
+</div>
+
+<div class="stat">
+📸 38
+<small>reportes hoy</small>
+</div>
+
+<div class="stat">
+🔄
+<small>Actualizado<br>hace 2 min</small>
+</div>
+
+<div class="report">
+📸 REPORTAR<br>
+AHORA
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-head">
+
+<h3>
+📹 CÁMARAS EN VIVO
+</h3>
+
+<a href="#">
+VER TODAS →
+</a>
+
+</div>
+
+<div class="cameras">
+
+<div class="camera">
+
+<div class="camera-image">
+<div class="live">EN VIVO</div>
+<div class="expand">↗</div>
+</div>
+
+<div class="camera-info">
+<strong>
+① GARITA<br>
+CENTRO
+</strong>
+
+<p>
+Actualizado hace 2 min
+</p>
+</div>
+
+</div>
+
+<div class="camera">
+
+<div class="camera-image">
+<div class="live">EN VIVO</div>
+<div class="expand">↗</div>
+</div>
+
+<div class="camera-info">
+<strong>
+② READY<br>
+LANE
+</strong>
+
+<p>
+Actualizado hace 2 min
+</p>
+</div>
+
+</div>
+
+<div class="camera">
+
+<div class="camera-image">
+<div class="live">EN VIVO</div>
+<div class="expand">↗</div>
+</div>
+
+<div class="camera-info">
+<strong>
+③ NUEVO<br>
+MEXICALI
+</strong>
+
+<p>
+Actualizado hace 2 min
+</p>
+</div>
+
+</div>
+
+<div class="camera">
+
+<div class="camera-image">
+<div class="live">EN VIVO</div>
+<div class="expand">↗</div>
+</div>
+
+<div class="camera-info">
+<strong>
+④ CALÉXICO →<br>
+MEXICALI
+</strong>
+
+<p>
+Actualizado hace 2 min
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info-grid">
+
+<div class="info-card">
+
+<h4>
+☀️ CLIMA
+</h4>
+
+<strong>
+32°C
+</strong>
+
+<p>
+Soleado<br>
+Sensación 34°C
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>
+💵 TIPO DE CAMBIO
+</h4>
+
+<strong>
+$16.85
+</strong>
+
+<p>
+Dólar Americano<br>
+Compra: $16.40 · Venta: $17.30
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h4>
+ℹ️ INFORMACIÓN ÚTIL
+</h4>
+
+<p>
+Documentos necesarios ›<br>
+Reglas actuales ›<br>
+Teléfonos de emergencia ›
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+<nav class="nav">
+
+<a href="#" class="active">
+<span>⌂</span>
+INICIO
+</a>
+
+<a href="#">
+<span>📷</span>
+CÁMARAS
+</a>
+
+<a href="#">
+<span>🔔</span>
+REPORTES
+</a>
+
+<a href="#">
+<span>ⓘ</span>
+INFO
+</a>
+
+<a href="#">
+<span>👥</span>
+COMUNIDAD
+</a>
+
+</nav>
+
+</body>
+</html>
