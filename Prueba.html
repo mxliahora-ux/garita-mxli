@@ -1,157 +1,530 @@
+export default {
+  async fetch(request) {
+
+    const WHATSAPP_URL =
+      "https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita";
+
+    const FACEBOOK_URL =
+      "https://www.facebook.com/garitamx/";
+
+    const centroAllUrl =
+      "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250302";
+
+    const nuevoAllUrl =
+      "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250301";
+
+    const weatherUrl =
+      "https://api.open-meteo.com/v1/forecast?latitude=32.6245&longitude=-115.4523&current=temperature_2m,apparent_temperature,wind_speed_10m&timezone=America%2FTijuana&forecast_days=1";
+
+    try {
+
+      const [resCentro, resNuevo, resWeather] = await Promise.all([
+        fetch(centroAllUrl),
+        fetch(nuevoAllUrl),
+        fetch(weatherUrl)
+      ]);
+
+      const [xmlCentro, xmlNuevo, weather] = await Promise.all([
+        resCentro.text(),
+        resNuevo.text(),
+        resWeather.json()
+      ]);
+
+      function sacar(xml, tipo) {
+        const regex = new RegExp(
+          tipo + "[\\s\\S]*?PDT\\s+(\\d+)\\s+min\\s+delay",
+          "i"
+        );
+
+        const match = xml.match(regex);
+
+        return match ? Number(match[1]) : null;
+      }
+
+      function sacarPeatonal(xml) {
+        const regex =
+          /Pedestrian[\s\S]*?PDT\s+(\d+)\s+min\s+delay/i;
+
+        const match = xml.match(regex);
+
+        return match ? Number(match[1]) : null;
+      }
+
+      function mostrar(min) {
+        return Number.isFinite(min) ? min : "—";
+      }
+
+      function clase(min) {
+        if (!Number.isFinite(min)) return "gray";
+        if (min <= 20) return "green";
+        if (min <= 45) return "yellow";
+        return "red";
+      }
+
+      const centroGeneral = sacar(xmlCentro, "General");
+      const centroSentri = sacar(xmlCentro, "Sentri");
+      const centroReady = sacar(xmlCentro, "Ready");
+      const centroPeatonal = sacarPeatonal(xmlCentro);
+
+      const nuevoGeneral = sacar(xmlNuevo, "General");
+      const nuevoSentri = sacar(xmlNuevo, "Sentri");
+      const nuevoReady = sacar(xmlNuevo, "Ready");
+
+      const temp = weather?.current?.temperature_2m;
+
+      const horaMexicali =
+        new Intl.DateTimeFormat("es-MX", {
+          timeZone: "America/Tijuana",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true
+        }).format(new Date());
+
+      const cache = Date.now();
+                const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Garitas Mexicali</title>
+
+<meta http-equiv="refresh" content="300">
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#edf1f5;color:#20242b}
-.app{max-width:430px;margin:auto;min-height:100vh;padding:20px 10px 90px;background:linear-gradient(#f8fafc,#e6ebef)}
-.top{display:grid;grid-template-columns:45px 1fr 45px;align-items:center;margin-bottom:14px}
-.menu{font-size:30px}
-.bell{text-align:right;font-size:24px;position:relative}
-.bell span{background:#8bb640;color:white;border-radius:50%;font-size:12px;padding:3px 6px;position:absolute;right:-4px;top:-6px}
-.logo{text-align:center;line-height:.95}
-.logo .g{font-size:28px;letter-spacing:8px;font-weight:900}
-.logo .m{font-size:28px;letter-spacing:7px;font-weight:900;color:#8bb640}
-.logo small{display:block;margin-top:9px;font-size:11px;letter-spacing:2px;color:#5f6770;font-weight:800}
 
-.hero{position:relative;height:285px;border-radius:18px;overflow:hidden;box-shadow:0 12px 24px rgba(0,0,0,.16);background:#cfd5dc}
-.hero img{width:100%;height:100%;object-fit:cover}
-.live{position:absolute;top:14px;left:14px;background:rgba(45,51,58,.72);color:white;border-radius:18px;padding:8px 12px;font-size:12px;font-weight:900}
-.cam{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.92);border-radius:18px;padding:8px 13px;font-size:12px;font-weight:900}
-.expand{position:absolute;right:12px;bottom:12px;background:white;border-radius:12px;width:38px;height:38px;display:grid;place-items:center;font-size:22px}
-.panel{position:absolute;left:15px;bottom:15px;width:155px;background:rgba(255,255,255,.95);border-radius:18px;padding:14px 13px;box-shadow:0 10px 20px rgba(0,0,0,.16)}
-.panel h2{margin:0 0 6px;font-size:17px}
-.big{display:flex;align-items:flex-end;gap:5px}
-.big strong{font-size:60px;line-height:.8;font-weight:300;letter-spacing:-5px}
-.big span{color:#d9433f;font-size:18px;font-weight:900;padding-bottom:5px}
-.redpill{background:#d9433f;color:white;border-radius:18px;padding:7px 9px;font-size:11px;font-weight:900;margin:10px 0}
-.panel b{display:block;font-size:14px}.panel small{color:#444}
-.updated{margin-top:10px;padding-top:9px;border-top:1px solid #d8dde2;font-size:11px;font-weight:800}
+*{
+box-sizing:border-box
+}
 
-.section{display:flex;justify-content:space-between;margin:16px 2px 9px;font-size:12px;font-weight:900}
-.grid4,.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.card,.mini,.reports,.ad{background:linear-gradient(#fff,#f2f4f7);border:1px solid #dfe4e9;border-radius:15px;box-shadow:0 8px 16px rgba(0,0,0,.08)}
-.card{padding:10px 8px;min-height:108px}
-.card .title{font-size:10px;font-weight:900}
-.card .num{margin-top:12px;font-size:34px;font-weight:300;letter-spacing:-2px}
-.card .num span{font-size:13px;font-weight:900}
-.green{color:#8bb640}.yellow{color:#d99a1b}.red{color:#d9433f}
-.badge{display:inline-block;color:white;border-radius:12px;padding:4px 8px;font-size:10px;font-weight:900;margin-top:8px}
-.badge.green{background:#8bb640}.badge.yellow{background:#d99a1b}.badge.red{background:#d9433f}
-.note{margin-top:8px;font-size:10px}
+body{
+margin:0;
+background:#dfe5ea;
+font-family:-apple-system,BlinkMacSystemFont,
+"Segoe UI",Roboto,Arial,sans-serif;
+color:#17202a;
+}
 
-.mini-grid{margin-top:9px}
-.mini{padding:11px 9px;min-height:96px}
-.mini .top{font-size:11px;font-weight:900}
-.mini .value{margin-top:12px;font-size:29px}
-.mini .small{margin-top:6px;font-size:11px;color:#444}
+.app{
+width:100%;
+max-width:430px;
+margin:0 auto;
+min-height:100vh;
+background:linear-gradient(
+180deg,
+#f9fbfc 0%,
+#e7edf1 100%
+);
+padding:18px 16px 88px;
+}
 
-.reports{margin-top:12px;padding:13px}
-.reports-head{display:flex;justify-content:space-between;font-size:12px;font-weight:900;margin-bottom:10px}
-.report{display:grid;grid-template-columns:42px 1fr 54px;gap:9px;padding:8px 0;border-bottom:1px solid #dfe4e9}
-.avatar{width:40px;height:40px;border-radius:50%;background:#cbd5e1}
-.report b{font-size:13px}.report p{margin:2px 0 0;font-size:11px}
-.like{background:#f4f6f8;border-radius:16px;padding:7px;text-align:center;color:#8bb640;font-weight:900}
-.send{width:100%;margin-top:10px;border:0;border-radius:22px;background:#343c45;color:white;padding:14px;font-size:14px;font-weight:900}
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:16px;
+}
 
-.ad{margin-top:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.ad b{font-size:13px}.ad p{margin:2px 0 0;font-size:11px;color:#555}
-.ad button{border:1px solid #555;background:white;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:900}
+.brand b{
+display:block;
+font-size:28px;
+line-height:.95;
+}
 
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;height:72px;background:rgba(247,249,251,.96);border-top:1px solid #dfe4e9;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px 14px}
-.nav div{text-align:center;font-size:10px;font-weight:900;color:#666}
-.nav .active{color:#8bb640}
-.plus{width:52px;height:52px;border-radius:50%;background:#3b434c;color:white;margin:-20px auto 0;display:grid;place-items:center;font-size:35px}
-@media(max-width:390px){.grid4,.mini-grid{grid-template-columns:repeat(2,1fr)}}
+.brand span{
+display:block;
+margin-top:5px;
+font-size:12px;
+font-weight:800;
+color:#6b7280;
+}
+
+.live-count{
+background:#fff;
+border-radius:18px;
+padding:10px 12px;
+text-align:right;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.live-count b{
+display:block;
+font-size:18px;
+}
+
+.live-count span{
+display:block;
+font-size:11px;
+color:#6b7280;
+font-weight:800;
+}
+
+.hero{
+position:relative;
+height:280px;
+border-radius:26px;
+overflow:hidden;
+background:#cfd6dc;
+margin-bottom:14px;
+box-shadow:0 16px 32px rgba(0,0,0,.18);
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.hero-top{
+position:absolute;
+top:14px;
+left:14px;
+right:14px;
+display:flex;
+justify-content:space-between;
+}
+
+.pill{
+background:rgba(255,255,255,.92);
+border-radius:999px;
+padding:8px 12px;
+font-size:12px;
+font-weight:900;
+}
+
+.dark{
+background:rgba(38,49,61,.82);
+color:white;
+}
+
+.main-time{
+background:#fff;
+border-radius:26px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:0 14px 26px rgba(0,0,0,.10);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.main-time h1{
+margin:0;
+font-size:27px;
+}
+
+.main-time p{
+margin:5px 0 0;
+color:#6b7280;
+font-size:14px;
+font-weight:700;
+}
+
+.big-min{
+text-align:right;
+}
+
+.big-min strong{
+font-size:58px;
+line-height:.8;
+font-weight:300;
+}
+
+.big-min span{
+display:block;
+font-size:14px;
+font-weight:900;
+}
+
+.green{
+color:#74a832;
+}
+
+.yellow{
+color:#d69a1c;
+}
+
+.red{
+color:#d7433f;
+}
+
+.times{
+display:grid;
+gap:11px;
+margin-bottom:16px;
+}
+
+.time-card{
+background:#fff;
+border-radius:22px;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.time-card b{
+display:block;
+font-size:18px;
+}
+
+.time-card span{
+display:block;
+margin-top:3px;
+color:#6b7280;
+font-size:13px;
+}
+
+.time-num{
+text-align:right;
+}
+
+.time-num strong{
+font-size:38px;
+font-weight:300;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:11px;
+margin-bottom:16px;
+}
+
+.info{
+background:#fff;
+border-radius:22px;
+padding:16px;
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.info strong{
+display:block;
+margin-top:12px;
+font-size:34px;
+}
+
+.nav{
+position:fixed;
+left:50%;
+bottom:0;
+transform:translateX(-50%);
+width:100%;
+max-width:430px;
+height:74px;
+background:rgba(255,255,255,.94);
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:9px 8px 14px;
+}
+
+.nav a{
+text-decoration:none;
+color:#5b6470;
+text-align:center;
+font-size:11px;
+font-weight:900;
+}
+
+.nav a b{
+display:block;
+font-size:22px;
+margin-bottom:4px;
+}
+
+.active{
+color:#74a832;
+}
+
 </style>
 </head>
 
 <body>
-<div class="app">
 
-<header class="top">
-  <div class="menu">☰</div>
-  <div class="logo">
-    <div class="g">GARITAS</div>
-    <div class="m">MEXICALI</div>
-    <small>AQUÍ SÍ VES LA FRONTERA REAL</small>
-  </div>
-  <div class="bell">🔔<span>3</span></div>
+<main class="app">
+
+<header class="header">
+
+<div class="brand">
+<b>Garitas<br>Mexicali</b>
+<span>Aquí sí ves la frontera real</span>
+</div>
+
+<div class="live-count">
+<b id="viewers">147</b>
+<span>viendo ahora</span>
+</div>
+
 </header>
 
 <section class="hero">
-  <img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg">
-  <div class="live">🟢 EN VIVO</div>
-  <div class="cam">📷 CÁMARA CENTRO</div>
-  <div class="expand">↗</div>
 
-  <div class="panel">
-    <h2>CENTRO 🚶</h2>
-    <div class="big"><strong>120</strong><span>MIN</span></div>
-    <div class="redpill">🚶 PEATONAL Y VEHICULAR</div>
-    <b>Tráfico pesado</b>
-    <small>Todos los carriles</small>
-    <div class="updated">⏱ Actualizado hace 2 min</div>
-  </div>
-</section>
+<img
+src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg?cache=${cache}"
+>
 
-<div class="section">
-  <span>TIEMPOS EN OTRAS GARITAS</span>
-  <span>VER TODAS ›</span>
+<div class="hero-top">
+<div class="pill dark">● EN VIVO</div>
+<div class="pill">Centro peatonal</div>
 </div>
 
-<section class="grid4">
-  <div class="card"><div class="title">🚘 NUEVO MEXICALI</div><div class="num">20 <span class="green">MIN</span></div><div class="badge green">FLUIDO</div><div class="note">Todos los carriles ›</div></div>
-  <div class="card"><div class="title">☆ SENTRI</div><div class="num">10 <span class="green">MIN</span></div><div class="badge green">RÁPIDO</div><div class="note">Todos los carriles ›</div></div>
-  <div class="card"><div class="title">☆ READY LANE</div><div class="num">15 <span class="yellow">MIN</span></div><div class="badge yellow">MODERADO</div><div class="note">Todos los carriles ›</div></div>
-  <div class="card"><div class="title">🚚 COMERCIAL</div><div class="num">110 <span class="red">MIN</span></div><div class="badge red">PESADO</div><div class="note">Todos los carriles ›</div></div>
 </section>
 
-<section class="mini-grid">
-  <div class="mini"><div class="top">💵 DÓLAR HOY</div><div class="value">$17.05</div><div class="small green">+0.11 (0.65%)</div></div>
-  <div class="mini"><div class="top">🌤️ CLIMA</div><div class="value">38°</div><div class="small">Soleado<br>Máx: <b class="red">42°</b> Mín: 23°</div></div>
-  <div class="mini"><div class="top">🕘 HORA LOCAL</div><div class="value">9:41</div><div class="small">AM<br>Domingo</div></div>
-  <div class="mini"><div class="top">🌬️ CALIDAD DEL AIRE</div><div class="value">42</div><div class="small green">● Buena</div></div>
-</section>
+<section class="main-time">
 
-<section class="reports">
-  <div class="reports-head"><span>💬 REPORTES EN TIEMPO REAL</span><span>VER TODOS</span></div>
+<div class="row">
 
-  <div class="report">
-    <div class="avatar"></div>
-    <div><b>Carlos M.</b><p>Hace 5 min · Garita Centro<br>Mucho tráfico en línea estándar.</p></div>
-    <div class="like">👍 24</div>
-  </div>
+<div>
+<h1>Centro</h1>
+<p>Peatonal principal</p>
+</div>
 
-  <div class="report">
-    <div class="avatar"></div>
-    <div><b>Ana G.</b><p>Hace 8 min · Nuevo Mexicali<br>Fluido, pasé sin problema.</p></div>
-    <div class="like">👍 18</div>
-  </div>
-
-  <button class="send">＋ ENVIAR REPORTE</button>
-</section>
-
-<section class="ad">
-  <div>
-    <b>📣 ¡ANÚNCIATE AQUÍ!</b>
-    <p>Llega a más de 7,000 personas todos los días.</p>
-  </div>
-  <button>MÁS INFORMACIÓN</button>
-</section>
+<div class="big-min ${clase(centroPeatonal)}">
+<strong>${mostrar(centroPeatonal)}</strong>
+<span>MIN</span>
+</div>
 
 </div>
+
+</section>
+<section class="times">
+
+<div class="time-card">
+<div>
+<b>Nuevo Mexicali</b>
+<span>General</span>
+</div>
+
+<div class="time-num green">
+<strong>${mostrar(nuevoGeneral)}</strong>
+<span>MIN</span>
+</div>
+</div>
+
+<div class="time-card">
+<div>
+<b>Sentri</b>
+<span>Centro</span>
+</div>
+
+<div class="time-num green">
+<strong>${mostrar(centroSentri)}</strong>
+<span>MIN</span>
+</div>
+</div>
+
+<div class="time-card">
+<div>
+<b>Ready Lane</b>
+<span>Centro</span>
+</div>
+
+<div class="time-num yellow">
+<strong>${mostrar(centroReady)}</strong>
+<span>MIN</span>
+</div>
+</div>
+
+</section>
+
+<section class="info-grid">
+
+<div class="info">
+<b>💵 Dólar hoy</b>
+<strong>$17.00</strong>
+<span>Referencia local</span>
+</div>
+
+<div class="info">
+<b>🌤️ Clima</b>
+<strong>
+${Number.isFinite(temp)
+? Math.round(temp) + "°"
+: "—"}
+</strong>
+
+<span>
+Hora ${horaMexicali}
+</span>
+</div>
+
+</section>
+
+</main>
 
 <nav class="nav">
-  <div class="active">⌂<br>INICIO</div>
-  <div>📷<br>CÁMARAS</div>
-  <div><div class="plus">+</div></div>
-  <div>💬<br>REPORTES</div>
-  <div>•••<br>MÁS</div>
+
+<a class="active" href="#">
+<b>⌂</b>
+Inicio
+</a>
+
+<a href="#">
+<b>📷</b>
+Cámaras
+</a>
+
+<a href="${WHATSAPP_URL}">
+<b>💬</b>
+Reportes
+</a>
+
+<a href="${FACEBOOK_URL}">
+<b>f</b>
+Facebook
+</a>
+
 </nav>
+
+<script>
+
+function updateViewers(){
+
+const base = 136;
+const extra =
+Math.floor(Math.random()*34);
+
+document.getElementById(
+"viewers"
+).textContent = base + extra;
+
+}
+
+setInterval(updateViewers,7000);
+
+</script>
 
 </body>
 </html>
+`;
+
+      return new Response(html, {
+        headers: {
+          "Content-Type":
+          "text/html; charset=UTF-8",
+
+          "Cache-Control":
+          "no-store"
+        }
+      });
+
+    } catch (e) {
+
+      return new Response(
+        "Error cargando datos",
+        { status: 500 }
+      );
+
+    }
+
+  }
+};
