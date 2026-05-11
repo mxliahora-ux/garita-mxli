@@ -4,133 +4,576 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garitas Mexicali</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#dfe5ea;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#17202a}
-.app{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(#f9fbfc,#e7edf1);padding:18px 16px 88px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.brand b{display:block;font-size:30px;line-height:.95}
-.brand span{font-size:12px;font-weight:800;color:#6b7280}
-.live-count{background:white;border-radius:18px;padding:10px 13px;text-align:right;box-shadow:0 8px 18px #0001}
-.live-count b{font-size:20px}.live-count span{display:block;font-size:11px;color:#6b7280;font-weight:800}
-.hero{position:relative;height:280px;border-radius:26px;overflow:hidden;box-shadow:0 16px 32px #0002;margin-bottom:14px}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between}
-.pill{background:#ffffffe8;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900}
-.dark{background:#26313dd9;color:white}
-.main,.card,.info,.reports,.ad{background:white;border-radius:24px;box-shadow:0 10px 20px #0001}
-.main{padding:18px;margin-bottom:16px}
-.row{display:flex;justify-content:space-between;align-items:flex-start}
-h1{margin:0;font-size:30px}
-.sub{color:#6b7280;font-size:15px;font-weight:700;margin-top:4px}
-.big{text-align:right;color:#d7433f}
-.big strong{font-size:64px;line-height:.8;font-weight:300}.big span{display:block;font-weight:900}
-.status{display:inline-block;margin-top:14px;background:#fee2e2;color:#991b1b;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:900}
-.title{display:flex;justify-content:space-between;margin:0 2px 10px}.title b{font-size:19px}.title span{font-size:12px;color:#6b7280;font-weight:900}
-.cams{display:flex;gap:11px;overflow-x:auto;padding-bottom:16px}
-.cam{min-width:170px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 20px #0001}
-.cam img{width:100%;height:100px;object-fit:cover}.cam div{padding:10px}.cam b{font-size:14px}.cam span{display:block;font-size:12px;color:#6b7280}
-.times{display:grid;gap:11px;margin-bottom:16px}
-.card{padding:16px;display:flex;justify-content:space-between;align-items:center}
-.card b{font-size:20px}.card span{display:block;color:#6b7280;font-size:13px;font-weight:700}
-.num{text-align:right}.num strong{font-size:42px;font-weight:300}.num small{display:block;font-weight:900}
-.green{color:#74a832}.yellow{color:#d69a1c}.red{color:#d7433f}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px}
-.info{padding:16px}.info b{font-size:14px}.info strong{display:block;font-size:34px;margin-top:12px}.info span{font-size:13px;color:#6b7280}
-.reports{padding:16px;margin-bottom:16px}.reports h2{margin:0 0 12px;font-size:21px}.report{border-top:1px solid #dde4ea;padding:12px 0}.report:first-of-type{border-top:0}.report p{margin:4px 0 0;font-size:14px;color:#36414d}
-.btn{display:block;text-align:center;text-decoration:none;background:#26313d;color:white;border-radius:18px;padding:15px;font-weight:900;margin-top:8px}
-.ad{padding:18px;background:linear-gradient(135deg,#26313d,#3d4856);color:white}.ad b{font-size:22px}.ad span{display:block;margin-top:6px;color:#ffffffcc;font-size:14px}
-.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);max-width:430px;width:100%;height:74px;background:#fffffff0;display:grid;grid-template-columns:repeat(4,1fr);padding:9px 8px 14px;box-shadow:0 -8px 20px #0001}
-.nav a{text-decoration:none;text-align:center;color:#5b6470;font-size:11px;font-weight:900}.nav b{display:block;font-size:22px}.nav .active{color:#74a832}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#edf2f5;
+  color:#111827;
+}
+
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding:18px 14px 90px;
+  background:linear-gradient(#f8fafc,#e7edf1);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.logo b{
+  font-size:26px;
+  line-height:.9;
+  display:block;
+}
+
+.logo span{
+  color:#7fb239;
+  font-weight:900;
+}
+
+.top-info{
+  text-align:right;
+  font-weight:900;
+}
+
+.top-info small{
+  color:#6b7280;
+}
+
+.hero{
+  position:relative;
+  height:255px;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 14px 30px #0002;
+  margin-bottom:14px;
+}
+
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.pill{
+  position:absolute;
+  top:12px;
+  border-radius:14px;
+  padding:9px 12px;
+  font-weight:900;
+  font-size:13px;
+}
+
+.live{
+  left:12px;
+  background:#e5484d;
+  color:white;
+}
+
+.cam{
+  right:12px;
+  background:white;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.wait{
+  background:linear-gradient(160deg,#05080c,#151b22);
+  color:white;
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 12px 25px #0003;
+}
+
+.wait h2{
+  margin:0;
+  font-size:17px;
+  text-align:center;
+}
+
+.tag{
+  display:block;
+  width:max-content;
+  margin:10px auto 0;
+  border-radius:12px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.redbg{
+  background:#e5484d;
+}
+
+.greenbg{
+  background:#54b435;
+}
+
+.big{
+  text-align:center;
+  font-size:62px;
+  font-weight:900;
+  line-height:.85;
+  margin:12px 0;
+}
+
+.red{
+  color:#ff313d;
+}
+
+.green{
+  color:#53d144;
+}
+
+.mini{
+  display:grid;
+  gap:8px;
+  border-top:1px solid #ffffff22;
+  padding-top:14px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  font-weight:800;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  background:white;
+  border-radius:20px;
+  padding:13px;
+  margin-bottom:16px;
+  box-shadow:0 10px 20px #0001;
+}
+
+.stat{
+  text-align:center;
+  font-weight:900;
+}
+
+.stat small{
+  display:block;
+  color:#6b7280;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.title{
+  display:flex;
+  justify-content:space-between;
+  margin:0 2px 10px;
+  font-weight:900;
+}
+
+.title span{
+  color:#6b7280;
+  font-size:12px;
+}
+
+.cams{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  margin-bottom:16px;
+}
+
+.camcard{
+  min-width:155px;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 20px #0001;
+}
+
+.camcard img{
+  width:100%;
+  height:90px;
+  object-fit:cover;
+}
+
+.camcard div{
+  padding:10px;
+}
+
+.camcard b{
+  font-size:14px;
+}
+
+.camcard span{
+  display:block;
+  color:#6b7280;
+  font-size:12px;
+}
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.box{
+  background:white;
+  border-radius:20px;
+  padding:15px;
+  box-shadow:0 10px 20px #0001;
+}
+
+.box b{
+  font-size:14px;
+}
+
+.box strong{
+  display:block;
+  font-size:30px;
+  margin-top:8px;
+}
+
+.box span{
+  color:#6b7280;
+  font-size:13px;
+}
+
+.report{
+  background:white;
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 10px 20px #0001;
+  margin-bottom:14px;
+}
+
+.report b{
+  font-size:19px;
+}
+
+.report p{
+  color:#6b7280;
+}
+
+.report a{
+  display:block;
+  margin-top:12px;
+  background:#7fb239;
+  color:white;
+  text-align:center;
+  text-decoration:none;
+  border-radius:15px;
+  padding:14px;
+  font-weight:900;
+}
+
+.ad{
+  background:white;
+  border:2px dashed #b7d99a;
+  border-radius:22px;
+  padding:16px;
+}
+
+.ad b{
+  font-size:20px;
+  color:#2f7d32;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:430px;
+  width:100%;
+  height:72px;
+  background:white;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:8px 8px 14px;
+  box-shadow:0 -8px 20px #0001;
+}
+
+.nav div{
+  text-align:center;
+  font-size:11px;
+  font-weight:900;
+  color:#6b7280;
+}
+
+.nav b{
+  display:block;
+  font-size:22px;
+}
+
+.active{
+  color:#7fb239 !important;
+}
+
+@media(max-width:380px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
+
 <body>
 
-<main class="app">
+<div class="app">
+
 <header class="header">
-  <div class="brand">
-    <b>Garitas<br>Mexicali</b>
-    <span>Aquí sí ves la frontera real</span>
+  <div class="logo">
+    <b>GARITAS</b>
+    <b><span>MEXICALI</span></b>
   </div>
-  <div class="live-count">
-    <b id="viewers">147</b>
-    <span>viendo ahora</span>
+
+  <div class="top-info">
+    👥 <span id="viewers">142</span><br>
+    <small>viendo ahora</small>
   </div>
 </header>
 
 <section class="hero">
-  <img id="camMain" src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg">
-  <div class="hero-top">
-    <div class="pill dark">● EN VIVO</div>
-    <div class="pill">Centro peatonal</div>
+  <img id="maincam"
+  src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg">
+
+  <div class="pill live">
+    ● EN VIVO
+  </div>
+
+  <div class="pill cam">
+    📷 CÁMARA CENTRO
   </div>
 </section>
 
-<section class="main">
-  <div class="row">
-    <div>
-      <h1>Centro</h1>
-      <div class="sub">Peatonal principal</div>
+<section class="cards">
+
+  <div class="wait">
+    <h2>GARITA CENTRO</h2>
+
+    <div class="tag redbg">
+      TRÁFICO PESADO
     </div>
-    <div class="big">
-      <strong>90</strong>
-      <span>MIN</span>
+
+    <div class="big red">
+      120
+    </div>
+
+    <div class="mini">
+
+      <div class="row">
+        <span>🚗 General</span>
+        <span class="red">70 min</span>
+      </div>
+
+      <div class="row">
+        <span>🚶 Peatonal</span>
+        <span class="red">90 min</span>
+      </div>
+
+      <div class="row">
+        <span>🟦 Ready</span>
+        <span class="red">60 min</span>
+      </div>
+
+      <div class="row">
+        <span>⚡ Sentri</span>
+        <span class="green">5 min</span>
+      </div>
+
     </div>
   </div>
-  <div class="status">🔴 Tráfico pesado</div>
+
+  <div class="wait">
+
+    <h2>NUEVO MEXICALI</h2>
+
+    <div class="tag greenbg">
+      TRÁFICO FLUIDO
+    </div>
+
+    <div class="big green">
+      20
+    </div>
+
+    <div class="mini">
+
+      <div class="row">
+        <span>🚗 General</span>
+        <span class="green">10 min</span>
+      </div>
+
+      <div class="row">
+        <span>🚶 Peatonal</span>
+        <span class="green">5 min</span>
+      </div>
+
+      <div class="row">
+        <span>🟦 Ready</span>
+        <span class="green">20 min</span>
+      </div>
+
+      <div class="row">
+        <span>⚡ Sentri</span>
+        <span class="green">5 min</span>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 
-<div class="title"><b>Cámaras</b><span>Actualizan automático</span></div>
+<section class="stats">
+
+  <div class="stat">
+    👥 142
+    <small>viendo ahora</small>
+  </div>
+
+  <div class="stat">
+    📷 38
+    <small>reportes hoy</small>
+  </div>
+
+  <div class="stat">
+    ⏱️ 2 min
+    <small>actualizado</small>
+  </div>
+
+</section>
+
+<div class="title">
+  <b>📷 Cámaras en vivo</b>
+  <span>Ver todas ›</span>
+</div>
+
 <section class="cams">
-  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteA/imagen-actual.jpg"><div><b>Centro Sentri</b><span>Puente / Sentri</span></div></article>
-  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteB/imagen-actual.jpg"><div><b>Pueblo Nuevo</b><span>Caracol</span></div></article>
-  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/ColonB/imagen-actual.jpg"><div><b>Colón Parque</b><span>Vista Colón</span></div></article>
+
+  <article class="camcard">
+    <img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteA/imagen-actual.jpg">
+    <div>
+      <b>Centro Sentri</b>
+      <span>Actualizado hace 2 min</span>
+    </div>
+  </article>
+
+  <article class="camcard">
+    <img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteB/imagen-actual.jpg">
+    <div>
+      <b>Pueblo Nuevo</b>
+      <span>Actualizado hace 2 min</span>
+    </div>
+  </article>
+
 </section>
 
-<div class="title"><b>Tiempos rápidos</b><span>Prueba visual</span></div>
-<section class="times">
-  <article class="card"><div><b>Nuevo Mexicali</b><span>General</span></div><div class="num green"><strong>20</strong><small>MIN</small></div></article>
-  <article class="card"><div><b>Sentri</b><span>Centro</span></div><div class="num green"><strong>10</strong><small>MIN</small></div></article>
-  <article class="card"><div><b>Ready Lane</b><span>Centro</span></div><div class="num yellow"><strong>35</strong><small>MIN</small></div></article>
+<section class="info">
+
+  <div class="box">
+    <b>☀️ Clima</b>
+    <strong>32°C</strong>
+    <span>Mexicali</span>
+  </div>
+
+  <div class="box">
+    <b>💵 Dólar</b>
+    <strong>$17.00</strong>
+    <span>Referencia</span>
+  </div>
+
 </section>
 
-<section class="info-grid">
-  <article class="info"><b>💵 Dólar hoy</b><strong>$17.00</strong><span>Referencia local</span></article>
-  <article class="info"><b>🌤️ Clima</b><strong>38°</strong><span>Mexicali</span></article>
-</section>
+<section class="report">
 
-<section class="reports">
-  <h2>Reportes de comunidad</h2>
-  <div class="report"><b>Garita Centro</b><p>Fila lenta por peatonal. Último reporte hace 5 min.</p></div>
-  <div class="report"><b>Nuevo Mexicali</b><p>Fluido por general. Último reporte hace 8 min.</p></div>
-  <a class="btn" href="https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita">＋ Enviar reporte</a>
+  <b>📩 Reportar tráfico</b>
+
+  <p>
+    Envíanos actualización por correo.
+  </p>
+
+  <a href="mailto:mxliahora@gmail.com">
+    Enviar reporte
+  </a>
+
 </section>
 
 <section class="ad">
-  <b>📢 Anúnciate aquí</b>
-  <span>Tu negocio puede aparecer frente a personas que revisan la garita todos los días.</span>
+
+  <b>📢 TU ANUNCIO AQUÍ</b>
+
+  <p>
+    Promociona tu negocio en Garitas Mexicali.
+  </p>
+
 </section>
-</main>
+
+</div>
 
 <nav class="nav">
-  <a class="active" href="#"><b>⌂</b>Inicio</a>
-  <a href="#"><b>📷</b>Cámaras</a>
-  <a href="https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita"><b>💬</b>Reportes</a>
-  <a href="https://www.facebook.com/garitamx/"><b>f</b>Facebook</a>
+
+  <div class="active">
+    <b>⌂</b>
+    Inicio
+  </div>
+
+  <div>
+    <b>📷</b>
+    Cámaras
+  </div>
+
+  <div>
+    <b>💬</b>
+    Reportes
+  </div>
+
+  <div>
+    <b>☰</b>
+    Más
+  </div>
+
 </nav>
 
 <script>
-function updateViewers(){
-  document.getElementById("viewers").textContent = 136 + Math.floor(Math.random()*34);
-}
-function refreshCameras(){
-  document.querySelectorAll("img").forEach((img,i)=>{
-    const base = img.src.split("?")[0];
-    img.src = base + "?cache=" + (Date.now()+i);
+
+setInterval(() => {
+
+  document.getElementById("viewers")
+  .textContent =
+  135 + Math.floor(Math.random()*35);
+
+},7000);
+
+setInterval(() => {
+
+  document.querySelectorAll("img")
+  .forEach((img,i) => {
+
+    img.src =
+    img.src.split("?")[0]
+    + "?cache="
+    + (Date.now()+i);
+
   });
-}
-setInterval(updateViewers,7000);
-setInterval(refreshCameras,300000);
+
+},300000);
+
 </script>
 
 </body>
