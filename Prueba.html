@@ -1,530 +1,137 @@
-export default {
-  async fetch(request) {
-
-    const WHATSAPP_URL =
-      "https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita";
-
-    const FACEBOOK_URL =
-      "https://www.facebook.com/garitamx/";
-
-    const centroAllUrl =
-      "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250302";
-
-    const nuevoAllUrl =
-      "https://bwt.cbp.gov/api/bwtRss/rssbyportnum/HTML/ALL/250301";
-
-    const weatherUrl =
-      "https://api.open-meteo.com/v1/forecast?latitude=32.6245&longitude=-115.4523&current=temperature_2m,apparent_temperature,wind_speed_10m&timezone=America%2FTijuana&forecast_days=1";
-
-    try {
-
-      const [resCentro, resNuevo, resWeather] = await Promise.all([
-        fetch(centroAllUrl),
-        fetch(nuevoAllUrl),
-        fetch(weatherUrl)
-      ]);
-
-      const [xmlCentro, xmlNuevo, weather] = await Promise.all([
-        resCentro.text(),
-        resNuevo.text(),
-        resWeather.json()
-      ]);
-
-      function sacar(xml, tipo) {
-        const regex = new RegExp(
-          tipo + "[\\s\\S]*?PDT\\s+(\\d+)\\s+min\\s+delay",
-          "i"
-        );
-
-        const match = xml.match(regex);
-
-        return match ? Number(match[1]) : null;
-      }
-
-      function sacarPeatonal(xml) {
-        const regex =
-          /Pedestrian[\s\S]*?PDT\s+(\d+)\s+min\s+delay/i;
-
-        const match = xml.match(regex);
-
-        return match ? Number(match[1]) : null;
-      }
-
-      function mostrar(min) {
-        return Number.isFinite(min) ? min : "—";
-      }
-
-      function clase(min) {
-        if (!Number.isFinite(min)) return "gray";
-        if (min <= 20) return "green";
-        if (min <= 45) return "yellow";
-        return "red";
-      }
-
-      const centroGeneral = sacar(xmlCentro, "General");
-      const centroSentri = sacar(xmlCentro, "Sentri");
-      const centroReady = sacar(xmlCentro, "Ready");
-      const centroPeatonal = sacarPeatonal(xmlCentro);
-
-      const nuevoGeneral = sacar(xmlNuevo, "General");
-      const nuevoSentri = sacar(xmlNuevo, "Sentri");
-      const nuevoReady = sacar(xmlNuevo, "Ready");
-
-      const temp = weather?.current?.temperature_2m;
-
-      const horaMexicali =
-        new Intl.DateTimeFormat("es-MX", {
-          timeZone: "America/Tijuana",
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true
-        }).format(new Date());
-
-      const cache = Date.now();
-                const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garitas Mexicali</title>
-
-<meta http-equiv="refresh" content="300">
-
 <style>
-
-*{
-box-sizing:border-box
-}
-
-body{
-margin:0;
-background:#dfe5ea;
-font-family:-apple-system,BlinkMacSystemFont,
-"Segoe UI",Roboto,Arial,sans-serif;
-color:#17202a;
-}
-
-.app{
-width:100%;
-max-width:430px;
-margin:0 auto;
-min-height:100vh;
-background:linear-gradient(
-180deg,
-#f9fbfc 0%,
-#e7edf1 100%
-);
-padding:18px 16px 88px;
-}
-
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:16px;
-}
-
-.brand b{
-display:block;
-font-size:28px;
-line-height:.95;
-}
-
-.brand span{
-display:block;
-margin-top:5px;
-font-size:12px;
-font-weight:800;
-color:#6b7280;
-}
-
-.live-count{
-background:#fff;
-border-radius:18px;
-padding:10px 12px;
-text-align:right;
-box-shadow:0 8px 18px rgba(0,0,0,.08);
-}
-
-.live-count b{
-display:block;
-font-size:18px;
-}
-
-.live-count span{
-display:block;
-font-size:11px;
-color:#6b7280;
-font-weight:800;
-}
-
-.hero{
-position:relative;
-height:280px;
-border-radius:26px;
-overflow:hidden;
-background:#cfd6dc;
-margin-bottom:14px;
-box-shadow:0 16px 32px rgba(0,0,0,.18);
-}
-
-.hero img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-
-.hero-top{
-position:absolute;
-top:14px;
-left:14px;
-right:14px;
-display:flex;
-justify-content:space-between;
-}
-
-.pill{
-background:rgba(255,255,255,.92);
-border-radius:999px;
-padding:8px 12px;
-font-size:12px;
-font-weight:900;
-}
-
-.dark{
-background:rgba(38,49,61,.82);
-color:white;
-}
-
-.main-time{
-background:#fff;
-border-radius:26px;
-padding:18px;
-margin-bottom:16px;
-box-shadow:0 14px 26px rgba(0,0,0,.10);
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-}
-
-.main-time h1{
-margin:0;
-font-size:27px;
-}
-
-.main-time p{
-margin:5px 0 0;
-color:#6b7280;
-font-size:14px;
-font-weight:700;
-}
-
-.big-min{
-text-align:right;
-}
-
-.big-min strong{
-font-size:58px;
-line-height:.8;
-font-weight:300;
-}
-
-.big-min span{
-display:block;
-font-size:14px;
-font-weight:900;
-}
-
-.green{
-color:#74a832;
-}
-
-.yellow{
-color:#d69a1c;
-}
-
-.red{
-color:#d7433f;
-}
-
-.times{
-display:grid;
-gap:11px;
-margin-bottom:16px;
-}
-
-.time-card{
-background:#fff;
-border-radius:22px;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 10px 20px rgba(0,0,0,.08);
-}
-
-.time-card b{
-display:block;
-font-size:18px;
-}
-
-.time-card span{
-display:block;
-margin-top:3px;
-color:#6b7280;
-font-size:13px;
-}
-
-.time-num{
-text-align:right;
-}
-
-.time-num strong{
-font-size:38px;
-font-weight:300;
-}
-
-.info-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:11px;
-margin-bottom:16px;
-}
-
-.info{
-background:#fff;
-border-radius:22px;
-padding:16px;
-box-shadow:0 10px 20px rgba(0,0,0,.08);
-}
-
-.info strong{
-display:block;
-margin-top:12px;
-font-size:34px;
-}
-
-.nav{
-position:fixed;
-left:50%;
-bottom:0;
-transform:translateX(-50%);
-width:100%;
-max-width:430px;
-height:74px;
-background:rgba(255,255,255,.94);
-display:grid;
-grid-template-columns:repeat(4,1fr);
-padding:9px 8px 14px;
-}
-
-.nav a{
-text-decoration:none;
-color:#5b6470;
-text-align:center;
-font-size:11px;
-font-weight:900;
-}
-
-.nav a b{
-display:block;
-font-size:22px;
-margin-bottom:4px;
-}
-
-.active{
-color:#74a832;
-}
-
+*{box-sizing:border-box}
+body{margin:0;background:#dfe5ea;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#17202a}
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(#f9fbfc,#e7edf1);padding:18px 16px 88px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.brand b{display:block;font-size:30px;line-height:.95}
+.brand span{font-size:12px;font-weight:800;color:#6b7280}
+.live-count{background:white;border-radius:18px;padding:10px 13px;text-align:right;box-shadow:0 8px 18px #0001}
+.live-count b{font-size:20px}.live-count span{display:block;font-size:11px;color:#6b7280;font-weight:800}
+.hero{position:relative;height:280px;border-radius:26px;overflow:hidden;box-shadow:0 16px 32px #0002;margin-bottom:14px}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between}
+.pill{background:#ffffffe8;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900}
+.dark{background:#26313dd9;color:white}
+.main,.card,.info,.reports,.ad{background:white;border-radius:24px;box-shadow:0 10px 20px #0001}
+.main{padding:18px;margin-bottom:16px}
+.row{display:flex;justify-content:space-between;align-items:flex-start}
+h1{margin:0;font-size:30px}
+.sub{color:#6b7280;font-size:15px;font-weight:700;margin-top:4px}
+.big{text-align:right;color:#d7433f}
+.big strong{font-size:64px;line-height:.8;font-weight:300}.big span{display:block;font-weight:900}
+.status{display:inline-block;margin-top:14px;background:#fee2e2;color:#991b1b;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:900}
+.title{display:flex;justify-content:space-between;margin:0 2px 10px}.title b{font-size:19px}.title span{font-size:12px;color:#6b7280;font-weight:900}
+.cams{display:flex;gap:11px;overflow-x:auto;padding-bottom:16px}
+.cam{min-width:170px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 20px #0001}
+.cam img{width:100%;height:100px;object-fit:cover}.cam div{padding:10px}.cam b{font-size:14px}.cam span{display:block;font-size:12px;color:#6b7280}
+.times{display:grid;gap:11px;margin-bottom:16px}
+.card{padding:16px;display:flex;justify-content:space-between;align-items:center}
+.card b{font-size:20px}.card span{display:block;color:#6b7280;font-size:13px;font-weight:700}
+.num{text-align:right}.num strong{font-size:42px;font-weight:300}.num small{display:block;font-weight:900}
+.green{color:#74a832}.yellow{color:#d69a1c}.red{color:#d7433f}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px}
+.info{padding:16px}.info b{font-size:14px}.info strong{display:block;font-size:34px;margin-top:12px}.info span{font-size:13px;color:#6b7280}
+.reports{padding:16px;margin-bottom:16px}.reports h2{margin:0 0 12px;font-size:21px}.report{border-top:1px solid #dde4ea;padding:12px 0}.report:first-of-type{border-top:0}.report p{margin:4px 0 0;font-size:14px;color:#36414d}
+.btn{display:block;text-align:center;text-decoration:none;background:#26313d;color:white;border-radius:18px;padding:15px;font-weight:900;margin-top:8px}
+.ad{padding:18px;background:linear-gradient(135deg,#26313d,#3d4856);color:white}.ad b{font-size:22px}.ad span{display:block;margin-top:6px;color:#ffffffcc;font-size:14px}
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);max-width:430px;width:100%;height:74px;background:#fffffff0;display:grid;grid-template-columns:repeat(4,1fr);padding:9px 8px 14px;box-shadow:0 -8px 20px #0001}
+.nav a{text-decoration:none;text-align:center;color:#5b6470;font-size:11px;font-weight:900}.nav b{display:block;font-size:22px}.nav .active{color:#74a832}
 </style>
 </head>
-
 <body>
 
 <main class="app">
-
 <header class="header">
-
-<div class="brand">
-<b>Garitas<br>Mexicali</b>
-<span>Aquí sí ves la frontera real</span>
-</div>
-
-<div class="live-count">
-<b id="viewers">147</b>
-<span>viendo ahora</span>
-</div>
-
+  <div class="brand">
+    <b>Garitas<br>Mexicali</b>
+    <span>Aquí sí ves la frontera real</span>
+  </div>
+  <div class="live-count">
+    <b id="viewers">147</b>
+    <span>viendo ahora</span>
+  </div>
 </header>
 
 <section class="hero">
-
-<img
-src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg?cache=${cache}"
->
-
-<div class="hero-top">
-<div class="pill dark">● EN VIVO</div>
-<div class="pill">Centro peatonal</div>
-</div>
-
+  <img id="camMain" src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg">
+  <div class="hero-top">
+    <div class="pill dark">● EN VIVO</div>
+    <div class="pill">Centro peatonal</div>
+  </div>
 </section>
 
-<section class="main-time">
-
-<div class="row">
-
-<div>
-<h1>Centro</h1>
-<p>Peatonal principal</p>
-</div>
-
-<div class="big-min ${clase(centroPeatonal)}">
-<strong>${mostrar(centroPeatonal)}</strong>
-<span>MIN</span>
-</div>
-
-</div>
-
+<section class="main">
+  <div class="row">
+    <div>
+      <h1>Centro</h1>
+      <div class="sub">Peatonal principal</div>
+    </div>
+    <div class="big">
+      <strong>90</strong>
+      <span>MIN</span>
+    </div>
+  </div>
+  <div class="status">🔴 Tráfico pesado</div>
 </section>
+
+<div class="title"><b>Cámaras</b><span>Actualizan automático</span></div>
+<section class="cams">
+  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteA/imagen-actual.jpg"><div><b>Centro Sentri</b><span>Puente / Sentri</span></div></article>
+  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteB/imagen-actual.jpg"><div><b>Pueblo Nuevo</b><span>Caracol</span></div></article>
+  <article class="cam"><img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/ColonB/imagen-actual.jpg"><div><b>Colón Parque</b><span>Vista Colón</span></div></article>
+</section>
+
+<div class="title"><b>Tiempos rápidos</b><span>Prueba visual</span></div>
 <section class="times">
-
-<div class="time-card">
-<div>
-<b>Nuevo Mexicali</b>
-<span>General</span>
-</div>
-
-<div class="time-num green">
-<strong>${mostrar(nuevoGeneral)}</strong>
-<span>MIN</span>
-</div>
-</div>
-
-<div class="time-card">
-<div>
-<b>Sentri</b>
-<span>Centro</span>
-</div>
-
-<div class="time-num green">
-<strong>${mostrar(centroSentri)}</strong>
-<span>MIN</span>
-</div>
-</div>
-
-<div class="time-card">
-<div>
-<b>Ready Lane</b>
-<span>Centro</span>
-</div>
-
-<div class="time-num yellow">
-<strong>${mostrar(centroReady)}</strong>
-<span>MIN</span>
-</div>
-</div>
-
+  <article class="card"><div><b>Nuevo Mexicali</b><span>General</span></div><div class="num green"><strong>20</strong><small>MIN</small></div></article>
+  <article class="card"><div><b>Sentri</b><span>Centro</span></div><div class="num green"><strong>10</strong><small>MIN</small></div></article>
+  <article class="card"><div><b>Ready Lane</b><span>Centro</span></div><div class="num yellow"><strong>35</strong><small>MIN</small></div></article>
 </section>
 
 <section class="info-grid">
-
-<div class="info">
-<b>💵 Dólar hoy</b>
-<strong>$17.00</strong>
-<span>Referencia local</span>
-</div>
-
-<div class="info">
-<b>🌤️ Clima</b>
-<strong>
-${Number.isFinite(temp)
-? Math.round(temp) + "°"
-: "—"}
-</strong>
-
-<span>
-Hora ${horaMexicali}
-</span>
-</div>
-
+  <article class="info"><b>💵 Dólar hoy</b><strong>$17.00</strong><span>Referencia local</span></article>
+  <article class="info"><b>🌤️ Clima</b><strong>38°</strong><span>Mexicali</span></article>
 </section>
 
+<section class="reports">
+  <h2>Reportes de comunidad</h2>
+  <div class="report"><b>Garita Centro</b><p>Fila lenta por peatonal. Último reporte hace 5 min.</p></div>
+  <div class="report"><b>Nuevo Mexicali</b><p>Fluido por general. Último reporte hace 8 min.</p></div>
+  <a class="btn" href="https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita">＋ Enviar reporte</a>
+</section>
+
+<section class="ad">
+  <b>📢 Anúnciate aquí</b>
+  <span>Tu negocio puede aparecer frente a personas que revisan la garita todos los días.</span>
+</section>
 </main>
 
 <nav class="nav">
-
-<a class="active" href="#">
-<b>⌂</b>
-Inicio
-</a>
-
-<a href="#">
-<b>📷</b>
-Cámaras
-</a>
-
-<a href="${WHATSAPP_URL}">
-<b>💬</b>
-Reportes
-</a>
-
-<a href="${FACEBOOK_URL}">
-<b>f</b>
-Facebook
-</a>
-
+  <a class="active" href="#"><b>⌂</b>Inicio</a>
+  <a href="#"><b>📷</b>Cámaras</a>
+  <a href="https://wa.me/12174393549?text=Hola%20quiero%20reportar%20la%20garita"><b>💬</b>Reportes</a>
+  <a href="https://www.facebook.com/garitamx/"><b>f</b>Facebook</a>
 </nav>
 
 <script>
-
 function updateViewers(){
-
-const base = 136;
-const extra =
-Math.floor(Math.random()*34);
-
-document.getElementById(
-"viewers"
-).textContent = base + extra;
-
+  document.getElementById("viewers").textContent = 136 + Math.floor(Math.random()*34);
 }
-
+function refreshCameras(){
+  document.querySelectorAll("img").forEach((img,i)=>{
+    const base = img.src.split("?")[0];
+    img.src = base + "?cache=" + (Date.now()+i);
+  });
+}
 setInterval(updateViewers,7000);
-
+setInterval(refreshCameras,300000);
 </script>
 
 </body>
 </html>
-`;
-
-      return new Response(html, {
-        headers: {
-          "Content-Type":
-          "text/html; charset=UTF-8",
-
-          "Cache-Control":
-          "no-store"
-        }
-      });
-
-    } catch (e) {
-
-      return new Response(
-        "Error cargando datos",
-        { status: 500 }
-      );
-
-    }
-
-  }
-};
