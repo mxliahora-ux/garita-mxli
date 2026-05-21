@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mexi-Cali</title>
 
 <style>
-body{
+
+*{
   margin:0;
-  background:#050505;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#000;
   color:white;
   font-family:Arial, sans-serif;
-  text-align:center;
+  overflow-x:hidden;
 }
 
 .hero img{
@@ -20,67 +27,80 @@ body{
 }
 
 .section{
-  padding:35px 20px 45px;
-  background:#050505;
+  background:#000;
+  padding:40px 25px 60px;
+  text-align:center;
 }
 
 .links{
   display:flex;
-  justify-content:center;
-  gap:45px;
-  flex-wrap:wrap;
-  margin-bottom:35px;
+  flex-direction:column;
+  gap:35px;
 }
 
 .links a{
   color:white;
   text-decoration:none;
-  font-size:22px;
+  font-size:24px;
   font-weight:800;
-  letter-spacing:5px;
+  letter-spacing:7px;
   text-transform:uppercase;
-  padding-bottom:10px;
+  padding-bottom:14px;
   border-bottom:2px solid #ff2d9a;
+  transition:0.3s;
+}
+
+.links a:hover{
+  color:#ff2d9a;
+  transform:scale(1.03);
 }
 
 .stats{
+  margin-top:55px;
   display:flex;
   justify-content:center;
-  gap:60px;
+  gap:70px;
   flex-wrap:wrap;
-  margin-top:25px;
 }
 
 .stat{
-  font-size:14px;
-  letter-spacing:3px;
-  color:#bbb;
+  text-align:center;
 }
 
 .stat b{
   display:block;
-  font-size:34px;
-  color:white;
-  margin-bottom:5px;
+  font-size:58px;
+  margin-top:10px;
+}
+
+.stat span{
+  display:block;
+  margin-top:8px;
+  color:#aaa;
+  letter-spacing:5px;
+  font-size:13px;
 }
 
 .footer{
-  margin-top:35px;
-  font-size:13px;
-  letter-spacing:4px;
-  color:#aaa;
+  margin-top:55px;
+  color:#666;
+  letter-spacing:6px;
+  font-size:12px;
 }
 
 @media(max-width:700px){
-  .links{
-    flex-direction:column;
-    gap:25px;
-  }
 
   .links a{
     font-size:20px;
+    letter-spacing:5px;
   }
+
+  .stat b{
+    font-size:44px;
+  }
+
 }
+
 </style>
 </head>
 
@@ -93,13 +113,31 @@ body{
 <section class="section">
 
   <div class="links">
-    <a href="https://www.facebook.com/share/18bTfeCp7C/?mibextid=wwXIfr">GARITA MXLI</a>
-    <a href="https://www.facebook.com/share/1As4KH1y48/?mibextid=wwXIfr">MEXICALI DE NOCHE</a>
+
+    <a href="https://www.facebook.com/share/18bTfeCp7C/?mibextid=wwXIfr">
+      GARITA MXLI
+    </a>
+
+    <a href="https://www.facebook.com/share/1As4KH1y48/?mibextid=wwXIfr">
+      MEXICALI DE NOCHE
+    </a>
+
   </div>
 
   <div class="stats">
-    <div class="stat">👁️ <b>12,483</b> VISITANTES</div>
-    <div class="stat">🟢 <b>148</b> VIENDO AHORA</div>
+
+    <div class="stat">
+      👁️
+      <b id="visitantes">12,483</b>
+      <span>VISITANTES</span>
+    </div>
+
+    <div class="stat">
+      🟢
+      <b id="online">148</b>
+      <span>VIENDO AHORA</span>
+    </div>
+
   </div>
 
   <div class="footer">
@@ -107,6 +145,27 @@ body{
   </div>
 
 </section>
+
+<script>
+
+let visitantes = 12483;
+let online = 148;
+
+setInterval(() => {
+
+  visitantes += Math.floor(Math.random() * 3);
+
+  online = 120 + Math.floor(Math.random() * 80);
+
+  document.getElementById("visitantes").innerText =
+    visitantes.toLocaleString();
+
+  document.getElementById("online").innerText =
+    online;
+
+}, 4000);
+
+</script>
 
 </body>
 </html>
