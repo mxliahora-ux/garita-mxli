@@ -18,79 +18,91 @@ body{
     background:#000;
     color:white;
     font-family:Arial, sans-serif;
+    overflow-x:hidden;
 }
+
+/* HERO IMAGE */
 
 .hero img{
     width:100%;
     display:block;
 }
 
+/* CONTENT */
+
 .content{
-    padding:40px 30px 60px;
+    padding:35px 25px 60px;
     text-align:center;
+    background:#050505;
 }
 
+/* LINKS */
+
 .links{
-    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+    margin-bottom:45px;
 }
 
 .links a{
-    display:block;
     text-decoration:none;
     color:white;
-    font-size:24px;
+    font-size:22px;
     font-weight:800;
-    letter-spacing:8px;
-    margin:35px 0;
-    padding-bottom:14px;
+    letter-spacing:6px;
+    text-transform:uppercase;
     border-bottom:2px solid #ff2d9a;
+    padding-bottom:10px;
+    transition:.3s;
 }
+
+.links a:hover{
+    color:#ff2d9a;
+}
+
+/* STATS */
 
 .stats{
     display:flex;
     justify-content:center;
     gap:60px;
-    margin-top:50px;
     flex-wrap:wrap;
+    margin-top:20px;
 }
 
 .stat{
-    text-align:center;
-}
-
-.icon{
-    font-size:30px;
-    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:#ccc;
+    font-size:14px;
+    letter-spacing:3px;
 }
 
 .number{
-    font-size:58px;
+    font-size:34px;
     font-weight:900;
+    color:white;
 }
 
-.label{
-    margin-top:10px;
-    color:#999;
-    font-size:14px;
-    letter-spacing:5px;
-}
-
-.footer{
-    margin-top:55px;
-    color:#666;
-    font-size:12px;
-    letter-spacing:6px;
-}
+/* MOBILE */
 
 @media(max-width:700px){
 
-    .links a{
-        font-size:20px;
-        letter-spacing:5px;
+    .links{
+        flex-direction:column;
+        gap:25px;
     }
 
-    .number{
-        font-size:48px;
+    .links a{
+        font-size:20px;
+    }
+
+    .stats{
+        flex-direction:column;
+        gap:20px;
     }
 
 }
@@ -100,11 +112,17 @@ body{
 
 <body>
 
-<div class="hero">
-    <img src="hero.jpg">
-</div>
+<!-- HERO -->
 
-<div class="content">
+<section class="hero">
+    <img src="hero.jpg" alt="Mexi-Cali">
+</section>
+
+<!-- CONTENT -->
+
+<section class="content">
+
+    <!-- LINKS -->
 
     <div class="links">
 
@@ -118,27 +136,27 @@ body{
 
     </div>
 
+    <!-- STATS -->
+
     <div class="stats">
 
         <div class="stat">
-            <div class="icon">👁️</div>
-            <div class="number" id="visitantes">12,483</div>
-            <div class="label">VISITANTES</div>
+            👁️
+            <span class="number" id="visitantes">12,483</span>
+            VISITANTES
         </div>
 
         <div class="stat">
-            <div class="icon">🟢</div>
-            <div class="number" id="online">148</div>
-            <div class="label">VIENDO AHORA</div>
+            🟢
+            <span class="number" id="online">148</span>
+            VIENDO AHORA
         </div>
 
     </div>
 
-    <div class="footer">
-        MEXI-CALI.COM
-    </div>
+</section>
 
-</div>
+<!-- SCRIPT -->
 
 <script>
 
