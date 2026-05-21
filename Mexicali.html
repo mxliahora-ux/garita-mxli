@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MEXI-CALI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#000;
+    overflow:hidden;
+    color:white;
+}
+
+.hero{
+    width:100%;
+    height:100vh;
+    background:
+    linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.85)),
+    url('mexicali-bg.jpg') center/cover no-repeat;
+
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.overlay{
+    width:100%;
+    padding:20px;
+}
+
+.title-small{
+    font-size:20px;
+    letter-spacing:6px;
+    color:#ff4da6;
+    margin-bottom:15px;
+    text-transform:uppercase;
+}
+
+.title{
+    font-size:110px;
+    font-weight:900;
+    line-height:1;
+    background:linear-gradient(90deg,#ffffff,#ff8a00,#ff2d55);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-transform:uppercase;
+}
+
+.subtitle{
+    margin-top:15px;
+    font-size:28px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.live-box{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.live{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(10px);
+    padding:18px 28px;
+    border-radius:18px;
+    font-size:18px;
+}
+
+.live span{
+    color:#00ff99;
+    font-weight:700;
+}
+
+.links{
+    margin-top:55px;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.links a{
+    text-decoration:none;
+    color:white;
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:3px;
+    padding:18px 35px;
+    border-radius:60px;
+    transition:.3s;
+    backdrop-filter:blur(10px);
+}
+
+.garita{
+    background:linear-gradient(90deg,#00ff99,#00cc66);
+}
+
+.noche{
+    background:linear-gradient(90deg,#ff00aa,#ff5e62);
+}
+
+.links a:hover{
+    transform:scale(1.05);
+}
+
+.footer{
+    position:absolute;
+    bottom:25px;
+    width:100%;
+    text-align:center;
+    font-size:14px;
+    letter-spacing:4px;
+    color:#ccc;
+}
+
+@media(max-width:768px){
+
+.title{
+    font-size:65px;
+}
+
+.subtitle{
+    font-size:18px;
+}
+
+.links a{
+    font-size:18px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="overlay">
+
+<div class="title-small">
+ALGO GRANDE VIENE PARA
+</div>
+
+<div class="title">
+MEXI-CALI
+</div>
+
+<div class="subtitle">
+La frontera, la ciudad y su gente.
+</div>
+
+<div class="live-box">
+
+<div class="live">
+🟢 <span>148</span> personas en línea
+</div>
+
+<div class="live">
+👁️ <span>12,483</span> visitantes
+</div>
+
+</div>
+
+<div class="links">
+
+<a class="garita" href="https://facebook.com">
+GARITA MXLI
+</a>
+
+<a class="noche" href="https://facebook.com">
+MEXICALI DE NOCHE
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+MEXI-CALI.COM
+</div>
+
+</section>
+
+</body>
+</html>
