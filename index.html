@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MEXI-CALI.COM</title>
+  <meta name="description" content="MEXI-CALI.COM, la red social cachanilla." />
+  <style>
+    :root{
+      --bg:#050006;
+      --panel:#0b0b0f;
+      --text:#ffffff;
+      --muted:#cfc7d6;
+      --orange:#ff8a13;
+      --pink:#ff1493;
+      --magenta:#ff2bd6;
+      --gold:#ffb22e;
+      --line:rgba(255,255,255,.16);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{background:#000;scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at top,#210018 0%,#060006 42%,#000 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif;}
+    .wrap{max-width:780px;margin:0 auto;background:#000;min-height:100vh;box-shadow:0 0 50px rgba(255,20,147,.15)}
+    .hero{position:relative;line-height:0;background:#000;border-bottom:1px solid rgba(255,255,255,.08)}
+    .hero img{display:block;width:100%;height:auto}
+    .stats{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;justify-content:center;z-index:3;width:72%;max-width:430px}
+    .stat{flex:1;text-align:center;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.55);border:1px solid rgba(255,45,214,.45);box-shadow:0 0 18px rgba(255,20,147,.25);font-size:clamp(12px,3vw,17px);font-weight:900;line-height:1.1;white-space:nowrap;backdrop-filter:blur(5px)}
+    .stat b{color:#ffc13a;text-shadow:0 0 10px rgba(255,193,58,.7)}
+    .section{padding:16px 18px}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:-2px}
+    .card{position:relative;min-height:240px;border-radius:24px;overflow:hidden;text-decoration:none;color:#fff;border:2px solid rgba(255,255,255,.12);background:#09090c;box-shadow:0 0 26px rgba(0,0,0,.75);isolation:isolate}
+    .card.garita{border-color:rgba(255,138,19,.8);box-shadow:0 0 24px rgba(255,138,19,.28)}
+    .card.noche{border-color:rgba(255,43,214,.7);box-shadow:0 0 24px rgba(255,43,214,.28)}
+    .card::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2;transition:transform .35s ease}
+    .card.garita::before{background-image:url('card-garita.jpg')}
+    .card.noche::before{background-image:url('card-noche.jpg')}
+    .card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38) 42%,rgba(0,0,0,.88));z-index:-1}
+    .card:active::before{transform:scale(1.04)}
+    .icon{width:70px;height:70px;border-radius:18px;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;margin:20px 0 0 20px;font-size:32px;text-shadow:0 0 15px currentColor;box-shadow:0 0 18px currentColor;color:var(--orange)}
+    .noche .icon{color:var(--magenta)}
+    .card-content{position:absolute;left:22px;right:22px;bottom:20px;line-height:1.15}
+    .card h2{margin:0 0 12px;font-size:clamp(30px,7vw,44px);letter-spacing:.5px;line-height:.96;text-transform:uppercase;text-shadow:0 3px 16px #000}
+    .card p{margin:0;font-size:clamp(18px,4.3vw,25px);font-weight:700;line-height:1.24;color:#ffb247;text-shadow:0 2px 12px #000}
+    .noche p{color:#ff4fca}
+    .arrow{position:absolute;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid currentColor;font-size:36px;font-weight:900;box-shadow:0 0 18px currentColor;color:var(--orange)}
+    .noche .arrow{color:var(--magenta)}
+    .soy{padding:0 18px 16px}
+    .soy img{display:block;width:100%;border-radius:22px;border:1px solid rgba(255,255,255,.18);box-shadow:0 0 24px rgba(255,20,147,.25)}
+    .bio{margin:0 18px 18px;padding:26px 24px 28px;border-radius:24px;background:linear-gradient(135deg,rgba(16,16,23,.96),rgba(4,4,8,.98));border:1px solid rgba(255,255,255,.18);box-shadow:0 0 30px rgba(255,20,147,.12);line-height:1.55}
+    .bio h1{margin:0 0 18px;font-size:clamp(30px,6vw,44px);line-height:1.05;text-transform:uppercase;letter-spacing:.5px;text-align:left}
+    .bio h1 span:first-child{color:#fff}.bio h1 span:nth-child(2){color:var(--orange)}.bio h1 span:nth-child(3){color:var(--pink)}
+    .bio p{margin:0 0 15px;font-size:clamp(18px,4vw,23px);color:#eee;line-height:1.5}
+    .bio strong{color:#fff}.bio .mark{color:#ff4fc7;font-weight:900}.bio .fire{color:#ffb22e;font-weight:900}
+    .promo{margin:0 18px 18px;padding:24px;border-radius:24px;background:linear-gradient(135deg,rgba(14,10,14,.98),rgba(5,5,8,.98));border:1.5px solid rgba(255,20,147,.65);box-shadow:0 0 25px rgba(255,20,147,.25);display:grid;grid-template-columns:1fr 1.25fr;gap:22px;align-items:center;line-height:normal}
+    .promo h2{margin:0 0 12px;text-transform:uppercase;font-size:clamp(26px,5.8vw,36px);line-height:1.05;letter-spacing:.4px}.promo h2 span:nth-child(1){color:#fff}.promo h2 span:nth-child(2){color:var(--orange)}.promo h2 span:nth-child(3){color:var(--pink)}
+    .promo p{margin:0;color:#ddd;font-size:clamp(16px,3.8vw,20px);line-height:1.4}.promo .mega{font-size:52px;color:var(--orange);filter:drop-shadow(0 0 14px rgba(255,138,19,.7));margin-bottom:8px}
+    form{display:grid;gap:12px}input,textarea{width:100%;border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(255,255,255,.07);color:#fff;padding:15px 16px;font-size:17px;outline:none}textarea{min-height:92px;resize:vertical;font-family:Arial,Helvetica,sans-serif}input:focus,textarea:focus{border-color:rgba(255,43,214,.9);box-shadow:0 0 0 3px rgba(255,43,214,.15)}button{border:0;border-radius:16px;padding:17px 18px;font-size:18px;font-weight:900;letter-spacing:1px;color:#fff;background:linear-gradient(90deg,var(--orange),var(--pink));box-shadow:0 0 24px rgba(255,20,147,.35);cursor:pointer;text-transform:uppercase}button:active{transform:scale(.99)}
+    footer{text-align:center;color:#bdb7c4;font-size:14px;letter-spacing:1.5px;padding:10px 18px 28px;line-height:1.6}.social{display:flex;justify-content:center;gap:22px;margin-bottom:12px}.social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);font-size:20px}.social a:hover{box-shadow:0 0 18px rgba(255,20,147,.35)}
+    @media(max-width:640px){.section{padding:12px 14px}.cards{grid-template-columns:1fr;gap:14px}.card{min-height:220px}.soy{padding:0 14px 14px}.bio{margin:0 14px 14px;padding:22px 20px}.promo{margin:0 14px 16px;grid-template-columns:1fr;padding:22px 20px}.promo .mega{font-size:44px}.stats{top:10px;width:76%}.stat{padding:7px 8px}}
+    @media(max-width:390px){.card{min-height:205px}.card h2{font-size:31px}.card p{font-size:18px}.icon{width:58px;height:58px;font-size:26px}.arrow{width:46px;height:46px;font-size:30px}.bio p{font-size:17px}.stats{width:78%;gap:6px}.stat{font-size:11px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <img src="hero.jpg" alt="MEXI-CALI.COM La red social cachanilla">
+      <div class="stats" aria-label="Actividad de la página">
+        <div class="stat">👥 <b id="online">148</b> online</div>
+        <div class="stat">👀 <b id="visitas">12.4K</b> hoy</div>
+      </div>
+    </section>
+    <section class="section cards">
+      <a class="card garita" href="https://www.facebook.com/share/1BGGdbKWyc/?mibextid=wwXIfr" target="_blank" rel="noopener">
+        <div class="icon">🚗</div><div class="card-content"><h2>Garita MXLI</h2><p>Tiempos reales,<br>filas y cruce fronterizo.</p></div><div class="arrow">›</div>
+      </a>
+      <a class="card noche" href="https://www.facebook.com/share/1GFjBtntDR/?mibextid=wwXIfr" target="_blank" rel="noopener">
+        <div class="icon">☾</div><div class="card-content"><h2>Mexicali<br>De Noche</h2><p>Eventos, vida nocturna,<br>fotos, videos y más.</p></div><div class="arrow">›</div>
+      </a>
+    </section>
+    <section class="soy"><img src="soy-cachanilla.jpg" alt="Soy Cachanilla"></section>
+    <section class="bio">
+      <h1><span>¿Qué es</span> <span>MEXI-</span><span>CALI.COM?</span></h1>
+      <p>📍 Mexicali es la vibrante capital del estado de Baja California, México.</p>
+      <p>🌎 Es una metrópolis fronteriza ubicada en el extremo noroeste del país, colindante directamente con Calexico, California.</p>
+      <p>📅 Fundada el 14 de marzo de 1903, su nombre nace de la unión entre <strong>“México”</strong> y <strong>“California”</strong>.</p>
+      <p><strong>MEXI-CALI.COM</strong> es tu <span class="mark">red social cachanilla</span>. Conectamos a nuestra comunidad con información real, útil y actual del día a día en la frontera.</p>
+      <p class="fire">Porque Mexicali no duerme… y nosotros tampoco. 🔥</p>
+    </section>
+    <section class="promo" id="promociona">
+      <div><div class="mega">📣</div><h2><span>¿Quieres promocionar</span><br><span>tu negocio</span> <span>o evento?</span></h2><p>Escríbenos y con gusto te contactaremos.</p></div>
+      <form action="mailto:mxliahora@gmail.com" method="post" enctype="text/plain">
+        <input type="email" name="email" placeholder="Tu email" required>
+        <textarea name="mensaje" placeholder="Cuéntanos sobre tu negocio o evento..." required></textarea>
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </section>
+    <footer><div class="social"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="TikTok">♪</a><a href="#" aria-label="YouTube">▶</a></div>© 2024 MEXI-CALI.COM • LA FRONTERA QUE <span style="color:#ff1493">NUNCA</span> DUERME</footer>
+  </main>
+  <script>
+    const online=document.getElementById('online');
+    const visitas=document.getElementById('visitas');
+    let o=148+Math.floor(Math.random()*8); let v=12400+Math.floor(Math.random()*140);
+    function tick(){ o += Math.random()<.7 ? Math.ceil(Math.random()*2) : -1; if(o<130)o=130; if(o>220)o=220; v += Math.random()<.9 ? Math.ceil(Math.random()*5) : 0; online.textContent=o; visitas.textContent=(v/1000).toFixed(1)+'K'; }
+    tick(); setInterval(tick,3000);
+  </script>
+</body>
+</html>
