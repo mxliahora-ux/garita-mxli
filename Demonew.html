@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Garita MXLI</title>
+
+<meta name="theme-color" content="#f5f7fa">
+<meta name="description" content="Tiempos de espera e imágenes actualizadas de las garitas de Mexicali">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#eef2f6;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+color:#111827;
+}
+
+.container{
+max-width:430px;
+margin:auto;
+padding:14px;
+padding-bottom:100px;
+}
+
+.header{
+background:#ffffff;
+border-radius:22px;
+padding:18px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+margin-bottom:14px;
+}
+
+.logo{
+text-align:center;
+font-size:32px;
+font-weight:900;
+letter-spacing:-1px;
+}
+
+.logo span{
+color:#d91c1c;
+}
+
+.subtitle{
+text-align:center;
+font-size:13px;
+color:#667085;
+margin-top:6px;
+font-weight:600;
+}
+
+.status{
+margin-top:10px;
+text-align:center;
+font-size:12px;
+color:#16a34a;
+font-weight:700;
+}
+
+.card{
+background:#ffffff;
+border-radius:22px;
+padding:18px;
+margin-bottom:12px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.topRow{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.title{
+font-size:20px;
+font-weight:900;
+}
+
+.badgeRed{
+display:inline-block;
+margin-top:8px;
+padding:6px 10px;
+background:#fff1f2;
+border:1px solid #fecdd3;
+color:#dc2626;
+border-radius:999px;
+font-size:11px;
+font-weight:800;
+}
+
+.badgeGreen{
+display:inline-block;
+margin-top:8px;
+padding:6px 10px;
+background:#ecfdf3;
+border:1px solid #bbf7d0;
+color:#16a34a;
+border-radius:999px;
+font-size:11px;
+font-weight:800;
+}
+
+.time{
+font-size:64px;
+font-weight:700;
+letter-spacing:-3px;
+line-height:1;
+}
+
+.time span{
+display:block;
+font-size:14px;
+letter-spacing:0;
+text-align:right;
+font-weight:900;
+}
+
+.red{
+color:#dc2626;
+}
+
+.green{
+color:#16a34a;
+}
+
+.lanes{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:8px;
+margin-top:16px;
+padding-top:14px;
+border-top:1px solid #e5e7eb;
+}
+
+.lane{
+font-size:12px;
+font-weight:700;
+}
+
+.lane strong{
+display:block;
+margin-top:4px;
+font-size:13px;
+}
+
+.sectionTitle{
+margin:18px 4px 10px;
+font-size:18px;
+font-weight:900;
+}
+
+.cameras{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.camera{
+position:relative;
+height:125px;
+border-radius:18px;
+overflow:hidden;
+background:#111827;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+text-decoration:none;
+}
+
+.camera img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.camera::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.75));
+}
+
+.cameraBadge{
+position:absolute;
+top:8px;
+left:8px;
+background:#dc2626;
+color:#fff;
+font-size:9px;
+font-weight:900;
+padding:4px 7px;
+border-radius:999px;
+z-index:2;
+}
+
+.cameraName{
+position:absolute;
+left:9px;
+right:9px;
+bottom:24px;
+z-index:2;
+color:#fff;
+font-size:12px;
+font-weight:900;
+text-shadow:0 2px 8px rgba(0,0,0,.8);
+}
+
+.cameraUpdate{
+position:absolute;
+left:9px;
+bottom:8px;
+z-index:2;
+color:#d1fae5;
+font-size:10.5px;
+font-weight:800;
+text-shadow:0 2px 8px rgba(0,0,0,.8);
+}
+
+.credit{
+font-size:11px;
+color:#667085;
+font-weight:700;
+margin:8px 4px 14px;
+}
+
+.report{
+background:linear-gradient(135deg,#facc15,#f59e0b);
+border-radius:22px;
+padding:16px;
+margin-top:14px;
+box-shadow:0 8px 24px rgba(0,0,0,.10);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+}
+
+.report strong{
+font-size:20px;
+}
+
+.report p{
+font-size:13px;
+margin-top:4px;
+font-weight:700;
+}
+
+.btnDark{
+background:#111827;
+color:#fff;
+text-decoration:none;
+border-radius:14px;
+padding:12px 14px;
+font-size:13px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.ad{
+background:linear-gradient(135deg,#ffffff,#eaf3ff);
+border-radius:22px;
+padding:16px;
+margin-top:14px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+}
+
+.ad strong{
+font-size:18px;
+}
+
+.ad small{
+display:block;
+margin-top:4px;
+font-size:12px;
+color:#667085;
+font-weight:700;
+}
+
+.btnBlue{
+background:#0a7fdd;
+color:#fff;
+text-decoration:none;
+border-radius:14px;
+padding:12px 14px;
+font-size:13px;
+font-weight:900;
+}
+
+.infoGrid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:8px;
+margin-top:14px;
+}
+
+.infoBox{
+background:#fff;
+border-radius:18px;
+padding:14px 8px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+font-weight:800;
+min-height:92px;
+}
+
+.infoBox .value{
+font-size:25px;
+font-weight:900;
+margin-top:6px;
+}
+
+.buy{
+color:#16a34a;
+}
+
+.sell{
+color:#dc2626;
+}
+
+.bottomNav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+max-width:430px;
+width:100%;
+background:#ffffff;
+border-top:1px solid #e5e7eb;
+display:flex;
+justify-content:space-around;
+padding:11px 4px 19px;
+box-shadow:0 -8px 24px rgba(0,0,0,.08);
+}
+
+.bottomNav a{
+text-decoration:none;
+color:#667085;
+font-size:11px;
+font-weight:800;
+text-align:center;
+}
+
+.bottomNav div{
+font-size:20px;
+margin-bottom:4px;
+}
+
+.bottomNav .active{
+color:#dc2626;
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+<header class="header">
+<div class="logo">GARITA <span>MXLI</span></div>
+<div class="subtitle">Aquí sí ves la frontera real</div>
+<div class="status">🟢 Actualizado hace 2 min</div>
+</header>
+
+<section class="card">
+<div class="topRow">
+<div>
+<div class="title">GARITA CENTRO</div>
+<div class="badgeRed">TRÁFICO MUY PESADO</div>
+</div>
+<div class="time red">120<span>MIN</span></div>
+</div>
+
+<div class="lanes">
+<div class="lane">Ready Lane<strong>90 min</strong></div>
+<div class="lane">Sentri<strong>15 min</strong></div>
+<div class="lane">Peatonal<strong>90 min</strong></div>
+</div>
+</section>
+
+<section class="card">
+<div class="topRow">
+<div>
+<div class="title">GARITA NUEVO</div>
+<div class="badgeGreen">TRÁFICO FLUIDO</div>
+</div>
+<div class="time green">20<span>MIN</span></div>
+</div>
+
+<div class="lanes">
+<div class="lane">Ready Lane<strong>60 min</strong></div>
+<div class="lane">Sentri<strong>10 min</strong></div>
+<div class="lane">Peatonal<strong>5 min</strong></div>
+</div>
+</section>
+
+<div class="sectionTitle">📷 IMÁGENES ACTUALIZADAS</div>
+
+<section class="cameras">
+
+<a class="camera" href="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg" target="_blank">
+<img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PeatonalA/imagen-actual.jpg">
+<span class="cameraBadge">IMAGEN ACTUALIZADA</span>
+<span class="cameraName">Centro Peatonal 1</span>
+<span class="cameraUpdate">🔄 Toca para ampliar</span>
+</a>
+
+<a class="camera" href="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteA/imagen-actual.jpg" target="_blank">
+<img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteA/imagen-actual.jpg">
+<span class="cameraBadge">IMAGEN ACTUALIZADA</span>
+<span class="cameraName">Centro Sentri</span>
+<span class="cameraUpdate">🔄 Toca para ampliar</span>
+</a>
+
+<a class="camera" href="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteB/imagen-actual.jpg" target="_blank">
+<img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/PuenteB/imagen-actual.jpg">
+<span class="cameraBadge">IMAGEN ACTUALIZADA</span>
+<span class="cameraName">Pueblo Nuevo / Caracol</span>
+<span class="cameraUpdate">🔄 Toca para ampliar</span>
+</a>
+
+<a class="camera" href="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/ColonB/imagen-actual.jpg" target="_blank">
+<img src="https://www.crucedirecto.com/a-cd/baja-california/mexicali/centro/ColonB/imagen-actual.jpg">
+<span class="cameraBadge">IMAGEN ACTUALIZADA</span>
+<span class="cameraName">Colón / Parque</span>
+<span class="cameraUpdate">🔄 Toca para ampliar</span>
+</a>
+
+</section>
+
+<div class="credit">Fuente de imágenes: Cruce Directo</div>
+
+<section class="report">
+<div>
+<strong>📸 ¿HAY FILA?</strong>
+<p>Reporta tu tiempo y ayuda a otros</p>
+</div>
+<a class="btnDark" href="https://wa.me/525547820675">REPORTAR</a>
+</section>
+
+<section class="ad">
+<div>
+<strong>📢 ANÚNCIATE AQUÍ</strong>
+<small>Tu negocio puede aparecer en Garita MXLI</small>
+</div>
+<a class="btnBlue" href="https://wa.me/525547820675">INFO</a>
+</section>
+
+<section class="infoGrid">
+
+<div class="infoBox">
+☀️ CLIMA
+<div class="value">38°C</div>
+<small>Mexicali</small>
+</div>
+
+<div class="infoBox">
+🌡️ SENSACIÓN
+<div class="value">40°</div>
+<small>Actual</small>
+</div>
+
+<div class="infoBox">
+💵 DÓLAR
+<div class="value buy">$16.45</div>
+<small class="sell">$17.30</small>
+</div>
+
+</section>
+
+</main>
+
+<nav class="bottomNav">
+<a class="active" href="#"><div>🏠</div>Inicio</a>
+<a href="#"><div>⏱️</div>Tiempos</a>
+<a href="#"><div>📷</div>Cámaras</a>
+<a href="#"><div>📖</div>Guías</a>
+<a href="https://wa.me/525547820675"><div>👤</div>Reporte</a>
+</nav>
+
+</body>
+</html>
