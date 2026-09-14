@@ -1,347 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MXLI AHORA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporte Test - MXLI AHORA</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<style>
-* { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071234;
+      color: white;
+      padding: 20px;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #071234;
-  color: white;
-}
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
 
-.container {
-  max-width: 720px;
-  margin: auto;
-  padding: 18px;
-}
+    .card {
+      background: #1c2650;
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 16px;
+    }
 
-.card {
-  background: #1c2650;
-  border-radius: 22px;
-  padding: 16px;
-  margin-bottom: 14px;
-}
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+    }
 
-.hero-img, .sofia-img {
-  width: 100%;
-  display: block;
-  border-radius: 18px;
-}
+    .report-image {
+      width: 100%;
+      border-radius: 16px;
+      display: none;
+      margin-bottom: 14px;
+    }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
+    .report-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
 
-.logo {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-}
+    .report-text {
+      font-size: 18px;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
 
-.brand-title {
-  font-size: 28px;
-  font-weight: bold;
-}
+    .report-updated {
+      margin-top: 14px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
 
-.menu {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 14px;
-}
+    .empty {
+      opacity: 0.75;
+      font-size: 18px;
+    }
 
-.menu a {
-  text-decoration: none;
-  color: white;
-}
-
-.menu a:visited { color: white; }
-
-.menu-item {
-  background: #253152;
-  border-radius: 16px;
-  padding: 14px 8px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 15px;
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.menu-night {
-  font-size: 13px;
-  line-height: 1.2;
-}
-
-.info-box {
-  background: #2a356b;
-  border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 12px;
-  font-size: 18px;
-}
-
-.mini-note {
-  font-size: 14px;
-  opacity: 0.9;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  border-radius: 16px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: white;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.btn-red { background: #ef5a4d; }
-.btn-dark { background: #1e293b; }
-
-.btn-red:active {
-  transform: scale(0.97);
-}
-
-.exchange-wrap {
-  display: flex;
-  justify-content: center;
-  gap: 26px;
-  margin-top: 14px;
-}
-
-.exchange-label {
-  font-size: 13px;
-  opacity: 0.7;
-}
-
-.exchange-value {
-  font-size: 30px;
-  font-weight: bold;
-  color: #ffd84d;
-}
-
-.ad-title {
-  text-align: center;
-  opacity: 0.7;
-}
-
-.ad-main {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.ad-sub {
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 12px;
-}
-
-/* SOLO para la garita */
-.garita-box {
-  background: #1c2650;
-  border-radius: 22px;
-  padding: 12px;
-  margin-bottom: 14px;
-}
-
-.garita-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.garita-sub {
-  font-size: 16px;
-  opacity: 0.8;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.garita-frame-wrap {
-  overflow: hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
-  border-radius: 18px;
-  background: transparent;
-}
-
-.garita-frame {
-  width: 100%;
-  height: 560px;
-  border: none;
-  display: block;
-  background: transparent;
-}
-</style>
+    a.link {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 16px;
+      opacity: 0.9;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="card">
+      <h1>Reporte en vivo</h1>
 
-<div class="container">
+      <img id="reportImage" class="report-image" alt="Reporte">
 
-<!-- HEADER -->
-<div class="topbar">
-  <img src="logo.png" class="logo">
-  <div class="brand-title">MXLI AHORA</div>
-</div>
+      <div id="reportBlock">
+        <div id="reportTitle" class="report-title">🚨 Reporte MXLI</div>
+        <div id="reportText" class="report-text empty">Todavía no has subido ningún reporte.</div>
+        <div id="reportUpdated" class="report-updated"></div>
+      </div>
 
-<!-- MENU -->
-<div class="menu">
-  <a href="camaras.html" target="_blank">
-    <div class="menu-item">📷 Cámaras</div>
-  </a>
-
-  <a href="#" target="_blank">
-    <div class="menu-item">📘 Garita</div>
-  </a>
-
-  <a href="#" target="_blank">
-    <div class="menu-item menu-night">🌙 Mexicali de noche</div>
-  </a>
-</div>
-
-<!-- GARITA AUTOMÁTICA -->
-<div class="garita-box">
-  <div class="garita-title">🚨 Garitas Mexicali</div>
-  <div class="garita-sub">🟢 Actualización automática cada 5 minutos</div>
-  <div class="garita-frame-wrap">
-    <iframe
-      class="garita-frame"
-      src="https://raspy-sky-1be8.mxliahora.workers.dev/">
-    </iframe>
-  </div>
-</div>
-
-<!-- FECHA + HORA -->
-<div class="info-box" id="fechaHoraBox">📅 Cargando...</div>
-
-<!-- CLIMA -->
-<div class="info-box" id="climaBox">🌡️ Cargando...</div>
-
-<!-- TIPO DE CAMBIO -->
-<div class="card">
-  <div style="text-align:center;font-size: 22px;font-weight:bold;">💵 Tipo de cambio</div>
-  <div style="text-align:center;font-size:14px;opacity:0.7;margin-top:4px;">
-    Hoy en Mexicali
-  </div>
-
-  <div class="exchange-wrap">
-    <div>
-      <div class="exchange-label">Compra</div>
-      <div class="exchange-value">$16.85</div>
-    </div>
-
-    <div>
-      <div class="exchange-label">Venta</div>
-      <div class="exchange-value">$17.10</div>
+      <a class="link" href="admin-test.html">← Volver a Admin Test</a>
     </div>
   </div>
-</div>
 
-<!-- BOTÓN -->
-<a href="camaras.html" class="btn btn-red">Ver cámaras en vivo</a>
+  <script>
+    function cargarReporte() {
+      const text = localStorage.getItem('mxli_report_text') || '';
+      const image = localStorage.getItem('mxli_report_image') || '';
+      const updated = localStorage.getItem('mxli_report_updated') || '';
 
-<!-- SOFÍA -->
-<div class="card">
-  <img src="sofia.jpg" class="sofia-img">
-  <div class="mini-note">Reporte con Sofía</div>
-</div>
+      const reportImage = document.getElementById('reportImage');
+      const reportText = document.getElementById('reportText');
+      const reportUpdated = document.getElementById('reportUpdated');
 
-<!-- PUBLICIDAD -->
-<div class="card">
-  <div class="ad-title">PUBLICIDAD</div>
-  <div class="ad-main">¿Quieres anunciarte aquí?</div>
-  <div class="ad-sub">Tu negocio puede aparecer aquí</div>
-  <a href="mailto:mxliahora@gmail.com" class="btn btn-dark">Envíanos un correo</a>
-</div>
+      if (image) {
+        reportImage.src = image;
+        reportImage.style.display = 'block';
+      } else {
+        reportImage.style.display = 'none';
+      }
 
-</div>
+      if (text) {
+        reportText.textContent = text;
+        reportText.classList.remove('empty');
+      } else {
+        reportText.textContent = 'Todavía no has subido ningún reporte.';
+        reportText.classList.add('empty');
+      }
 
-<script>
-const tiempoInicial = new Date();
+      reportUpdated.textContent = updated ? 'Última actualización: ' + updated : '';
+    }
 
-function capitalizar(texto) {
-  return texto.charAt(0).toUpperCase() + texto.slice(1);
-}
-
-function actualizarFechaHora() {
-  const ahora = new Date();
-
-  const fecha = new Intl.DateTimeFormat('es-MX', {
-    timeZone: 'America/Tijuana',
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-  }).format(ahora);
-
-  const hora = new Intl.DateTimeFormat('es-MX', {
-    timeZone: 'America/Tijuana',
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true
-  }).format(ahora);
-
-  document.getElementById('fechaHoraBox').textContent =
-    '📅 ' + capitalizar(fecha) + ' • ⏰ ' + hora;
-}
-function actualizarTiempoRelativo() {
-  const ahora = new Date();
-  const diff = Math.floor((ahora - tiempoInicial) / 60000);
-
-  let texto = diff <= 0
-    ? "Actualizado hace unos segundos"
-    : diff === 1
-    ? "Actualizado hace 1 min"
-    : "Actualizado hace " + diff + " min";
-
-  document.getElementById("updateBox").textContent = texto;
-}
-
-async function obtenerClima() {
-  try {
-    const res = await fetch('https://wttr.in/Mexicali?format=%t');
-    const clima = await res.text();
-
-    document.getElementById('climaBox').innerHTML =
-      "🌡️ " + clima.trim() + " <span style='opacity:0.6;'>Mexicali</span>";
-
-  } catch {
-    document.getElementById('climaBox').innerHTML =
-      "🌡️ 34°C <span style='opacity:0.6;'>Mexicali</span>";
-  }
-}
-
-// INICIO
-actualizarFechaHora();
-obtenerClima();
-actualizarTiempoRelativo();
-
-// ACTUALIZACIONES
-setInterval(actualizarFechaHora, 1000);
-setInterval(obtenerClima, 300000); // 5 min
-setInterval(actualizarTiempoRelativo, 30000);
-</script>
-
+    cargarReporte();
+    setInterval(cargarReporte, 2000);
+  </script>
 </body>
 </html>
