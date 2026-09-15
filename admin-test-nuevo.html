@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#071438" />
+  <title>Garita MXLI · Admin Test Nuevo</title>
+  <style>
+    :root{
+      --bg:#06133a;
+      --card:#1f2b5c;
+      --card2:#27356f;
+      --text:#fff;
+      --muted:#cbd3ee;
+      --blue:#2f6fff;
+      --orange:#ff6a00;
+      --red:#ff4d43;
+      --green:#20bf6b;
+      --dark:#202b46;
+      --line:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#07143d 0%,#05102e 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}
+    .wrap{width:min(760px,100%);margin:0 auto;padding:28px 16px 64px}
+    .brand{display:flex;align-items:center;gap:12px;margin:6px 4px 20px}
+    .logo{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0b1f54;font-weight:900;border:3px solid #ff6a00;letter-spacing:-1px}
+    .brand h1{margin:0;font-size:22px}.brand p{margin:2px 0 0;color:var(--muted);font-size:14px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+    h2{font-size:34px;line-height:1.05;margin:0 0 10px}.sub{color:var(--muted);font-size:17px;line-height:1.4;margin:0 0 22px}
+    label{display:block;font-weight:700;font-size:16px;margin:18px 0 9px}
+    select,textarea,input[type="file"]{width:100%;font:inherit}
+    select,textarea{border:0;border-radius:18px;background:#fff;color:#101522;padding:16px 17px;outline:none}
+    textarea{min-height:150px;resize:vertical;font-size:18px;line-height:1.35}
+    select{font-size:17px}
+    .filebox{border:1px dashed rgba(255,255,255,.3);padding:14px;border-radius:18px;background:rgba(255,255,255,.05)}
+    .previewImg{display:none;margin-top:14px;width:100%;max-height:520px;object-fit:cover;border-radius:22px;background:#0c173a}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    button{border:0;border-radius:18px;padding:16px 14px;font:inherit;font-weight:800;font-size:18px;cursor:pointer}
+    .publish{background:var(--red);color:#fff}.edit{background:var(--blue);color:#fff}.delete{background:var(--dark);color:#fff}.clear{background:#fff;color:#14204a}
+    .status{margin-top:16px;color:var(--muted);font-size:15px;min-height:22px}
+    .sectionTitle{margin:28px 0 12px;font-size:21px}
+    .publicCard{background:#fff;color:#12182b;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.22)}
+    .publicHead{padding:18px 18px 12px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .pill{display:inline-block;padding:7px 11px;border-radius:999px;background:#e9efff;color:#245be7;font-size:13px;font-weight:800}
+    .ago{font-size:13px;color:#6b7280;white-space:nowrap}
+    .publicText{padding:0 18px 16px;white-space:pre-wrap;font-size:18px;line-height:1.38}
+    .publicPhoto{display:none;width:100%;max-height:620px;object-fit:cover;background:#eef2f7}
+    .foot{padding:15px 18px;border-top:1px solid #edf0f5;display:flex;justify-content:space-between;gap:8px;align-items:center;color:#36506f;font-size:14px;font-weight:700}
+    .empty{padding:26px;color:#6b7280;text-align:center}
+    .tiny{color:var(--muted);font-size:13px;line-height:1.35;margin-top:14px}
+    @media(max-width:560px){
+      .wrap{padding:18px 12px 48px}.panel{padding:18px;border-radius:24px}h2{font-size:30px}.row{grid-template-columns:1fr}.brand{margin-bottom:14px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand">
+      <div class="logo">MXLI</div>
+      <div><h1>Garita MXLI</h1><p>Admin Test · nueva versión</p></div>
+    </div>
+
+    <section class="panel">
+      <h2>Publicar reporte</h2>
+      <p class="sub">Prueba desde tu teléfono: elige categoría, escribe el reporte, sube una foto y revisa cómo quedaría.</p>
+
+      <label for="category">Categoría</label>
+      <select id="category">
+        <option>Garita Centro</option>
+        <option>Nuevo Mexicali</option>
+        <option>Peatonal</option>
+        <option>Permisos I-94</option>
+        <option>Medical Lane</option>
+        <option>Tráfico</option>
+        <option>Reporte de la comunidad</option>
+        <option>Otro</option>
+      </select>
+
+      <label for="report">Texto del reporte</label>
+      <textarea id="report" maxlength="900" placeholder="Ejemplo: Peatonal Centro con poca fila en este momento. Permisos con bancas ocupadas."></textarea>
+
+      <label for="photo">Subir foto</label>
+      <div class="filebox">
+        <input id="photo" type="file" accept="image/*" />
+        <img id="imgPreview" class="previewImg" alt="Vista previa de la foto" />
+      </div>
+
+      <div class="row">
+        <button class="publish" id="publishBtn">Publicar reporte</button>
+        <button class="edit" id="editBtn">Actualizar reporte</button>
+      </div>
+      <div class="row">
+        <button class="delete" id="deleteBtn">Borrar reporte</button>
+        <button class="clear" id="clearBtn">Limpiar formulario</button>
+      </div>
+
+      <div id="status" class="status">Esperando cambios…</div>
+      <div class="tiny">Esta versión es una prueba local: guarda el reporte en este navegador para comprobar diseño y flujo. En el siguiente paso se conecta al servidor/Cloudflare para que aparezca públicamente en GaritaMXLI.com.</div>
+    </section>
+
+    <h3 class="sectionTitle">Vista previa pública</h3>
+    <section id="publicCard" class="publicCard">
+      <div id="empty" class="empty">Todavía no hay un reporte publicado en esta prueba.</div>
+      <div id="content" style="display:none">
+        <div class="publicHead">
+          <span id="publicCategory" class="pill">Reporte</span>
+          <span id="publicAgo" class="ago">ahora</span>
+        </div>
+        <div id="publicText" class="publicText"></div>
+        <img id="publicPhoto" class="publicPhoto" alt="Foto del reporte" />
+        <div class="foot"><span>⚡ GaritaMXLI.com</span><span>Reporte reciente</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const els = {
+      category: document.getElementById('category'), report: document.getElementById('report'), photo: document.getElementById('photo'),
+      imgPreview: document.getElementById('imgPreview'), status: document.getElementById('status'), empty: document.getElementById('empty'),
+      content: document.getElementById('content'), publicCategory: document.getElementById('publicCategory'), publicAgo: document.getElementById('publicAgo'),
+      publicText: document.getElementById('publicText'), publicPhoto: document.getElementById('publicPhoto')
+    };
+    const KEY='garita_mxli_admin_test_v2';
+    let selectedImage='';
+
+    function nowISO(){ return new Date().toISOString(); }
+    function agoText(iso){
+      if(!iso) return 'ahora';
+      const diff=Math.max(0, Date.now()-new Date(iso).getTime());
+      const m=Math.floor(diff/60000);
+      if(m<1) return 'hace unos segundos';
+      if(m===1) return 'hace 1 minuto';
+      if(m<60) return `hace ${m} minutos`;
+      const h=Math.floor(m/60);
+      return h===1?'hace 1 hora':`hace ${h} horas`;
+    }
+    function readSaved(){
+      try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}
+    }
+    function render(data){
+      if(!data){els.empty.style.display='block';els.content.style.display='none';return}
+      els.empty.style.display='none';els.content.style.display='block';
+      els.publicCategory.textContent=data.category||'Reporte';
+      els.publicText.textContent=data.text||'';
+      els.publicAgo.textContent=agoText(data.updatedAt||data.createdAt);
+      if(data.image){els.publicPhoto.src=data.image;els.publicPhoto.style.display='block'}else{els.publicPhoto.removeAttribute('src');els.publicPhoto.style.display='none'}
+    }
+    function fillForm(data){
+      if(!data) return;
+      els.category.value=data.category||'Garita Centro';els.report.value=data.text||'';selectedImage=data.image||'';
+      if(selectedImage){els.imgPreview.src=selectedImage;els.imgPreview.style.display='block'}
+    }
+    els.photo.addEventListener('change',()=>{
+      const f=els.photo.files && els.photo.files[0]; if(!f) return;
+      const r=new FileReader(); r.onload=()=>{selectedImage=r.result;els.imgPreview.src=selectedImage;els.imgPreview.style.display='block';els.status.textContent='Foto lista para publicar.'}; r.readAsDataURL(f);
+    });
+    function validate(){
+      const text=els.report.value.trim(); if(!text){els.status.textContent='Escribe el texto del reporte antes de publicar.';return false} return true;
+    }
+    document.getElementById('publishBtn').addEventListener('click',()=>{
+      if(!validate()) return;
+      const data={category:els.category.value,text:els.report.value.trim(),image:selectedImage,createdAt:nowISO(),updatedAt:nowISO()};
+      localStorage.setItem(KEY,JSON.stringify(data));render(data);els.status.textContent='✅ Reporte publicado en la prueba.';
+    });
+    document.getElementById('editBtn').addEventListener('click',()=>{
+      if(!validate()) return;
+      const old=readSaved()||{};const data={category:els.category.value,text:els.report.value.trim(),image:selectedImage,createdAt:old.createdAt||nowISO(),updatedAt:nowISO()};
+      localStorage.setItem(KEY,JSON.stringify(data));render(data);els.status.textContent='✅ Reporte actualizado.';
+    });
+    document.getElementById('deleteBtn').addEventListener('click',()=>{
+      localStorage.removeItem(KEY);selectedImage='';els.photo.value='';els.imgPreview.style.display='none';render(null);els.status.textContent='🗑️ Reporte borrado de la prueba.';
+    });
+    document.getElementById('clearBtn').addEventListener('click',()=>{
+      els.report.value='';els.photo.value='';selectedImage='';els.imgPreview.style.display='none';els.status.textContent='Formulario limpio. El reporte publicado no se borró.';
+    });
+
+    const saved=readSaved(); render(saved); fillForm(saved);
+    setInterval(()=>{const d=readSaved();if(d) els.publicAgo.textContent=agoText(d.updatedAt||d.createdAt)},30000);
+  </script>
+</body>
+</html>
