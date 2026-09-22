@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071a31">
+<title>Guías · Garita MXLI</title>
+<style>
+
+:root{
+  --navy:#071a31;
+  --navy2:#0b2443;
+  --orange:#ff6b22;
+  --blue:#0d6efd;
+  --green:#18b56b;
+  --ink:#122642;
+  --muted:#6f8095;
+  --card:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:#071a31;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+}
+body{padding-bottom:76px}
+.app{
+  width:min(100%,430px);
+  margin:0 auto;
+  min-height:100vh;
+  background:linear-gradient(180deg,#0b284b 0%,#071a31 100%);
+}
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px 10px;
+}
+.logo{
+  width:58px;height:58px;border-radius:50%;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex:0 0 58px;
+}
+.logo img{width:100%;height:100%;object-fit:cover}
+.brand-title{
+  font-size:27px;font-weight:900;line-height:.95;letter-spacing:.2px
+}
+.brand-title span{color:var(--orange)}
+.brand-sub{
+  margin-top:6px;font-size:8.5px;font-weight:800;
+  letter-spacing:1.1px;color:#dbe5ef
+}
+.topbar{
+  margin:0 16px 15px;
+  background:#12335c;
+  border:1px solid #315d8f;
+  border-radius:18px;
+  padding:9px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:10px;font-weight:800;color:#e9f2fb;
+}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#18c777;display:inline-block;margin-right:7px}
+.back-link{
+  color:#fff;text-decoration:none;font-size:10px;font-weight:900;white-space:nowrap
+}
+.main{padding:0 16px 22px}
+.page-title{
+  display:flex;align-items:center;gap:9px;
+  font-size:24px;font-weight:900;margin:2px 0 4px
+}
+.page-title .accent{color:var(--orange)}
+.page-sub{
+  color:#c4d0df;font-size:10.5px;line-height:1.4;
+  margin-bottom:16px
+}
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:18px 0 8px;
+  font-size:17px;font-weight:900
+}
+.section-title small{
+  color:#9bb0c7;font-size:8.5px;font-weight:800
+}
+.card{
+  background:#fff;color:var(--ink);
+  border-radius:12px;
+  box-shadow:0 9px 24px rgba(0,0,0,.18);
+}
+.bottom-nav{
+  position:fixed;left:50%;bottom:0;transform:translateX(-50%);
+  width:min(100%,430px);height:64px;
+  background:#071a31;border-top:1px solid rgba(255,255,255,.12);
+  display:grid;grid-template-columns:repeat(5,1fr);z-index:50;
+}
+.nav-item{
+  color:#c3d0e0;text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;font-size:8px;font-weight:800;
+}
+.nav-item.active{color:var(--orange)}
+.nav-icon{font-size:19px;line-height:1}
+.footer{
+  margin-top:20px;text-align:center;color:#8ea4bd;font-size:8.5px;line-height:1.45
+}
+
+
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.guide-card{
+  padding:13px 12px;min-height:145px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  text-decoration:none;color:var(--ink)
+}
+.guide-icon{
+  width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff1e8;color:#ff6b22;font-size:22px;
+  margin-bottom:10px
+}
+.guide-title{font-size:14px;font-weight:900;line-height:1.12}
+.guide-copy{font-size:9px;line-height:1.35;color:#67788d;margin-top:7px}
+.guide-link{
+  margin-top:10px;font-size:9px;font-weight:900;color:#0c67b4
+}
+.guide-wide{
+  grid-column:1/-1;min-height:auto;display:grid;
+  grid-template-columns:auto 1fr;gap:12px;align-items:center
+}
+.guide-wide .guide-icon{margin:0}
+.guide-wide .guide-link{margin-top:5px}
+.gallery-note{
+  margin-top:15px;
+  background:#102d50;border:1px solid #284e77;border-radius:11px;
+  padding:11px;color:#c9d6e5;font-size:9.5px;line-height:1.4
+}
+@media(max-width:350px){
+  .guide-grid{grid-template-columns:1fr}
+  .guide-wide{grid-column:auto}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="header">
+  <div class="logo">
+    <img src="https://mxliahora-ux.github.io/garita-mxli/garita-icon.png" alt="Garita MXLI">
+  </div>
+  <div>
+    <div class="brand-title">GARITA <span>MXLI</span></div>
+    <div class="brand-sub">LA FRONTERA QUE NUNCA DUERME</div>
+  </div>
+</header>
+
+<div class="topbar">
+  <span><span class="live-dot"></span>Información útil para tu cruce</span>
+  <a class="back-link" href="javascript:history.back()">← Regresar</a>
+</div>
+
+<main class="main">
+  <div class="page-title"><span class="accent">▣</span> Guías Garita MXLI</div>
+  <div class="page-sub">Información rápida y enlaces oficiales para los temas que más consulta la comunidad.</div>
+
+  <div class="guide-grid">
+    
+    <a class="card guide-card" href="https://i94.cbp.dhs.gov/home" target="_blank" rel="noopener noreferrer">
+      <div>
+        <div class="guide-icon">🛂</div>
+        <div class="guide-title">I-94</div>
+        <div class="guide-copy">Permiso de entrada para viajeros que lo requieren al cruzar por tierra.</div>
+      </div>
+      <div class="guide-link">Ver información oficial ↗</div>
+    </a>
+    
+    <a class="card guide-card" href="https://ttp.dhs.gov/" target="_blank" rel="noopener noreferrer">
+      <div>
+        <div class="guide-icon">⭐</div>
+        <div class="guide-title">SENTRI</div>
+        <div class="guide-copy">Solicitud, renovación y manejo de tu cuenta en Trusted Traveler Programs.</div>
+      </div>
+      <div class="guide-link">Ver información oficial ↗</div>
+    </a>
+    
+    <a class="card guide-card" href="https://www.aphis.usda.gov/pet-travel/us-to-another-country-export/pet-travel-us-mexico" target="_blank" rel="noopener noreferrer">
+      <div>
+        <div class="guide-icon">🐶</div>
+        <div class="guide-title">Viajar con perros</div>
+        <div class="guide-copy">Requisitos vigentes para viajar con perros de Estados Unidos a México.</div>
+      </div>
+      <div class="guide-link">Ver información oficial ↗</div>
+    </a>
+    
+    <a class="card guide-card" href="https://fincen105.cbp.dhs.gov/" target="_blank" rel="noopener noreferrer">
+      <div>
+        <div class="guide-icon">💵</div>
+        <div class="guide-title">Más de $10,000 USD</div>
+        <div class="guide-copy">Información oficial sobre declaración de efectivo e instrumentos monetarios.</div>
+      </div>
+      <div class="guide-link">Ver información oficial ↗</div>
+    </a>
+    
+    <a class="card guide-card" href="https://www.gob.mx/sectur/angelesverdes/es" target="_blank" rel="noopener noreferrer">
+      <div>
+        <div class="guide-icon">🚙</div>
+        <div class="guide-title">Ángeles Verdes 078</div>
+        <div class="guide-copy">Auxilio mecánico, orientación turística y asistencia en carretera en México.</div>
+      </div>
+      <div class="guide-link">Ver información oficial ↗</div>
+    </a>
+    
+
+    <div class="card guide-card guide-wide">
+      <div class="guide-icon">🏥</div>
+      <div>
+        <div class="guide-title">Medical Lane</div>
+        <div class="guide-copy">Espacio reservado para la guía local de Medical Lane de Garita MXLI.</div>
+        <div class="guide-link">Guía local · próximamente</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-note">
+    Aquí vamos a colocar también los flyers oficiales de Garita MXLI que ya hemos preparado. Cuando subamos las imágenes, cada guía se podrá abrir en grande desde esta misma página.
+  </div>
+
+  <footer class="footer">
+    Guías informativas · verifica requisitos vigentes antes de viajar<br>
+    ⚡ garitamxli.com
+  </footer>
+</main>
+</div>
+
+<nav class="bottom-nav">
+  <a class="nav-item" href="https://garitamxli.com/"><span class="nav-icon">⌂</span><span>Inicio</span></a>
+  <a class="nav-item" href="https://garitamxli.com/"><span class="nav-icon">◷</span><span>Tiempos</span></a>
+  <a class="nav-item" href="https://garitamxli.com/"><span class="nav-icon">▤</span><span>Publicaciones</span></a>
+  <a class="nav-item" href="guias.html"><span class="nav-icon">⌑</span><span>Guías</span></a>
+  <a class="nav-item" href="javascript:history.back()"><span class="nav-icon">•••</span><span>Más</span></a>
+</nav>
+
+</body>
+</html>
